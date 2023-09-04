@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Harrison-1eo"><title> · Harrison-1eo</title><meta name="description" content="Bingo: VABA Leader Election()
+注：当前操作用户始终是用户 \(i\)
+零、开始阶段：
+
+用户 \(i\) 初始化各集合为空集
+用户 \(i\)
+为每个其他参与方随机抽样一个秘密\(r_1,r_2,...,r_n\)
+作为 dealer 分三次调用 Bing"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/Profile.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a href="/">首页</a></li><li> <a href="/archives">归档</a></li><li> <a href="/tags">标签</a></li><li> <a href="/about">关于</a></li><li> <a href="/links">友链</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/Profile.png"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/Profile.png" style="width:220px;" alt="favicon"><h3 title=""><a href="/">Harrison-1eo</a></h3><div class="description"><p>Here is Nothing.</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/Harrison-1eo"><i class="fa fa-github"></i></a></li><li><a href="mailto:lihc1314i@126.com"><i class="fa fa-envelope"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> Harrison-1eo</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a></a></h3></div><div class="post-content"><p><h1 id="bingo-vaba-leader-election">Bingo: VABA Leader Election()</h1>
+<p>注：当前操作用户始终是用户 <span class="math inline">\(i\)</span></p>
+<p><strong>零、开始阶段：</strong></p>
+<ol type="1">
+<li>用户 <span class="math inline">\(i\)</span> 初始化各集合为空集</li>
+<li>用户 <span class="math inline">\(i\)</span>
+为每个其他参与方随机抽样一个秘密<span
+class="math inline">\(r_1,r_2,...,r_n\)</span></li>
+<li>作为 dealer 分三次调用 BingoShare 分享上述n个秘密</li>
+<li>对于其他参与者 <span class="math inline">\(j\)</span> 发来的三次
+BingoShare 请求都进行参与</li>
+</ol>
+<p><strong>一、如果完成了其他某个参与者 <span
+class="math inline">\(j\)</span> 三次的BingoShare
+请求，则：</strong></p>
+<ol type="1">
+<li>将参与者 <span class="math inline">\(j\)</span> 加入 <span
+class="math inline">\(dealer_i\)</span> 集合中</li>
+<li>如果 <span class="math inline">\(dealer_i\)</span>
+集合中有f+1个参与方，则
+<ol type="1">
+<li><span class="math inline">\(attached_i \gets dealer_i\)</span></li>
+<li>向所有人发送attach消息：<span
+class="math inline">\(&lt;\text{attach}, attached_i&gt;\)</span></li>
+</ol></li>
+</ol>
+<p><strong>二、如果从其他某个参与者 <span
+class="math inline">\(j\)</span> 收到attach消息<span
+class="math inline">\(&lt;\text{attach},
+attached_j&gt;\)</span>，则：</strong></p>
+<ol type="1">
+<li><p>如果收到的 <span class="math inline">\(attached_j\)</span>
+集合是自己的 <span class="math inline">\(dealer_i\)</span>
+集合的子集，则</p>
+<p>向参与者 <span class="math inline">\(j\)</span>
+发送signature消息：<span class="math inline">\(&lt;\text{signature},
+Sign(sk_i, attached_j)&gt;\)</span></p></li>
+</ol>
+<p><strong>三、如果从其他某个参与者 <span
+class="math inline">\(j\)</span> 收到signature消息<span
+class="math inline">\(&lt;\text{signature}, \sigma
+_j&gt;\)</span>，则：</strong></p>
+<ol type="1">
+<li><p>如果自己的 attached 集合不为空 并且使用参与者 <span
+class="math inline">\(j\)</span> 验证这条sig 消息正确，则：</p>
+<ol type="1">
+<li><p>将参与者 <span class="math inline">\(j\)</span>
+和他的签名信息添加到自己收集的签名集合 <span
+class="math inline">\(sigs_i\)</span> 中</p></li>
+<li><p>如果收集到了其他 f+1 个人的签名，则：</p>
+<p>调用 <span class="math inline">\(Gather_i(attached_i,
+sigs_i)\)</span>， 并且调用 checkValidity 校验有效性</p></li>
+</ol></li>
+</ol>
+<p><strong>四、当Gather协议输出集合<span class="math inline">\(X = \{
+(j, (attached_j,sigs_j)) \}\)</span> 时：</strong></p>
+<ol type="1">
+<li><span class="math inline">\(X_i \gets X\)</span></li>
+<li><span class="math inline">\(I_i \gets X_i\)</span>
+中每一项的下标，即<span class="math inline">\(I_i = {j}\)</span></li>
+<li>广播indices消息：<span class="math inline">\(&lt;\text{indices},
+I_i&gt;\)</span></li>
+</ol>
+<p><strong>五、当第一次从其他某个参与者 <span
+class="math inline">\(j\)</span> 收到indices消息<span
+class="math inline">\(&lt;\text{indices}, I_j&gt;\)</span>
+时：</strong></p>
+<ol type="1">
+<li><p>调用 <span class="math inline">\(GatherVerify_i(I_j)\)</span>
+并得到结果 <span class="math inline">\(X_j\)</span>，并且等待自己的
+<span class="math inline">\(Gather_i\)</span> 调用输出结果时，</p>
+<p>对于 <span class="math inline">\(X_j\)</span> 中的每个 $(k,
+(attached_k,sigs_k)) $：</p>
+<p>​ 对于 <span class="math inline">\(attached_k\)</span> 中的每个 <span
+class="math inline">\(l\)</span>
+，以作为秘密发放者终止的所有BingoShare调用时：==（23行，这句话没看懂）==</p>
+<p>​ 调用 <span
+class="math inline">\(BingoReconstructSum(attached_k,k)\)</span></p></li>
+</ol>
+<p><strong>六、如果BingoReconstructSum输出结果<span
+class="math inline">\(r_k\)</span>，则：</strong></p>
+<ol type="1">
+<li>将<span class="math inline">\((k,r_k)\)</span> 添加到集合 <span
+class="math inline">\(eval_i\)</span> 中</li>
+</ol>
+<p><strong>七、如果<span class="math inline">\(X_i\)</span>
+不为空集，且<span class="math inline">\(X_i\)</span>
+中每个参与方的评估结果都存在在<span
+class="math inline">\(eval_i\)</span> 中时：</strong></p>
+<ol type="1">
+<li>检查哪些参与方具有最大的关联值，并选择它作为领导者。==（30行没看懂，那个<span
+class="math inline">\(S_i\)</span> 集合是哪里来的）==</li>
+</ol>
+</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-09-04</span><span class="leancloud_visitors"></span><span>大约634个字, 2分钟6秒读完</span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://harrison-1eo.github.io/2023/09/04/Bingo_VABA_Leader_Election/,Harrison-1eo,,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/08/24/%E7%A7%98%E5%AF%86%E5%85%B1%E4%BA%AB/" title="秘密共享">下一篇</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"文章",PAGES:"页面",CATEGORIES:"分类",TAGS:"标签",UNTITLED:"(无标题)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="想要查找什么..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
