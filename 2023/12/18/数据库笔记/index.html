@@ -1,12 +1,98 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Harrison-1eo"><title>数据库原理与安全：笔记1 · Harrison-1eo</title><meta name="description" content="第一章 绪论
-1.1 数据库系统概述
-（1）数据
 
-描述事物的符号记录叫做数据（Data），是数据库中存储的基本对象。
-数据的种类
 
-结构化数据：可以使用关系型数据库进行表示和存储，可以表示为规范的二维表格形式。
-半结构化数据：不符合关系数据模型结构，但包含相关标记用来分隔语义元素，"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/Profile.png"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Harrison">
+  <meta name="keywords" content="Harrison, Blog, 博客, Hexo">
+  
+    <meta name="description" content="数据库原理与安全课堂笔记第一部分，包括第一章绪论和第二章关系数据库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库原理与安全：笔记1">
+<meta property="og:url" content="https://harrison-1eo.github.io/2023/12/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Harrison&#39;s Blog">
+<meta property="og:description" content="数据库原理与安全课堂笔记第一部分，包括第一章绪论和第二章关系数据库。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-130834.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-134116.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-135701.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-141726.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-150336.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-165120.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-165131.png">
+<meta property="article:published_time" content="2023-12-18T11:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-19T09:57:24.695Z">
+<meta property="article:author" content="Harrison">
+<meta property="article:tag" content="期末复习">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="大三上">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-130834.png">
+  
+  
+  
+  <title>数据库原理与安全：笔记1 - Harrison&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"harrison-1eo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -118,7 +204,186 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a href="/">首页</a></li><li> <a href="/archives">归档</a></li><li> <a href="/tags">标签</a></li><li> <a href="/about">关于</a></li><li> <a href="/links">友链</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/Profile.png"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/Profile.png" style="width:220px;" alt="favicon"><h3 title=""><a href="/">Harrison-1eo</a></h3><div class="description"><p>Here is Nothing.</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/Harrison-1eo"><i class="fa fa-github"></i></a></li><li><a href="mailto:lihc1314i@126.com"><i class="fa fa-envelope"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> Harrison-1eo</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>数据库原理与安全：笔记1</a></h3></div><div class="post-content"><p><h1 id="第一章-绪论">第一章 绪论</h1>
+</style></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Harrison&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据库原理与安全：笔记1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-18 19:00" pubdate>
+          2023年12月18日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">数据库原理与安全：笔记1</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第一章-绪论">第一章 绪论</h1>
 <h2 id="数据库系统概述">1.1 数据库系统概述</h2>
 <h3 id="数据">（1）数据</h3>
 <ol type="1">
@@ -259,7 +524,7 @@ DBMS）是位于用户与操作系统之间的一层数据管理软件，帮助�
 <li>实体之间的联系有<strong>一对一(1:1)、一对多(1:m)和多对多(m:n)</strong>等多种类型</li>
 </ul></li>
 </ol>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-130834.png"></p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-130834.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="数据模型的组成要素">1.2.3 数据模型的组成要素</h3>
 <p>数据模型的组成：</p>
 <ul>
@@ -417,7 +682,7 @@ Data Model） <u>对象关系数据模型</u>（Object Relational Data Model）
 <li>内模式对用户是<strong>“半透明”</strong>的</li>
 </ul></li>
 </ul>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-134116.png"></p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-134116.png" srcset="/img/loading.gif" lazyload></p>
 <p>三级模式是对数据的三个抽象级别。</p>
 <p><strong>二级映象</strong>在数据库管理系统<strong>内部实现这三个抽象层次的联系和转换</strong>：</p>
 <ul>
@@ -430,7 +695,7 @@ Data Model） <u>对象关系数据模型</u>（Object Relational Data Model）
 <li><p>硬件平台及数据库</p></li>
 <li><p>软件</p></li>
 <li><p>人员</p>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-135701.png"></p></li>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-135701.png" srcset="/img/loading.gif" lazyload></p></li>
 </ul>
 <h1 id="第二章-关系数据库">第二章 关系数据库</h1>
 <h2 id="关系数据结构及形式化定义">2.1 关系数据结构及形式化定义</h2>
@@ -457,7 +722,7 @@ Data Model） <u>对象关系数据模型</u>（Object Relational Data Model）
 <p>当n=2时，称该关系为二元关系（Binary relation）</p>
 <p>关系可以表示为一张二维表，表中的每行对应一个元组，表中的每列对应一个域</p>
 <p>每列起个名字，称为属性，n目关系必有n个属性</p>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-141726.png"></p></li>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-141726.png" srcset="/img/loading.gif" lazyload></p></li>
 </ol>
 <p><strong>码/键（Key）：</strong></p>
 <ul>
@@ -571,7 +836,7 @@ attribute）或非码属性（Non-key attribute）</p></li>
 <li><p>设F是基本关系R的一个或一组属性，但不是关系R的码。如果F与基本关系S的主码Ks相对应，则称F是R的外码。</p></li>
 <li><p>基本关系R称为参照关系。</p></li>
 <li><p>基本关系S称为被参照关系或目标关系。</p>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-150336.png"></p></li>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-150336.png" srcset="/img/loading.gif" lazyload></p></li>
 <li><p>外码并不一定要与相应的主码同名，但是通常情况下取相同名字便于识别</p></li>
 </ul>
 <p><strong>规则2.2 参照完整性规则
@@ -673,8 +938,360 @@ attribute）或非码属性（Non-key attribute）</p></li>
 属性列上的投影：元组在X上分量值x的象集Yx包含S在Y上投影的集合</p></li>
 <li><p>除操作是同时从行和列角度进行运算</p></li>
 <li><p>例如：</p>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-165120.png"></p>
-<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-165131.png"></p></li>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-165120.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-165131.png" srcset="/img/loading.gif" lazyload></p></li>
 </ul></li>
 </ol>
-</p><div class="tip">本文仅用作个人学习参考。采用CC-BY-SA-3.0协议，转载请注明出处。<br>作者: Harrison-1eo</div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-12-18</span><i class="fa fa-tag"></i><a class="tag" href="/tags/期末复习/" title="期末复习">期末复习 </a><i class="fa fa-tag"></i><a class="tag" href="/tags/数据库/" title="数据库">数据库 </a><i class="fa fa-tag"></i><a class="tag" href="/tags/大三上/" title="大三上">大三上 </a><span class="leancloud_visitors"></span><span>大约7356个字, 24分钟31秒读完</span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://harrison-1eo.github.io/2023/12/18/数据库笔记/,Harrison-1eo,数据库原理与安全：笔记1,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/12/19/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B02/" title="数据库原理与安全：笔记2">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/12/15/%E7%BD%91%E7%BB%9C%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A82/" title="网络内容安全：笔记2">下一篇</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"文章",PAGES:"页面",CATEGORIES:"分类",TAGS:"标签",UNTITLED:"(无标题)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="想要查找什么..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="print-no-link">#期末复习</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#数据库</a>
+      
+        <a href="/tags/%E5%A4%A7%E4%B8%89%E4%B8%8A/" class="print-no-link">#大三上</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据库原理与安全：笔记1</div>
+      <div>https://harrison-1eo.github.io/2023/12/18/数据库笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Harrison</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/19/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B02/" title="数据库原理与安全：笔记2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据库原理与安全：笔记2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/15/%E7%BD%91%E7%BB%9C%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A82/" title="网络内容安全：笔记2">
+                        <span class="hidden-mobile">网络内容安全：笔记2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      全站CC BY 4.0 DEED  Harrison<br> Powered by Hexo & Fluid
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
