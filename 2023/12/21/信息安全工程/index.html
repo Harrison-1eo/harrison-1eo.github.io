@@ -30,10 +30,12 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-155606.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-155640.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-155534.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-190949.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-191200.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-160025.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-172900.png">
 <meta property="article:published_time" content="2023-12-21T06:03:00.000Z">
-<meta property="article:modified_time" content="2023-12-21T10:47:32.583Z">
+<meta property="article:modified_time" content="2023-12-21T11:29:10.110Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三上">
@@ -332,7 +334,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.9k 字
+          10k 字
         
       </span>
     
@@ -343,7 +345,7 @@ mjx-container[display="true"] + br {
         
         
         
-          75 分钟
+          86 分钟
         
       </span>
     
@@ -513,7 +515,8 @@ Model），描述了一个组织的系统安全工程过程必须包含的基本
 <p>过程（Process）：</p>
 <p>为了达到某一给定目标而执行的一系列活动，这些活动可以重复、递归和并发地执行。</p>
 <p>过程域（Process Area，PA）：</p>
-<p>由一些(Base Practices，BP)组成，这些BP共同实施以达到PA的目标。
+<p>由一些集成的基本措施(Base
+Practices，BP)组成，BP定义了实现过程域目标的必要活动，这些BP共同实施以达到PA的目标。
 SSE-CMM 包含三类过程域：工程、项目和组织。</p>
 <p>SSE-CMM将安全工程划分为三个基本的过程域：风险、工程及保证三个区域：</p>
 <ul>
@@ -556,6 +559,26 @@ Feature）来定义，这些CF适用于所有过程域。每一个CF又可以由
 Practice）来描述。</p>
 <h2 id="各过程中包含的过程域pa">2.4 各过程中包含的过程域（PA）</h2>
 <h2 id="能力等级">2.5 能力等级</h2>
+<p>SSE-CMM定义了五个能力等级：</p>
+<ol type="1">
+<li><strong>初始级（Level
+1）</strong>：安全活动是非正式和不连贯的。</li>
+<li><strong>可重复级（Level
+2）</strong>：安全活动是可计划的、可重复的，但可能局限于单个项目。</li>
+<li><strong>定义级（Level
+3）</strong>：安全活动是基于组织标准的，被文档化和理解。</li>
+<li><strong>管理级（Level
+4）</strong>：使用定量的方法来衡量和改进安全过程。</li>
+<li><strong>优化级（Level 5）</strong>：不断优化和改进安全过程。</li>
+</ol>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-190949.png" srcset="/img/loading.gif" lazyload alt="能力等级">
+<figcaption aria-hidden="true">能力等级</figcaption>
+</figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-191200.png" srcset="/img/loading.gif" lazyload alt="能力级别（中文）">
+<figcaption aria-hidden="true">能力级别（中文）</figcaption>
+</figure>
 <h2 id="过程域的格式">2.6 过程域的格式</h2>
 <figure>
 <img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-160025.png" srcset="/img/loading.gif" lazyload alt="过程域描述格式">
@@ -728,9 +751,47 @@ Acquisition，SCADA）用于监视和控制工业、基础设施或设施型的�
 <li><strong>实时数据采集和处理</strong>：提供实时的过程控制和监视，以及对数据的实时分析。</li>
 <li><strong>图形用户界面</strong>：SCADA系统通常具有图形用户界面（GUI），便于操作员监视和控制过程。</li>
 </ul>
-<h2 id="工控系统安全域信息系统安全相比有哪些特殊要求">5.3
-工控系统安全域信息系统安全相比，有哪些特殊要求 (?)</h2>
-<h2 id="工控系统常用的通信协议">5.4 工控系统常用的通信协议 (?)</h2>
+<h2 id="工控系统安全域的特殊要求">5.3 工控系统安全域的特殊要求</h2>
+<p>工控系统（工业控制系统）的安全要求与传统信息系统安全要求相比具有一些特殊性，主要体现在以下几个方面：</p>
+<h3 id="环境安全">5.3.1 环境安全</h3>
+<ul>
+<li><strong>重要网络区域的部署</strong>：工控系统中的重要网络区域应避免部署在网络边界处，且必须有边界防护措施。</li>
+<li><strong>通信线路和网络设备的冗余</strong>：为保证系统的可用性，通信线路和关键网络设备应具备硬件冗余。</li>
+</ul>
+<h3 id="访问控制">5.3.2 访问控制</h3>
+<ul>
+<li><strong>手动超驰授权</strong>：工控系统应支持在特定时间或事件序列中，主管手动超越当前人员用户授权。</li>
+<li><strong>会话锁定机制</strong>：支持手动或自动（在非活动周期后）启动会话锁定，防止未授权访问。</li>
+<li><strong>远程会话终止</strong>：在一定非活动周期后自动或手动终止远程会话。</li>
+<li><strong>网络边界和安全域访问控制</strong>：应在网络边界或安全域之间设置访问控制规则，以默认拒绝所有非授权通信。</li>
+</ul>
+<h3 id="安全审计">5.3.3 安全审计</h3>
+<ul>
+<li><strong>审计记录生成</strong>：包括各类安全相关事件的记录。</li>
+<li><strong>集中管理审计事件</strong>：能够从系统的多个组件收集并管理审计记录。</li>
+<li><strong>审计记录存储容量管理</strong>：设置足够的审计记录存储容量并提供审计机制以减少超出容量的可能性。</li>
+<li><strong>时间同步和审计记录保护</strong>：系统时钟同步和审计信息及工具的保护。</li>
+</ul>
+<h3 id="边界防护">5.3.4 边界防护</h3>
+<ul>
+<li><strong>监控和控制区域边界通信</strong>：工控系统需要在控制网络与非控制网络的边界进行监视和控制。</li>
+<li><strong>防护设备故障响应</strong>：在边界防护机制失效时，能阻止所有边界通信且不影响关键设备通讯。</li>
+</ul>
+<h3 id="产管理层控制要求">5.3.5 产管理层控制要求</h3>
+<ul>
+<li><strong>应用软件来源管理</strong>：特别强调了对软件来源的管理。</li>
+<li><strong>安全事件处置</strong>：要求对安全事件进行有效的管理和处置。</li>
+</ul>
+<h3 id="总结工控系统安全与信息系统安全的特殊要求">总结：工控系统安全与信息系统安全的特殊要求</h3>
+<ul>
+<li><strong>实时性和可靠性</strong>：工控系统通常要求更高的实时性和可靠性，任何延迟或中断都可能导致严重后果。</li>
+<li><strong>物理安全和环境控制</strong>：工控系统通常与物理设施紧密相关，需要更多的物理安全和环境控制措施。</li>
+<li><strong>冗余和备份</strong>：工控系统对冗余和备份有更高的要求，以保证关键工业过程的连续性。</li>
+<li><strong>特定协议和技术</strong>：工控系统使用的协议和技术与传统IT系统不同，需要特定的安全措施和专业知识。</li>
+<li><strong>安全与生产的平衡</strong>：工控系统安全措施需考虑不干扰生产过程，安全与生产效率的平衡至关重要。</li>
+</ul>
+<p>因此，在设计和实施工控系统的安全措施时，需要考虑其特殊的环境、技术、业务需求和运行模式，以实现有效的风险管理和保护。</p>
+<h2 id="工控系统常用的通信协议">5.4 工控系统常用的通信协议</h2>
 <p>工控系统中常用的通信协议包括Modbus、Profibus、EtherCAT、CANopen、DeviceNet等。这些协议被设计用于在工业自动化环境中进行设备之间的数据交换。</p>
 <h3 id="modbus-协议信息帧的内容">Modbus 协议信息帧的内容</h3>
 <p>Modbus协议支持两种传输模式：ASCII和RTU。两种模式的信息帧结构略有不同，但基本组成部分相似：</p>
@@ -818,10 +879,58 @@ Acquisition，SCADA）用于监视和控制工业、基础设施或设施型的�
 </ul></li>
 </ol>
 <h2 id="pa02-pa054个过程">6.2 PA02-PA05：4个过程</h2>
-<h3 id="pa02-评估影响">6.2.1 PA02 评估影响</h3>
-<h3 id="pa03-评估安全风险">6.2.2 PA03 评估安全风险</h3>
-<h3 id="pa04-评估威胁">6.2.3 PA04 评估威胁</h3>
-<h3 id="pa05-评估脆弱性">6.2.4 PA05 评估脆弱性</h3>
+<p>安全能力成熟度模型（SSE-CMM）中，工程过程域与安全基本实施是评估和改进组织安全工程能力的关键组成部分。以下是SSE-CMM中定义的几个主要的过程域（PA）及其基本实施（BP）的详细说明：</p>
+<h3 id="pa01-管理安全控制">PA01-管理安全控制</h3>
+<ul>
+<li><strong>BP01.01</strong>：建立安全职责</li>
+<li><strong>BP01.02</strong>：管理安全配置</li>
+<li><strong>BP01.03</strong>：管理安全意识、培训和教育大纲</li>
+<li><strong>BP01.04</strong>：管理安全服务及控制机制</li>
+</ul>
+<h3 id="pa02-评估影响">PA02-评估影响</h3>
+<ul>
+<li><strong>BP02.01</strong>：对影响进行优先级排列</li>
+<li><strong>BP02.02</strong>：识别系统资产</li>
+<li><strong>BP02.03</strong>：选择影响的度量标准</li>
+<li><strong>BP02.04</strong>：标识度量标准关系</li>
+<li><strong>BP02.05</strong>：识别和特征化影响</li>
+<li><strong>BP02.06</strong>：监视影响</li>
+</ul>
+<h3 id="pa03-评估安全风险">PA03-评估安全风险</h3>
+<ul>
+<li><strong>BP03.01</strong>：选择风险分析方法</li>
+<li><strong>BP03.02</strong>：识别暴露</li>
+<li><strong>BP03.03</strong>：评估暴露的风险</li>
+<li><strong>BP03.04</strong>：评估总体不确定性</li>
+<li><strong>BP03.05</strong>：风险优先级排列</li>
+<li><strong>BP03.06</strong>：监视风险及其特征</li>
+</ul>
+<h3 id="pa04-评估威胁">PA04-评估威胁</h3>
+<ul>
+<li><strong>BP04.01</strong>：识别自然威胁</li>
+<li><strong>BP04.02</strong>：识别人为威胁</li>
+<li><strong>BP04.03</strong>：识别威胁的测量块</li>
+<li><strong>BP04.04</strong>：评估威胁影响的效力</li>
+<li><strong>BP04.05</strong>：评估威胁的可能性</li>
+<li><strong>BP04.06</strong>：监视威胁及其特征</li>
+</ul>
+<h3 id="pa05-评估脆弱性">PA05-评估脆弱性</h3>
+<ul>
+<li><strong>BP05.01</strong>：选择脆弱性分析方法</li>
+<li><strong>BP05.02</strong>：识别脆弱性</li>
+<li><strong>BP05.03</strong>：收集脆弱性数据</li>
+<li><strong>BP05.04</strong>：合成系统脆弱性</li>
+<li><strong>BP05.05</strong>：监视脆弱性及其特定</li>
+</ul>
+<h3 id="pa06-建立保证论据">PA06-建立保证论据</h3>
+<ul>
+<li><strong>BP06.01</strong>：识别保证目标</li>
+<li><strong>BP06.02</strong>：定义保证策略</li>
+<li><strong>BP06.03</strong>：控制保证证据</li>
+<li><strong>BP06.04</strong>：分析证据</li>
+<li><strong>BP06.05</strong>：提供保证论据</li>
+</ul>
+<p>这些过程域和基本实施代表了组织在安全工程方面的核心活动，涵盖了从风险管理到安全控制和保证论据的建立等多个方面。SSE-CMM的实施有助于组织系统地管理安全风险，提高安全工程的成熟度和效能。</p>
 <h1 id="数字孪生">7. 数字孪生</h1>
 <h2 id="产品数字变生模型标识">7.1 产品数字变生模型标识</h2>
 <ul>
@@ -852,7 +961,7 @@ Acquisition，SCADA）用于监视和控制工业、基础设施或设施型的�
 </ul></li>
 <li><strong>目的</strong>：防止未授权用户冒充授权用户，保护系统和数据安全。</li>
 </ul>
-<h3 id="访问控制">访问控制</h3>
+<h3 id="访问控制-1">访问控制</h3>
 <ul>
 <li><strong>定义</strong>：访问控制是基于用户的身份和权限来决定其是否能够访问特定系统资源的机制。</li>
 <li><strong>功能：</strong>
