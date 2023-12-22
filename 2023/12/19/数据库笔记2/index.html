@@ -24,8 +24,10 @@
 <meta property="og:description" content="数据库原理与安全课堂笔记2">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/20/20231220-161116.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/22/20231222-155901.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/22/20231222-155906.png">
 <meta property="article:published_time" content="2023-12-19T08:54:00.000Z">
-<meta property="article:modified_time" content="2023-12-21T03:10:32.465Z">
+<meta property="article:modified_time" content="2023-12-22T08:51:32.882Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="大三上">
 <meta property="article:tag" content="期末复习">
@@ -324,7 +326,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.8k 字
+          6.3k 字
         
       </span>
     
@@ -335,7 +337,7 @@ mjx-container[display="true"] + br {
         
         
         
-          61 分钟
+          80 分钟
         
       </span>
     
@@ -781,8 +783,164 @@ By的分组字段包括NULL，分组时将多个NULL分为一组（根据SQL标�
 <li>CROSS JOIN</li>
 <li>SELF JOIN</li>
 </ul>
+<p>Inner Join:</p>
+<ul>
+<li>即关系代数中的θ连接运算</li>
+<li>返回符合连接字段条件的所有记录</li>
+</ul>
+<p>Outer Join:</p>
+<ul>
+<li>即关系代数中的外连接运算</li>
+<li>左连接、右连接、全连接</li>
+</ul>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/22/20231222-155901.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/22/20231222-155906.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="嵌套查询">3.4.3 嵌套查询</h3>
+<p>一个SELECT-FROM-WHERE语句称为一个查询块，将一个查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为<strong>嵌套查询</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname            <span class="hljs-comment">/*外层查询或父查询*/</span><br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sno <span class="hljs-keyword">IN</span><br>    (<span class="hljs-keyword">SELECT</span> Sno   		<span class="hljs-comment">/*内层查询或子查询*/</span><br>    <span class="hljs-keyword">FROM</span> SC <br>    <span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">'2'</span>)<br></code></pre></td></tr></table></figure>
+<p>子查询的限制：不能使用ORDER BY子句</p>
+<p>嵌套查询求解方法：</p>
+<ul>
+<li><p>不相关子查询：子查询的查询条件不依赖于父查询，</p>
+<p>由里向外逐层处理。即每个子查询在上一级查询处理之前求解，子查询的结果用于建立其父查询的查找条件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Select</span> Sname <span class="hljs-keyword">from</span> Student S<br><span class="hljs-keyword">where</span> Sno <span class="hljs-keyword">in</span> ( <span class="hljs-keyword">select</span> Sno <span class="hljs-keyword">from</span> SC <span class="hljs-keyword">where</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">'2'</span> );<br></code></pre></td></tr></table></figure></li>
+<li><p>相关子查询：子查询的查询条件依赖于父查询</p>
+<p>首先取外层查询中表的第一个元组，根据它与内层查询相关的属性值处理内层查询，<strong>若WHERE子句返回值为真，则取此元组放入结果表</strong>。然后再取外层表的下一个元组重复这一过程，直至外层表全部检查完为止。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno, Cno <span class="hljs-keyword">FROM</span> SC x<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-operator">&gt;=</span> ( <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(Grade) <span class="hljs-keyword">FROM</span> SC y<br>				<span class="hljs-keyword">WHERE</span> y.Sno<span class="hljs-operator">=</span>x.Sno );<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="带有in谓词的子查询">1. 带有IN谓词的子查询</h4>
+<p>查询与“刘晨”在同一个系学习的学生：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno, Sname, Sdept<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sdept <span class="hljs-keyword">IN</span><br>    (<span class="hljs-keyword">SELECT</span> Sdept<br>    <span class="hljs-keyword">FROM</span> Student<br>    <span class="hljs-keyword">WHERE</span> Sname<span class="hljs-operator">=</span> <span class="hljs-string">'刘晨'</span> );<br><span class="hljs-comment">/*用自身连接完成查询要求*/</span><br><span class="hljs-keyword">SELECT</span> S1.Sno, S1.Sname,S1.Sdept<br><span class="hljs-keyword">FROM</span> Student S1,Student S2<br><span class="hljs-keyword">WHERE</span> S1.Sdept <span class="hljs-operator">=</span> S2.Sdept <span class="hljs-keyword">AND</span><br>	S2.Sname <span class="hljs-operator">=</span> <span class="hljs-string">'刘晨'</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>若IN的比较值列表中包含 NULL：</strong>
+<ul>
+<li>IN谓词是三值逻辑，可返回TRUE, FALSE or NULL</li>
+<li>返回TURE：列表中有正常值</li>
+<li>返回FALSE：返回列表中没有正常值，并且也没有NULL值</li>
+<li>返回NULL：值是NULL，或者列表中没有正常值并且拥有至少一个NULL</li>
+</ul></li>
+<li><strong>NOT IN的比较值列表中包含 NULL：</strong>
+<ul>
+<li>NOT IN谓词也是是三值逻辑，可返回TRUE, FALSE or NULL</li>
+<li>如果NOT IN列表中有一个值是NULL，则返回结果为空</li>
+<li>返回FALSE：IN会返回TRUE时，NOT IN将会返回FALSE</li>
+<li>返回NULL：IN会返回NULL时，NOT IN将会返回NULL</li>
+</ul></li>
+</ul>
+<h4 id="带有比较运算符的子查询">2. 带有比较运算符的子查询</h4>
+<p>当能确切知道内层查询返回单值时，可用比较运算符（&gt;，&lt;，=，&gt;=，&lt;=，!=或&lt;
+&gt;）。</p>
+<p>上例中由于一个学生只可能在一个系学习， <code>IN</code> 可以改为
+<code>=</code></p>
+<p>找出每个学生超过他选修课程平均成绩的课程号：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno, Cno<br><span class="hljs-keyword">FROM</span> SC x<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-operator">&gt;=</span>(<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(Grade)<br>                <span class="hljs-keyword">FROM</span> SC y<br>                <span class="hljs-keyword">WHERE</span> y.Sno<span class="hljs-operator">=</span>x.Sno);<br></code></pre></td></tr></table></figure>
+<p>执行过程：</p>
+<ol type="1">
+<li>从外层中取出SC的一个元组，将X.Sno的值传递给内层</li>
+<li>执行内层查询，得到一个值代替整个内层查询</li>
+<li>执行外层查询，得到记过，然后取出外层的下一个元组重复上述步骤</li>
+</ol>
+<h4 id="带有anysome或all谓词的子查询">3.
+带有ANY（SOME）或ALL谓词的子查询</h4>
+<ul>
+<li>&gt; ANY：大于子查询结果中的某个值</li>
+<li>&gt;ALL：大于子查询结果中的所有值（或者叫任意一个值）</li>
+<li>&lt;ANY：小于子查询结果中的某个值</li>
+<li>&lt;ALL：小于子查询结果中的所有值</li>
+<li>&gt;=ANY：大于等于子查询结果中的某个值</li>
+<li>&gt;=ALL：大于等于子查询结果中的所有值</li>
+<li>&lt;=ANY：小于等于子查询结果中的某个值</li>
+<li>&lt;=ALL：小于等于子查询结果中的所有值</li>
+<li>=ANY：等于子查询结果中的某个值</li>
+<li>=ALL：等于子查询结果中的所有值（通常没有实际意义，如果结果集的记录数大于1时，永为假）</li>
+<li>!=（或&lt;&gt;）ANY：不等于子查询结果中的某个值（通常没有实际意义，如果结果集的记录数大于1时，永为真）</li>
+<li>!=（或&lt;&gt;）ALL：不等于子查询结果中的所有值</li>
+</ul>
+<p>查询非计算机科学系中比计算机科学系任意一个学生年龄小的学生姓名和年龄：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Sage<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sage<span class="hljs-operator">&lt;</span><span class="hljs-keyword">ANY</span>(<span class="hljs-keyword">SELECT</span> Sage<br>               <span class="hljs-keyword">FROM</span> Student<br>               <span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">'CS'</span>)<br><span class="hljs-keyword">AND</span> Sdept<span class="hljs-operator">&lt;&gt;</span><span class="hljs-string">'CS'</span>;<br><span class="hljs-comment">/*用聚集函数实现*/</span><br><span class="hljs-keyword">SELECT</span> Sname, Sage<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sage <span class="hljs-operator">&lt;</span><br>            (<span class="hljs-keyword">SELECT</span> MAX（Sage）<br>            <span class="hljs-keyword">FROM</span> Student <span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span> ‘CS’ )<br><span class="hljs-keyword">AND</span> Sdept <span class="hljs-operator">&lt;&gt;</span> <span class="hljs-string">'CS'</span>;<br></code></pre></td></tr></table></figure>
+<p>ANY、ALL 与聚集函数的对应关系如表所示。</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>=</th>
+<th>&lt;&gt;或!=</th>
+<th>&lt;</th>
+<th>&lt;=</th>
+<th>&gt;</th>
+<th>&gt;=</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ANY</td>
+<td>IN</td>
+<td>--</td>
+<td>&lt;MAX</td>
+<td>&lt;=MAX</td>
+<td>&gt;MIN</td>
+<td>&gt;=MIN</td>
+</tr>
+<tr class="even">
+<td>ALL</td>
+<td>--</td>
+<td>NOT IN</td>
+<td>&lt;MIN</td>
+<td>&lt;=MIN</td>
+<td>&gt;MAX</td>
+<td>&gt;=MAX</td>
+</tr>
+</tbody>
+</table>
+<p>事实上，用聚集函数实现子查询通常比直接用 ANY 或 ALL
+查询效率要高。</p>
+<ul>
+<li>ANY: 与子查询结果/列表每一个值比较结果 <strong>OR等价</strong></li>
+<li>ALL: 与子查询结果/列表每一个值比较结果 <strong>AND等价</strong></li>
+</ul>
+<p>如果被比较的值域集合中包括<strong>NULL</strong>，则<strong>NOT
+IN、!=ALL</strong>的最终果为<strong>UNKNOWN (==False)</strong>。</p>
+<h4 id="带有exists谓词的子查询">4. 带有EXISTS谓词的子查询</h4>
+<p>存在量词 $$</p>
+<p>带有EXISTS谓词的子查询不返回任何数据，只产生逻辑真值”true”或逻辑假值”false”。</p>
+<ul>
+<li>若内层查询结果非空，则外层的WHERE子句返回真值，NOT
+EXIST返回假值</li>
+<li>若内层查询结果为空，则外层的WHERE子句返回假值，NOT
+EXIST返回真值</li>
+</ul>
+<p>查询所有选修了1号课程的学生姓名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">EXISTS</span><br>      (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br>       <span class="hljs-keyword">FROM</span> SC<br>       <span class="hljs-keyword">WHERE</span> Sno<span class="hljs-operator">=</span>Student.Sno <span class="hljs-keyword">AND</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">'1'</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>NOT EXISTS仅与是否有结果返回有关，与NULL无关</li>
+<li>在列表中<strong>没有NULL</strong>的情况下，not in 与 not
+exists等价</li>
+<li>在列表中<strong>有NULL</strong>的情况下，只有<strong>not
+exists可以返回结果</strong>，<strong>NOT IN 返回空集</strong></li>
+<li>一些带EXISTS或NOT
+EXISTS谓词的子查询<strong>不能被其他形式的子查等价替换
+[特别是含有NULL值的某些字段]</strong></li>
+<li>所有带IN谓词、比较运算符、ANY和ALL谓词的子查询<strong>都能</strong>用EXISTS谓词的子查询等价替换</li>
+</ul>
+<p>全称量词 $$：</p>
+<ul>
+<li><p>SQL语言中没有全称量词</p></li>
+<li><p>可以把全称量词的谓词转换为等价的存在量词的谓词：否定之否定 <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="20.999ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 9281.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="2200" d="M0 673Q0 684 7 689T20 694Q32 694 38 680T82 567L126 451H430L473 566Q483 593 494 622T512 668T519 685Q524 694 538 694Q556 692 556 674Q556 670 426 329T293 -15Q288 -22 278 -22T263 -15Q260 -11 131 328T0 673ZM414 410Q414 411 278 411T142 410L278 55L414 410Z"></path></g><g data-mml-node="mi" transform="translate(945,0)"><path data-c="78" d="M201 0Q189 3 102 3Q26 3 17 0H11V46H25Q48 47 67 52T96 61T121 78T139 96T160 122T180 150L226 210L168 288Q159 301 149 315T133 336T122 351T113 363T107 370T100 376T94 379T88 381T80 383Q74 383 44 385H16V431H23Q59 429 126 429Q219 429 229 431H237V385Q201 381 201 369Q201 367 211 353T239 315T268 274L272 270L297 304Q329 345 329 358Q329 364 327 369T322 376T317 380T310 384L307 385H302V431H309Q324 428 408 428Q487 428 493 431H499V385H492Q443 385 411 368Q394 360 377 341T312 257L296 236L358 151Q424 61 429 57T446 50Q464 46 499 46H516V0H510H502Q494 1 482 1T457 2T432 2T414 3Q403 3 377 3T327 1L304 0H295V46H298Q309 46 320 51T331 63Q331 65 291 120L250 175Q249 174 219 133T185 88Q181 83 181 74Q181 63 188 55T206 46Q208 46 208 23V0H201Z"></path></g><g data-mml-node="mo" transform="translate(1473,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mtext" transform="translate(1862,0)"><path data-c="A0" d=""></path></g><g data-mml-node="mi" transform="translate(2112,0)"><path data-c="50" d="M130 622Q123 629 119 631T103 634T60 637H27V683H214Q237 683 276 683T331 684Q419 684 471 671T567 616Q624 563 624 489Q624 421 573 372T451 307Q429 302 328 301H234V181Q234 62 237 58Q245 47 304 46H337V0H326Q305 3 182 3Q47 3 38 0H27V46H60Q102 47 111 49T130 61V622ZM507 488Q507 514 506 528T500 564T483 597T450 620T397 635Q385 637 307 637H286Q237 637 234 628Q231 624 231 483V342H302H339Q390 342 423 349T481 382Q507 411 507 488Z"></path></g><g data-mml-node="mo" transform="translate(3070.8,0)"><path data-c="2261" d="M56 444Q56 457 70 464H707Q722 456 722 444Q722 430 706 424H72Q56 429 56 444ZM56 237T56 250T70 270H707Q722 262 722 250T707 230H70Q56 237 56 250ZM56 56Q56 71 72 76H706Q722 70 722 56Q722 44 707 36H70Q56 43 56 56Z"></path></g><g data-mml-node="mi" transform="translate(4126.6,0)"><path data-c="AC" d="M56 323T56 336T70 356H596Q603 353 611 343V102Q598 89 591 89Q587 89 584 90T579 94T575 98T572 102L571 209V316H70Q56 323 56 336Z"></path></g><g data-mml-node="mtext" transform="translate(4793.6,0)"><path data-c="A0" d=""></path></g><g data-mml-node="mo" transform="translate(5043.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(5432.6,0)"><path data-c="2203" d="M56 661T56 674T70 694H487Q497 686 500 679V15Q497 10 487 1L279 0H70Q56 7 56 20T70 40H460V327H84Q70 334 70 347T84 367H460V654H70Q56 661 56 674Z"></path></g><g data-mml-node="mi" transform="translate(5988.6,0)"><path data-c="78" d="M201 0Q189 3 102 3Q26 3 17 0H11V46H25Q48 47 67 52T96 61T121 78T139 96T160 122T180 150L226 210L168 288Q159 301 149 315T133 336T122 351T113 363T107 370T100 376T94 379T88 381T80 383Q74 383 44 385H16V431H23Q59 429 126 429Q219 429 229 431H237V385Q201 381 201 369Q201 367 211 353T239 315T268 274L272 270L297 304Q329 345 329 358Q329 364 327 369T322 376T317 380T310 384L307 385H302V431H309Q324 428 408 428Q487 428 493 431H499V385H492Q443 385 411 368Q394 360 377 341T312 257L296 236L358 151Q424 61 429 57T446 50Q464 46 499 46H516V0H510H502Q494 1 482 1T457 2T432 2T414 3Q403 3 377 3T327 1L304 0H295V46H298Q309 46 320 51T331 63Q331 65 291 120L250 175Q249 174 219 133T185 88Q181 83 181 74Q181 63 188 55T206 46Q208 46 208 23V0H201Z"></path></g><g data-mml-node="mtext" transform="translate(6516.6,0)"><path data-c="A0" d=""></path></g><g data-mml-node="mo" transform="translate(6766.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(7155.6,0)"><path data-c="AC" d="M56 323T56 336T70 356H596Q603 353 611 343V102Q598 89 591 89Q587 89 584 90T579 94T575 98T572 102L571 209V316H70Q56 323 56 336Z"></path></g><g data-mml-node="mi" transform="translate(7822.6,0)"><path data-c="50" d="M130 622Q123 629 119 631T103 634T60 637H27V683H214Q237 683 276 683T331 684Q419 684 471 671T567 616Q624 563 624 489Q624 421 573 372T451 307Q429 302 328 301H234V181Q234 62 237 58Q245 47 304 46H337V0H326Q305 3 182 3Q47 3 38 0H27V46H60Q102 47 111 49T130 61V622ZM507 488Q507 514 506 528T500 564T483 597T450 620T397 635Q385 637 307 637H286Q237 637 234 628Q231 624 231 483V342H302H339Q390 342 423 349T481 382Q507 411 507 488Z"></path></g><g data-mml-node="mo" transform="translate(8503.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(8892.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></g></svg></mjx-container></span></p></li>
+</ul>
+<p>查询与“刘晨”在同一个系学习的学生（使用EXISTS谓词）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Sname,Sdept<br><span class="hljs-keyword">FROM</span> Student S1<br><span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br>              <span class="hljs-keyword">FROM</span> Student S2<br>              <span class="hljs-keyword">WHERE</span> S2.Sdept<span class="hljs-operator">=</span>S1.Sdept <span class="hljs-keyword">AND</span> S2.Sname<span class="hljs-operator">=</span><span class="hljs-string">'刘晨'</span>);<br></code></pre></td></tr></table></figure>
+<p>※ 查询选修了全部课程的学生姓名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>        <span class="hljs-comment">/* 查询这样的学生，没有一门课程是他不选修的 */</span><br>        (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br>         <span class="hljs-keyword">FROM</span> Course <br>         <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span><br>            (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <br>             <span class="hljs-keyword">FROM</span> SC<br>             <span class="hljs-keyword">WHERE</span> Sno<span class="hljs-operator">=</span>Student.Sno <span class="hljs-keyword">AND</span> Cno<span class="hljs-operator">=</span>Course.Cno));<br></code></pre></td></tr></table></figure>
+<p>R(X,Y)÷S(Y,Z)的运算使用SQL 语句可表达为下列通用形式：双层NOT
+EXIST</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> R.X <span class="hljs-keyword">from</span> R R1<br><span class="hljs-keyword">where</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span><br>(<br>    <span class="hljs-keyword">select</span> S.Y <span class="hljs-keyword">from</span> S<br>    <span class="hljs-keyword">where</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span><br>        (<br>        <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> R R2<br>        <span class="hljs-keyword">where</span> R2.X <span class="hljs-operator">=</span> R1.X <span class="hljs-keyword">and</span> R2.Y <span class="hljs-operator">=</span> S.Y<br>        )<br>);<br></code></pre></td></tr></table></figure>
 <h3 id="集合查询">3.4.4 集合查询</h3>
+<p>==集合操作的种类：==</p>
+<ul>
+<li>并操作UNION</li>
+<li>交操作INTERSECT</li>
+<li>差操作EXCEPT/MINUS</li>
+</ul>
 <h3 id="基于派生表的查询">3.4.5 基于派生表的查询</h3>
 <h3 id="select语句的一般形式">3.4.6 Select语句的一般形式</h3>
 <h2 id="数据更新">3.5 数据更新</h2>
@@ -835,7 +993,7 @@ By的分组字段包括NULL，分组时将多个NULL分为一组（根据SQL标�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月21日</div>
+          <div>2023年12月22日</div>
         </div>
       
       
