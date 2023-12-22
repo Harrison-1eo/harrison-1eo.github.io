@@ -33,8 +33,8 @@
 <meta property="article:published_time" content="2023-12-18T11:00:00.000Z">
 <meta property="article:modified_time" content="2023-12-19T09:57:24.695Z">
 <meta property="article:author" content="Harrison">
-<meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三上">
+<meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/19/20231219-130834.png">
@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"harrison-1eo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"harrison-1eo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -341,7 +341,7 @@ mjx-container[display="true"] + br {
         
         
         
-          56 分钟
+          83 分钟
         
       </span>
     
@@ -954,9 +954,9 @@ attribute）或非码属性（Non-key attribute）</p></li>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="print-no-link">#期末复习</a>
-      
         <a href="/tags/%E5%A4%A7%E4%B8%89%E4%B8%8A/" class="print-no-link">#大三上</a>
+      
+        <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="print-no-link">#期末复习</a>
       
         <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#数据库</a>
       
@@ -986,6 +986,11 @@ attribute）或非码属性（Non-key attribute）</p></li>
           <div>2023年12月18日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年12月19日</div>
+        </div>
       
       
         <div class="license-meta-item">
@@ -1129,7 +1134,7 @@ attribute）或非码属性（Non-key attribute）</p></li>
     <div class="footer-inner">
   
     <div class="footer-content">
-      全站CC BY 4.0 DEED  Harrison<br> Powered by Hexo & Fluid
+      全站 CC BY 4.0 DEED Harrison<br> Powered by Hexo & Fluid
     </div>
   
   
@@ -1207,6 +1212,52 @@ attribute）或非码属性（Non-key attribute）</p></li>
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+
+    // document.addEventListener('scroll', function() {
+    //   var activeItem = document.querySelector('.tocbot-active-link');
+    //   if (activeItem) {
+    //     var tocBody = document.getElementById('toc-body');
+    //     var itemRect = activeItem.getBoundingClientRect();
+    //     var tocRect = tocBody.getBoundingClientRect();
+
+    //     if (itemRect.top < tocRect.top || itemRect.bottom > tocRect.bottom) {
+    //       tocBody.scrollTop = activeItem.offsetTop - tocBody.offsetTop - 20; // 20 是可调整的偏移量
+    //     }
+    //     // console.log(activeItem.textContent);
+    //   } else {
+    //     // 当没有活动链接时的逻辑，可能是保持当前滚动位置或其他操作
+    //     // tocBody.scrollTop = 保持当前位置;
+    //   }
+    // });
+
+
+    // document.addEventListener('scroll', function() {
+    //   var activeItem = document.querySelector('.tocbot-active-link');
+    //   if (activeItem) {
+    //     var tocBody = document.getElementById('toc-body');
+    //     var activeItemOffset = activeItem.offsetTop;
+    //     var tocBodyScrollTop = tocBody.scrollTop;
+    //     var fixedPosition = 0; // 您希望活动链接固定的位置，这里是顶部，可以调整
+
+    //     // 计算并更新滚动位置
+    //     var newScrollTop = activeItemOffset - fixedPosition;
+    //     if (tocBodyScrollTop !== newScrollTop) {
+    //       tocBody.scrollTop = newScrollTop;
+    //     }
+    //   }
+    // });
+
+
+
+
+    // Add scroll event listener
+    document.querySelector('#toc-body').addEventListener('scroll', function(e) {
+      var tocBody = e.target;
+      if (tocBody.scrollHeight - tocBody.scrollTop === tocBody.clientHeight) {
+        e.preventDefault();
+      }
+    });    
+  
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {

@@ -53,10 +53,10 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-223724.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-223753.png">
 <meta property="article:published_time" content="2023-12-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-21T14:38:09.002Z">
+<meta property="article:modified_time" content="2023-12-21T14:38:43.895Z">
 <meta property="article:author" content="Harrison">
-<meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三上">
+<meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="信息安全工程">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-212423.png">
@@ -101,7 +101,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"harrison-1eo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"harrison-1eo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -540,9 +540,9 @@ z变换与离散时间傅里叶变换</h1>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="print-no-link">#期末复习</a>
-      
         <a href="/tags/%E5%A4%A7%E4%B8%89%E4%B8%8A/" class="print-no-link">#大三上</a>
+      
+        <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="print-no-link">#期末复习</a>
       
         <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B/" class="print-no-link">#信息安全工程</a>
       
@@ -572,6 +572,11 @@ z变换与离散时间傅里叶变换</h1>
           <div>2023年12月25日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年12月21日</div>
+        </div>
       
       
         <div class="license-meta-item">
@@ -709,7 +714,7 @@ z变换与离散时间傅里叶变换</h1>
     <div class="footer-inner">
   
     <div class="footer-content">
-      全站CC BY 4.0 DEED  Harrison<br> Powered by Hexo & Fluid
+      全站 CC BY 4.0 DEED Harrison<br> Powered by Hexo & Fluid
     </div>
   
   
@@ -787,6 +792,52 @@ z变换与离散时间傅里叶变换</h1>
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+
+    // document.addEventListener('scroll', function() {
+    //   var activeItem = document.querySelector('.tocbot-active-link');
+    //   if (activeItem) {
+    //     var tocBody = document.getElementById('toc-body');
+    //     var itemRect = activeItem.getBoundingClientRect();
+    //     var tocRect = tocBody.getBoundingClientRect();
+
+    //     if (itemRect.top < tocRect.top || itemRect.bottom > tocRect.bottom) {
+    //       tocBody.scrollTop = activeItem.offsetTop - tocBody.offsetTop - 20; // 20 是可调整的偏移量
+    //     }
+    //     // console.log(activeItem.textContent);
+    //   } else {
+    //     // 当没有活动链接时的逻辑，可能是保持当前滚动位置或其他操作
+    //     // tocBody.scrollTop = 保持当前位置;
+    //   }
+    // });
+
+
+    // document.addEventListener('scroll', function() {
+    //   var activeItem = document.querySelector('.tocbot-active-link');
+    //   if (activeItem) {
+    //     var tocBody = document.getElementById('toc-body');
+    //     var activeItemOffset = activeItem.offsetTop;
+    //     var tocBodyScrollTop = tocBody.scrollTop;
+    //     var fixedPosition = 0; // 您希望活动链接固定的位置，这里是顶部，可以调整
+
+    //     // 计算并更新滚动位置
+    //     var newScrollTop = activeItemOffset - fixedPosition;
+    //     if (tocBodyScrollTop !== newScrollTop) {
+    //       tocBody.scrollTop = newScrollTop;
+    //     }
+    //   }
+    // });
+
+
+
+
+    // Add scroll event listener
+    document.querySelector('#toc-body').addEventListener('scroll', function(e) {
+      var tocBody = e.target;
+      if (tocBody.scrollHeight - tocBody.scrollTop === tocBody.clientHeight) {
+        e.preventDefault();
+      }
+    });    
+  
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
