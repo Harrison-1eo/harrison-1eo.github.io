@@ -33,8 +33,15 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/20/20231220-161116.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/22/20231222-155901.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/22/20231222-155906.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-194530.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-194901.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-195309.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-195904.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-201549.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-204048.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-205056.png">
 <meta property="article:published_time" content="2023-12-18T11:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-22T11:51:05.433Z">
+<meta property="article:modified_time" content="2023-12-23T14:29:56.291Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="大三上">
 <meta property="article:tag" content="期末复习">
@@ -333,7 +340,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          16k 字
+          28k 字
         
       </span>
     
@@ -344,7 +351,7 @@ mjx-container[display="true"] + br {
         
         
         
-          204 分钟
+          355 分钟
         
       </span>
     
@@ -1727,6 +1734,843 @@ WITH CHECK OPTION 子句。</li>
 <li>视图能够对机密数据提供安全保护</li>
 <li>适当利用视图可以更清晰地表达查询</li>
 </ol>
+<h1 id="第四章-数据库安全性">第四章 数据库安全性</h1>
+<h2 id="数据库安全性概述">4.1 数据库安全性概述</h2>
+<h3 id="数据库的不安全因素">4.1.1 数据库的不安全因素</h3>
+<ol type="1">
+<li>非授权用户对数据库的恶意存取和破坏</li>
+<li>数据库中重要或敏感的数据被泄露</li>
+<li>安全环境的脆弱性</li>
+</ol>
+<h3 id="安全标准简介">4.1.2 安全标准简介</h3>
+<p>1985
+年美国国防部正式颁布<strong>《DoD可信计算机系统评估准则》</strong>（Trusted
+Computer System Evaluation Criteria，简称 TCSEC 或 DoD85）。</p>
+<p>TCSEC标准的目的:</p>
+<ul>
+<li>提供一种标准，使用户可以对其计算机系统内敏感信息安全操作的可信程度做评估。</li>
+<li>给计算机行业的制造商提供一种可循的指导规则，使其产品能够更好地满足敏感应用的安全需求。</li>
+</ul>
+<p>不同国家建立在 TCSEC 概念上的评估准则：</p>
+<ul>
+<li>欧洲的信息技术安全评估准则（ITSEC）</li>
+<li>加拿大的可信计算机产品评估准则（CTCPEC）</li>
+<li>美国的信息技术安全联邦标准（FC）</li>
+</ul>
+<p>1993 年，CTCPEC、FC、TCSEC 和 ITSEC
+联合行动，解决原标准中概念和技术上的差异，将各自独立的准则集合成一组单一的、能被广泛使用的
+IT 安全准则，这一行动被称为<strong>通用准则（Common
+Criteria，CC）项目</strong>。</p>
+<p>1999 年 CC V2.1版被 ISO 采用为国际标准，2001 年 CC V2.1
+版被我国采用为国家标准。</p>
+<p>目前 CC 已基本取代了 TCSEC，成为评估信息产品安全性的主要标准。</p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-194530.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="tcsec标准">1. <strong>TCSEC标准</strong></h4>
+<p>TCSEC/TDI
+中定义了数据库管理系统的设计与实现中需满足和用以进行安全性级别评估的标准，从
+4 个方面来描述安全性级别划分的指标，即安全策略、责任、保证和文档。</p>
+<p>TCSES/TDI 将系统划分为 4 组（division）7 个等级，依次是
+D、C（C1，C2）、B（B1，B2，B3）、A（A1），按系统可靠或可信程度逐渐增高。</p>
+<table>
+<thead>
+<tr class="header">
+<th>安全级别</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A1</td>
+<td>验证设计</td>
+</tr>
+<tr class="even">
+<td>B3</td>
+<td>安全域</td>
+</tr>
+<tr class="odd">
+<td>B2</td>
+<td>结构化保护</td>
+</tr>
+<tr class="even">
+<td>B1</td>
+<td>标记安全保护</td>
+</tr>
+<tr class="odd">
+<td>C2</td>
+<td>受控的存取保护</td>
+</tr>
+<tr class="even">
+<td>C1</td>
+<td>自主安全保护</td>
+</tr>
+<tr class="odd">
+<td>D</td>
+<td>最小保护</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>D 级：该级是最低级别。保留 D
+级的目的是为了将一切不符合更高标准的系统均归于 D 组。如 DOS
+就是操作系统中安全标准为 D
+级的典型例子，在安全性方面几乎没有什么专门的机制来保障。</li>
+<li>C1
+级：该级只提供了非常初级的自主安全保护，能够实现对用户和数据的分离，进行自主存取控制（DAC），保护或限制用户权限的传播。现有的商业系统往往稍作改进即可满足要求。</li>
+<li>C2 级：该级实际上是安全产品的最低档，提供受控的存取保护，即将 C1
+级的 DAC 进一步细化，以个人身份注册负责，并实施审计和资源隔离。达到 C2
+级的产品在其名称中往往不突出“安全”（security） 这一特色。</li>
+<li>B1
+级：标记安全保护。对系统的数据加以标记，并对标记的主体和客体实施强制存取控制（MAC）
+以及审计等安全机制。B1
+级别的产品被认为是真正意义上的安全产品，满足此级别的产品前一般多冠以“安全”（security）或“可信的”（trusted）字样，作为区别于普通产品的安全产品出售。</li>
+<li>B2
+级：结构化保护。建立形式化的安全策略模型，并对系统内的所有主体和客体实施
+DAC 和 MAC。</li>
+<li>B3 级：安全域。该级的 TCB （Trusted Computing
+Base）必须满足访问监控器的要求，审计跟踪能力更强，并提供系统恢复过程。</li>
+<li>A1 级：验证设计，即提供 B3
+级保护的同时给出系统的形式化设计说明和验证，以确信各安全保护真正实现。</li>
+</ul>
+<h4 id="cc通用准则">2. <strong>CC通用准则</strong></h4>
+<p>CC
+是在上述各评估准则及具体实践的基础上通过相互总结和互补发展而来的。和早期的评估准则相比，CC
+具有结构开放、表达方式通用等特点。</p>
+<p>CC
+提出了目前国际上公认的表述信息技术安全性的结构，即把对信息产品的安全要求分为</p>
+<ul>
+<li>安全功能要求：用以规范产品和系统的安全行为。</li>
+<li>安全保证要求：解决如何正确有效地实施这些功能。</li>
+</ul>
+<p>安全功能要求和安全保证要求都以“类-子类-组件”的结构表述，组件是安全要求的最小构件块。</p>
+<p>CC 的文本由三部分组成，三个部分相互依存，缺一不可。</p>
+<ul>
+<li>简介和一般模型：介绍 CC
+中的有关术语、基本概念和一般模型以及与评估有关的一些框架</li>
+<li>安全功能要求：列出了一系列类、子类和组件</li>
+<li>安全保证要求：列出了一系列保证类、子类和组件，根据系统对安全保证要求的支持情况提出了评估保证级（Evaluation
+Assurance Level，EAL），从 EAL1 至 EAL7
+共分为七级，按保证程度逐渐增高。</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>评估保证级</th>
+<th>定义</th>
+<th>TCSEC 安全级别（近似相当）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EAL1</td>
+<td>功能测试</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>EAL2</td>
+<td>结构测试</td>
+<td>C1</td>
+</tr>
+<tr class="odd">
+<td>EAL3</td>
+<td>系统地测试和检查</td>
+<td>C2</td>
+</tr>
+<tr class="even">
+<td>EAL4</td>
+<td>系统地设计、测试和复查</td>
+<td>B1</td>
+</tr>
+<tr class="odd">
+<td>EAL5</td>
+<td>半形式化设计和测试</td>
+<td>B2</td>
+</tr>
+<tr class="even">
+<td>EAL6</td>
+<td>半形式化验证的设计和测试</td>
+<td>B3</td>
+</tr>
+<tr class="odd">
+<td>EAL7</td>
+<td>形式化验证的设计和测试</td>
+<td>A1</td>
+</tr>
+</tbody>
+</table>
+<p>粗略而言，TCSEC 的 C1 和 C2 级分别相当于 EAL2 和 EAL3；B1、B2 和 B3
+分别相当于 EAL4、EAL5 和 EAL6；A1 对应于 EAL7。</p>
+<h4 id="等级保护">3. 等级保护</h4>
+<p><strong>等级保护1.0：</strong>《计算机信息系统安全保护等级划分准则》国家标准(GB
+17859-1999)，于 2001年1月1日执行</p>
+<ul>
+<li>第一级：用户自主保护级；</li>
+<li>第二级：系统审计保护级；</li>
+<li>第三级：安全标记保护级；</li>
+<li>第四级：结构化保护级；</li>
+<li>第五级：访问验证保护级。</li>
+</ul>
+<p>等级保护5级大致与C1,C2,B1,B2,B3相对应：掐头(D)去尾(A)</p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-194901.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>等级保护2.0：</strong>GB/T
+22239-2019《信息系统安全等级保护基本要求》：1-5级的通用要求、扩展要求</p>
+<h2 id="数据库安全性控制">4.2 数据库安全性控制</h2>
+<p>非法使用数据库的情况</p>
+<ul>
+<li>编写合法程序绕过数据库管理系统及其授权机制</li>
+<li>直接或编写应用程序执行非授权操作</li>
+<li>通过多次合法查询数据库从中推导出一些保密数据</li>
+</ul>
+<p>在一般计算机系统中，安全措施是一级一级层层设置的，<strong>相互之间缺乏联动机制，</strong>不方便溯源，不利于整体安全控制：</p>
+<ul>
+<li>系统首先根据用户标识鉴定用户身份，合法用户才准许进入计算机系统</li>
+<li>数据库管理系统还要进行存取控制，只允许用户执行合法操作</li>
+<li>操作系统有自己的保护措施</li>
+<li>数据可以以密码形式存储到数据库中</li>
+</ul>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-195309.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>计算机系统的安全模型</strong></p>
+<p>数据库安全保护的存取控制流程</p>
+<ul>
+<li>首先，数据库管理系统对提出 SQL
+访问请求的数据库用户进行<strong>身份鉴别</strong>，防止不可信用户使用系统。</li>
+<li>然后，在 SQL
+处理层进行<strong>自主存取控制和强制存取控制</strong>，进一步还可以进行<strong>推理控制</strong>。</li>
+<li>为监控恶意访问，可根据具体安全需求配置审计规则，对用户访问行为和系统关键操作进行审计，对异常用户行为进行<strong>简单入侵检测</strong>。</li>
+</ul>
+<p>以下为数据库安全性控制的常用方法。</p>
+<h3 id="用户身份鉴别">4.2.1 用户身份鉴别</h3>
+<p>用户身份鉴别是数据库管理系统提供的<strong>最外层</strong>安全保护措施。</p>
+<p>每个用户在系统中都有一个用户标识，每个用户标识由用户名（user
+name）和用户标识号（UID）组成，用户标识号在系统的整个生命周期内是唯一的。</p>
+<p><strong>1. 静态口令鉴别</strong></p>
+<ul>
+<li>静态口令一般由用户自己设定，这些口令是静态不变的。</li>
+<li>可设置password的复杂度要求、过期的时间，用户访问的有效IP范围等</li>
+<li>特点：简单，容易被攻击，安全性较低</li>
+</ul>
+<p><strong>2. 动态口令鉴别</strong></p>
+<ul>
+<li>口令是动态变化的，每次鉴别时均需使用动态产生的新口令登录数据库管理系统，即采用一次一密的方法。</li>
+<li>常用方式：短信密码和动态令</li>
+<li>特点：与静态口令鉴别相比，安全性相对高一些</li>
+</ul>
+<p><strong>3. 生物特征鉴别</strong></p>
+<ul>
+<li>通过生物特征进行认证的技术，生物特征是指生物体唯一具有的，可测量、识别和验证的稳定生物特征，如指纹、虹膜和掌纹等。</li>
+<li>特点：与传统的口令鉴别相比，安全性较高</li>
+</ul>
+<p><strong>4. 智能卡鉴别</strong></p>
+<ul>
+<li>智能卡是一种不可复制的硬件，内置集成电路的芯片，具有硬件加密功能。</li>
+<li>智能卡由用户随身携带，登录数据库管理系统时用户将智能卡插入专用的读卡器进行身份验证。</li>
+<li>由于每次从智能卡中读取的数据是静态的，通过内存扫描或网络监听等技术还是可能截取到用户的身份验证信息，存在安全隐患。因此，实际应用中一般采用个人身份识别码（PIN）和智能卡相结合的方式。</li>
+</ul>
+<p><strong>5. 多因子认证MFA(Multi-Factor Authentication)</strong></p>
+<ul>
+<li>一种身份验证方法，要求用户除了密码以外至少再提供一个身份验证因素，或者至少提供两个非密码的身份验证因素，才能访问网站、应用或网络等</li>
+</ul>
+<h3 id="存取控制">4.2.2 存取控制</h3>
+<p><strong>存取控制机制</strong>主要包括定义用户权限和合法权限检查两部分。</p>
+<p>（1）定义用户权限，并将用户权限登记到数据字典中</p>
+<ul>
+<li><strong>用户对某一数据对象(资源)的操作(如增删改查)权力称为权限</strong></li>
+<li>数据库管理系统提供适当的语言来定义用户权限，这些定义经过编译后存储在数据字典中，被称做<strong>安全规则或授权规则</strong>。</li>
+</ul>
+<p>（2）合法权限检查</p>
+<ul>
+<li>用户发出存取数据库操作请求，数据库管理系统查找数据字典，根据安全规则进行合法权限检查。</li>
+</ul>
+<p>权限定义和合法权检查机制一起组成了数据库管理系统的<strong>存取控制子系统</strong>。</p>
+<p><strong>自主存取控制（Discretionary Access Control,
+DAC）</strong></p>
+<ul>
+<li>C2级：非常灵活</li>
+<li>用户对不同的数据库对象有不同的存取权限</li>
+<li>不同的用户对同一对象也有不同的权限</li>
+<li>用户还可将其拥有的存取权限转授给其他用户</li>
+</ul>
+<p><strong>强制存取控制（Mandatory Access Control, MAC）</strong></p>
+<ul>
+<li>B1级：相对比较严格</li>
+<li>每一个数据库对象（客体）被标以一定的密级</li>
+<li>每一个用户（主体）也被授予某一个级别的许可证</li>
+<li>对于任意一个对象，只有具有合法许可证的用户才可以存取</li>
+</ul>
+<h3 id="自主存取控制方法">4.2.3 自主存取控制方法</h3>
+<ul>
+<li>自主存取控制主要通过 SQL 的 GRANT 语句和 REVOKE 语句实现。</li>
+<li>用户权限由<strong>数据库对象和操作类型</strong>组成。</li>
+<li>定义用户的存取权限：就是定义用户可以在哪些数据库对象上进行哪些类型的操作。</li>
+<li>在数据库系统中，定义存取权限称为<strong>授权（authorization）</strong>。</li>
+<li>在非关系系统中，用户只能对数据进行操作，存取控制的数据库对象也仅限于数据本身。</li>
+<li>在关系数据库系统中，存取控制的对象不仅有数据本身（基本表中的数据、属性列上的数据），还有数据库模式（包括模式、基本表、视图和索引的创建等）。</li>
+</ul>
+<p>关系数据库系统中存取控制对象：2大类：<strong>系统权限和（数据）对象权限</strong></p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-195904.png" srcset="/img/loading.gif" lazyload alt="关系数据库系统中的存取权限">
+<figcaption aria-hidden="true">关系数据库系统中的存取权限</figcaption>
+</figure>
+<h3 id="授权授予与收回">4.2.4 授权：授予与收回</h3>
+<h4 id="grant"><strong>1. GRANT</strong></h4>
+<p>GRANT 语句的一般格式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>]…<br>[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION];<br></code></pre></td></tr></table></figure>
+<p>语义：将对指定操作对象的指定操作权限授予指定的用户。</p>
+<p>发出 GRANT 语句的可以是：</p>
+<ul>
+<li>数据库管理员</li>
+<li>数据库对象创建者（即属主 owner）、</li>
+<li>已经拥有该权限的用户（WITH GRANT OPTION）</li>
+</ul>
+<p>按受权限的用户可以是：</p>
+<ul>
+<li>一个或多个具体用户</li>
+<li>PUBLIC（即全体用户）</li>
+</ul>
+<p>SQL 标准允许具有 WITH GRANT OPTION
+的用户把相应权限或其子集传递授予其他用户，但不允许循环授权，即被授权者不能把权限再授回给授权者或其祖先。</p>
+<p>指定 WITH GRANT OPTION
+子句：获得某种权限的用户可以把这种权限再授予其他的用户。</p>
+<p>没有指定 WITH GRANT OPTION
+子句：获得某种权限的用户只能使用该权限，不能传播该权限。</p>
+<p>把查询 Student 表权限授给用户 U1：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">TO</span> U1;<br></code></pre></td></tr></table></figure>
+<p>把查询 Student 表和修改学生学号的权限授给用户 U4：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">UPDATE</span>(Sno), <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">TO</span> U4;<br></code></pre></td></tr></table></figure>
+<p>对属性列授权时必须明确指出相应的属性列名。</p>
+<h4 id="revoke"><strong>2. REVOKE</strong></h4>
+<p>授予用户的权限可以由数据库管理员或其他授权者用 REVOKE 语句收回。</p>
+<p>REVOKE 语句的一般格式为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>]…[CASCADE<span class="hljs-operator">|</span>RESTRICT];<br></code></pre></td></tr></table></figure>
+<p>把用户 U4 修改学生学号的权限收回：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">UPDATE</span>(Sno) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">FROM</span> U4;<br></code></pre></td></tr></table></figure>
+<p>收回所有用户对表 SC 的查询权限：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC <span class="hljs-keyword">FROM</span> PUBLIC;<br></code></pre></td></tr></table></figure>
+<h4 id="创建数据库模式的权限"><strong>3.
+创建数据库模式的权限</strong></h4>
+<p>对创建数据库模式一类的数据库对象的授权由数据库管理员在创建用户时实现。</p>
+<p>CREATE USER 语句格式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span> [<span class="hljs-keyword">WITH</span>][DBA<span class="hljs-operator">|</span>RESOURCE<span class="hljs-operator">|</span><span class="hljs-keyword">CONNECT</span>];<br></code></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>只有系统的<strong>超级用户</strong>才有权创建一个新的数据库用户。</li>
+<li>新创建的数据库用户有三种权限：CONNECT、RESOURCE 和
+DBA（Oracle中三个都一样）。</li>
+<li>如没有指定创建的新用户的权限，默认该用户拥有 CONNECT 权限。拥有
+CONNECT 权限的用户不能创建新用户，不能创建模式，也不能创建基本表，
+<strong>只能登录数据库</strong>。</li>
+<li>拥有 RESOURCE
+权限的用户能<strong>创建基本表和视图，成为所创建对象的属主</strong>。但不能创建模式，不能创建新的用户。</li>
+<li>拥有 DBA
+权限的用户是系统中的<strong>超级用户</strong>，可以创建新的用户、创建模式、创建基本表和视图等；DBA拥有对所有数据库对象的存取权限，还可以把这些权限授予一般用户。</li>
+</ul>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-201549.png" srcset="/img/loading.gif" lazyload alt="权限与可执行的操作对照表">
+<figcaption aria-hidden="true">权限与可执行的操作对照表</figcaption>
+</figure>
+<p>注：CREATE USER 语句不是 SQL
+标准，因此不同的关系数据库管理系统的语法和内容相差甚远。</p>
+<h4 id="oracle的权限管理">4. Oracle的权限管理</h4>
+<p>2大类权限：</p>
+<ol type="1">
+<li>系统权限
+<ul>
+<li>允许用户执行特定的数据库动作，如创建表、创建索引、连接实例等。</li>
+<li>数据字典：system_privilege_map</li>
+<li>传递授权：with admin option</li>
+<li>例如：<code>CREATE TABLE</code>，<code>DROP ANY TABLE (NO DROP TABLE priv)</code></li>
+</ul></li>
+<li>对象权限
+<ul>
+<li>允许用户操纵一些特定对象，如读取视图，可更新某些列、执行存储过程等。</li>
+<li>数据字典：table_privilege_map</li>
+<li>传递授权：with grant option</li>
+<li>数据对象的owner拥有该对象的所有权限</li>
+</ul></li>
+</ol>
+<p>Oracle权限管理的基本原则：</p>
+<ul>
+<li>User对其schema下的对象具有全部的权限，不用Grant授权</li>
+<li>如果一个用户没有被Grant授权过，也就无法使用Revoke取消该权限</li>
+</ul>
+<h3 id="数据库角色-role">4.2.5 数据库角色 (Role)</h3>
+<p>数据库角色是<strong>被命名的一组与数据库操作相关的权限</strong>，<strong>角色是权限的集合</strong>。可以为一组具有相同权限的用户创建一个角色，使用角色来管理数据库可以简化授权的过程。</p>
+<p><strong>1. 角色的创建</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ROLE <span class="hljs-operator">&lt;</span>角色名<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
+<p>刚刚创建的角色是空的，没有任何内容。</p>
+<p><strong>2. 给角色授权</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span>对象名<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span>]…<br></code></pre></td></tr></table></figure>
+<p>数据库管理员和用户可以利用 GRANT 语句将权限授予某一个或几个角色。</p>
+<p>Role-Based Access Control (RBAC) 支持的三个安全原则：</p>
+<ul>
+<li>最小权限原则：将用户角色配置成其完成任务所需要的最小的权限集</li>
+<li>责任分离原则：通过调用相互独立互斥的角色来共同完成敏感的任务</li>
+<li>数据抽象原则：通过权限的抽象来体现</li>
+</ul>
+<p>静态职责分离（Static Separation of Duty,
+SSD）：当角色授权给用户时，不能同时将两个冲突的角色授权给用户，只能选择其一。</p>
+<p>动态职责分离（Dynamic Separation of Duty,
+DSD）：在角色分配时可以将冲突的角色赋予给同一个用户，但是在用户使用系统时，一次会话中不能同时激活两个角色。</p>
+<p><strong>3. 将一个角色授予其他的角色或用户</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-number">1</span><span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>角色<span class="hljs-number">2</span><span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-number">3</span><span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>用户<span class="hljs-number">1</span><span class="hljs-operator">&gt;</span>]…<br>[<span class="hljs-keyword">WITH</span> ADMIN OPTION];<br></code></pre></td></tr></table></figure>
+<p>该语句把角色授予某用户，或授予另一个角色。</p>
+<p>授予者或者是角色的创建者，或拥有在这个角色上的ADMIN OPTION。</p>
+<p>如果指定了WITH ADMIN
+OPTION，则获得某种权限的角色或用户还可以把这种权限再授予其他角色。</p>
+<p>一个角色包含的权限包括直接授予这个角色的全部权限加上其他角色授予这个角色的全部权限。</p>
+<p><strong>4. 角色权限的收回</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]…<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span><br><span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span>]…;<br></code></pre></td></tr></table></figure>
+<p>用户可以收回角色的权限，从而修改角色拥有的权限。</p>
+<p>REVOKE 动作的执行者：角色的创建者、拥有在这个（些）角色上的 ADMIN
+OPTION。</p>
+<p>通过角色来实现将一组权限授予一个用户：</p>
+<p>步骤如下：</p>
+<p>① 首先创建一个角色 R1。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ROLE R1;<br></code></pre></td></tr></table></figure>
+<p>② 然后使用 GRANT 语句，使角色 R1 拥有 Student 表的
+SELECT、UPDATE、INSERT 权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span>, <span class="hljs-keyword">UPDATE</span>, <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">TO</span> R1;<br></code></pre></td></tr></table></figure>
+<p>③ 将这个角色授予王平，张明，赵玲。使他们具有角色 R1
+所包含的全部权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> R1 <span class="hljs-keyword">TO</span> 王平,张明,赵玲;<br></code></pre></td></tr></table></figure>
+<p>④ 可以一次性通过 R1 来回收王平的这 3 个权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> R1 <span class="hljs-keyword">FROM</span> 王平;<br></code></pre></td></tr></table></figure>
+<h3 id="强制存取控制方法">4.2.6 强制存取控制方法</h3>
+<p>自主存取控制（DAC）缺点：可能存在数据的“无意泄露”</p>
+<ul>
+<li>原因：这种机制仅仅通过对数据的存取权限来进行安全控制，
+而数据本身并无安全性标记</li>
+<li>解决：对系统控制下的所有主客体实施强制存取控制策略</li>
+</ul>
+<p>强制存取控制（MAC）：系统为保证更高程度的安全性，按照 TDI/TCSEC
+标准中安全策略的要求所采取的强制存取检查手段</p>
+<ul>
+<li>用户不能直接感知或进行控制</li>
+<li>适用于对数据有严格而固定密级分类的部门，如军事部门、政府部门</li>
+</ul>
+<p>在强制存取控制中，数据库管理系统所管理的全部实体被分为主体和客体两大类。</p>
+<ul>
+<li><strong>主体是系统中的活动实体</strong>，包括数据库管理系统所管理的实际用户和代表用户的各进程。</li>
+<li><strong>客体是系统中的被动实体</strong>，受主体操纵，包括文件、基本表、索引、视图等。</li>
+<li>对于主体和客体，数据库管理系统为它们每个实例（值）指派一个敏感度标记（label）。</li>
+</ul>
+<p>敏感度标记被分成若干级别：</p>
+<ul>
+<li>绝密（Top
+Secret，TS）、机密（Secret，S）、可信（Confidential，C）、公开（Public，P）</li>
+<li>密级的次序：TS&gt;=S&gt;=C&gt;=P</li>
+<li>主体的敏感度标记称为许可证级别（clearance level）</li>
+<li>客体的敏感度标记称为密级（classification level）</li>
+</ul>
+<p>强制存取控制机制就是通过对比主体的敏感度标记和客体的敏感度标记，最终确定主体是否能够存取客体。</p>
+<p>保密性规则：（MAC—BLP模型）</p>
+<ul>
+<li>下读：用户级别高于文件级别的读操作</li>
+<li>上写：用户级别低于文件级别的写操作</li>
+<li>保证数据只能从低级别往高级别流动</li>
+</ul>
+<p>数据完整性规则：（Biba模型）</p>
+<ul>
+<li>下写：用户级别高于文件级别的写操作。</li>
+<li>上读：用户级别低于文件级别的读操作。</li>
+<li>保证数据只能从高级别往低级别流动</li>
+</ul>
+<p><strong>强制存取控制规则</strong>：（下读，上写）</p>
+<p>（1）仅当主体的许可证级别<strong>大于或等于</strong>客体的密级时，该主体才能<strong>读取</strong>相应的客体。</p>
+<p>（2）仅当主体的许可证级别<strong>小于或等于</strong>客体的密级时，该主体才能<strong>写</strong>相应的客体。</p>
+<ul>
+<li>强制存取控制是对数据本身进行密级标记，无论数据如何复制，<strong>标记与数据是一个不可分的整体</strong>，只有符合密级标记要求的用户才可以操纵数据，从而提供了更高级别的安全性。</li>
+<li>较高安全性级别提供的安全保护要包含较低级别的所有保护，因此在实现强制存取控制时要首先实现自主存取控制。</li>
+<li>自主存取控制与强制存取控制共同构成数据库管理系统的安全机制。</li>
+<li><strong>提供了更高级别的安全性</strong></li>
+</ul>
+<p>DAC+MAC安全检查：</p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-204048.png" srcset="/img/loading.gif" lazyload></p>
+<p>系统首先进行自主存取控制检查，对通过自主存取控制检查的允许存取的数据库对象再由系统自动进行强制存取控制检查，只有通过强制存取控制检查的数据库对象方可存取。</p>
+<h2 id="视图机制">4.3 视图机制</h2>
+<p>可以为不同的用户定义不同的视图，把数据对象限制在一定的范围内。即<strong>通过视图机制把要保密的数据对无权存取这些数据的用户隐藏起来</strong>，从而自动对数据提供一定程度的安全保护。</p>
+<p>视图机制间接地实现支持存取谓词的用户权限定义。</p>
+<p>建立计算机系学生的视图，把对该视图的 SELECT
+权限授于王平，把该视图上的所有操作权限授于张明：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* 先建立计算机系学生的视图 CS_Student */</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> CS_Student <span class="hljs-keyword">AS</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Student <span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">'CS'</span>; <br><span class="hljs-comment">/* 在视图上进一步定义存取权限 */</span> <br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> CS_Student <span class="hljs-keyword">TO</span> 王平; <br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILIGES <span class="hljs-keyword">ON</span> CS_Student <span class="hljs-keyword">TO</span> 张明;<br></code></pre></td></tr></table></figure>
+<h2 id="审计audit">4.4 审计（Audit）</h2>
+<p>审计功能把用户对数据库的所有操作自动记录下来放入审计日志（audit
+log）中。</p>
+<p>审计员可以利用审计日志监控数据库中的各种行为，重现导致数据库现有状况的一系列事件，找出非法存取数据的人、时间和内容等。</p>
+<p><strong>C2
+以上安全级别的数据库</strong>管理系统必须具有审计功能。</p>
+<ul>
+<li>审计通常是很费时间和空间的</li>
+<li>数据库管理员可以根据具体应用对安全性的要求，灵活地打开或关闭审计功能</li>
+<li>审计功能主要用于安全性要求较高的部门</li>
+</ul>
+<p><strong>1. 审计事件</strong></p>
+<ul>
+<li>服务器事件：审计数据库服务器发生的事件，包括数据库服务器的启动、停止、数据库服务器配置文件的重新加载。</li>
+<li>系统权限：对系统拥有的结构或模式对象进行操作的审计，要求该操作的权限是通过系统权限获得的。</li>
+<li>语句事件：对 SQL 语句，如 DDL、DML、DQL 及 DCL 语句的审计。</li>
+<li>模式对象事件：对特定模式对象上进行的 SELECT 或 DML
+操作的审计。模式对象包括表、视图、存储过程、函数等，不包括依附于表的索引、约束、触发器、分区表等。</li>
+</ul>
+<p><strong>2. 审计功能</strong></p>
+<ul>
+<li>基本功能，提供多种审计查阅方式</li>
+<li>提供多套审计规则：一般在初始化设定，以方便审计员管理</li>
+<li>提供审计分析和报表功能</li>
+<li>审计日志管理功能，包括为防止审计员误删审计记录，审计日志必须先转储后删除；对转储的审计记录文件提供完整性和保密性保护；只允许审计员查阅和转储审计记录，不允许任何用户新增和修改审计记录等</li>
+<li>系统提供查询审计设置及审计记录信息的专门视图</li>
+</ul>
+<p><strong>3. AUDIT 语句和 NOAUDIT 语句</strong></p>
+<p>AUDIT 语句用来设置审计功能，NOAUDIT 语句取消审计功能。</p>
+<p>审计一般可以分为用户级审计和系统级审计。</p>
+<p>用户级审计</p>
+<ul>
+<li>任何用户可设置的审计</li>
+<li>主要是用户针对自己创建的数据库表和视图进行审计</li>
+</ul>
+<p>系统级审计</p>
+<ul>
+<li>只能由数据库管理员设置</li>
+<li>监测成功或失败的登录要求、监测授权和收回操作以及其他数据库级权限下的操作</li>
+</ul>
+<p>【例 4.15】对修改 SC 表结构或修改 SC 表数据的操作进行审计。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">AUDIT <span class="hljs-keyword">ALTER</span>,<span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">ON</span> SC;<br></code></pre></td></tr></table></figure>
+<p>【例 4.16】取消对 SC 表的一切审计。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">NOAUDIT <span class="hljs-keyword">ALTER</span>,<span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">ON</span> SC;<br></code></pre></td></tr></table></figure>
+<p>数据库安全审计系统提供了一种事后检查的安全机制。</p>
+<p><strong>涉密信息系统中的“三员”：</strong></p>
+<ul>
+<li>系统管理员</li>
+<li>安全保密管理员</li>
+<li>安全审计管理员</li>
+</ul>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/23/20231223-205056.png" srcset="/img/loading.gif" lazyload alt="数据库管理的三权分立">
+<figcaption aria-hidden="true">数据库管理的三权分立</figcaption>
+</figure>
+<h2 id="数据加密">4.5 数据加密</h2>
+<p>数据加密是防止数据库中数据在存储和传输中失密的有效手段。</p>
+<p>加密的基本思想是根据一定的算法将原始数据——明文（plain
+text）变换为不可直接识别的格式——密文（cipher
+text），从而使得不知道解密算法的人无法获知数据的内容。</p>
+<p>数据加密主要包括<strong>存储加密和传输加密</strong>。</p>
+<h4 id="存储加密"><strong>1. 存储加密</strong></h4>
+<p>透明存储加密（TDE）：内核级加密保护方式，对用户完全透明</p>
+<ul>
+<li>透明存储加密是数据在写到磁盘时对数据进行加密，授权用户读取数据时再对其进行解密。</li>
+<li>数据在数据库<strong>内存中是以明文</strong>形态存在的，而在<strong>数据文件中则以密文</strong>形态存在。</li>
+<li>由于数据加密对用户透明，数据库的应用程序不需要做任何修改，只需在创建表语句中说明需加密的字段即可。</li>
+<li>基于数据库内核的数据存储加密、解密方法<strong>性能较好，安全完备性较高</strong>。</li>
+<li>缺点：仅在静止状态下保护数据、防护颗粒度较粗、数据库类型适用性上有限制。</li>
+</ul>
+<p>非透明存储加密：通过多个加密函数实现</p>
+<h4 id="传输加密"><strong>2. 传输加密</strong></h4>
+<p>链路加密</p>
+<ul>
+<li>在链路层进行加密</li>
+<li>传输信息由报头（路由选择信息）和报文（传送的数据信息）两部分组成</li>
+<li>对报文和报头均加密</li>
+</ul>
+<p>端到端加密</p>
+<ul>
+<li>在发送端加密，接收端解密</li>
+<li>只加密报文，不加密报头</li>
+<li>只在发送端和接收端需要密码设备，而中间节点不需要密码设备，因此它所需密码设备数量相对较少</li>
+<li>不加密报头，从而容易被非法监听者发现并从中获取敏感信息</li>
+</ul>
+<p>基于安全套接层协议（Security Socket
+Layer，SSL）传输方案的实现思路：</p>
+<p>（1）确认通信双方端点的可靠性</p>
+<ul>
+<li>数据库管理系统采用基于<strong>数字证书</strong>的服务器和客户端认证方式，实现通信双方的可靠性确认。</li>
+<li>用户和服务器各自持有由知名数字证书认证中心或企业内建 CA
+颁发的数字证书，双方在进行通信时，均首先向对方提供己方证书，然后使用本地的
+CA 信任列表和证书撤销列表对接收到的对方证书进行验证。</li>
+</ul>
+<p>（2）协商加密算法和密钥</p>
+<ul>
+<li>确认双方端点的可靠性后，通信双方协商本次会话的加密算法与密钥。</li>
+<li>通信双方利用公钥基础设施方式保证了服务器和客户端的协商过程通信的安全可靠。</li>
+</ul>
+<p>（3）可信数据传输</p>
+<ul>
+<li>业务数据在被发送之前将被用某一组特定的密钥进行加密和消息摘要计算，以<strong>密文</strong>形式在网络上传输。</li>
+<li>当业务数据被接收的时候，需用相同一组特定的密钥进行解密和摘要计算。</li>
+</ul>
+<h2 id="其他安全性保护">4.6 其他安全性保护</h2>
+<p>推理控制（inference control）</p>
+<ul>
+<li>数据推理(Inference)可以<strong>根据合法的非敏感数据推导出非法的敏感数据</strong></li>
+<li>处理强制存取控制未解决的问题</li>
+<li>避免用户利用其能够访问的数据推知更高密级的数据</li>
+<li>常用方法：基于函数依赖的推理控制、基于敏感关联的推理控制</li>
+</ul>
+<p>隐蔽信道（covert channel）</p>
+<ul>
+<li>处理强制存取控制未解决的问题</li>
+</ul>
+<p>数据隐私（data privacy）</p>
+<ul>
+<li>数据隐私是控制不愿被他人知道或他人不便知道的个人数据的能力。</li>
+<li>数据隐私范围很广，涉及数据管理中的数据收集、数据存储、数据处理和数据发布等各个阶段。</li>
+</ul>
+<p>数据库脱敏</p>
+<ul>
+<li><strong>利用数据脱敏技术将数据库中的敏感数据进行变换处理</strong>，在保持数据按需使用目标的同时，又能避免敏感数据泄露。</li>
+<li>数据脱敏(Data
+Masking)按照<strong>脱敏规则</strong>对敏感数据进行变换，去除标识数据，数据实现匿名化处理，从而实现敏感数据的保护。</li>
+<li>常见的数据脱敏技术方法有屏蔽、变形、替换、随机、加密等</li>
+</ul>
+<p>数据库防火墙</p>
+<ul>
+<li>通过SQL 协议分析， 根据预定义的禁止/许可策略让合法的SQL 操作通过，
+阻断非法违规操作， 形成数据库的外围防御圈， 实现SQL
+危险操作的<strong>主动预防、实时审计</strong>。</li>
+<li>攻击检测、防止漏洞利用、防止敏感数据泄露、数据库安全审计</li>
+</ul>
+<h1 id="第五章-数据库完整性">第五章 数据库完整性</h1>
+<p>数据库的完整性（integrity）是指<strong>数据的正确性</strong>（correctness）和<strong>相容性</strong>（compat-
+ability）。</p>
+<ul>
+<li>数据的正确性：指数据是符合现实世界语义、反映当前实际状况的</li>
+<li>数据的相容性：指数据库同一对象在不同关系表中的数据是符合逻辑的</li>
+</ul>
+<p>数据的完整性和安全性是两个既有联系又不尽相同的概念：</p>
+<ul>
+<li><p>数据的完整性是为了<strong>防止数据库中存在不符合语义的数据</strong>，也就是<strong>防止数据库中存在不正确</strong>的数据。</p>
+<p>防范对象：不合语义的、不正确的数据，防止它们进入数据库。</p></li>
+<li><p>数据的安全性是保护数据库防止恶意破坏和非法存取。</p>
+<p>防范对象：非法用户和非法操作，防止他们对数据库数据的非法存取。</p></li>
+</ul>
+<p>为维护数据库的完整性，数据库管理系统必须：</p>
+<ol type="1">
+<li><p>提供定义完整性约束条件的机制</p>
+<ul>
+<li><p>完整性约束条件也称为<strong>完整性规则</strong>，是数据库中的数据必须满足的语义约束条件。</p></li>
+<li><p>SQL
+标准使用了一系列概念来描述完整性，包括关系模型的<strong>实体完整性、参照完整性和用户定义完整性</strong>。</p></li>
+<li><p>这些完整性一般由 SQL 的数据定义语言语句来实现。</p></li>
+</ul></li>
+<li><p>提供完整性检查的方法</p>
+<ul>
+<li>数据库管理系统中检查数据是否满足完整性约束条件的机制称为完整性检查。</li>
+<li>一般在 INSERT、UPDATE、DELETE
+语句执行后开始检查，也可以在事务提交时检查。</li>
+</ul></li>
+<li><p>进行违约处理</p>
+<ul>
+<li>数据库管理系统若发现用户的操作违背了完整性约束条件，将采取一定的动作：拒绝（NO
+ACTION）执行该操作或级联（CASCADE）执行其他操作</li>
+</ul></li>
+</ol>
+<h2 id="实体完整性-1">5.1 实体完整性</h2>
+<h3 id="定义实体完整性">5.1.1 定义实体完整性</h3>
+<ul>
+<li>关系模型的实体完整性：在 CREATE TABLE 中用 PRIMARY KEY 定义。</li>
+<li>单属性构成的码有两种说明方法：定义为列级约束条件、定义为表级约束条件</li>
+<li>对多个属性构成的码只有一种说明方法：定义为表级约束条件</li>
+</ul>
+<p>【例 5.1】将 Student 表中的 Sno 属性定义为码。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student<br>(Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>) <span class="hljs-keyword">PRIMARY</span> KEY, <span class="hljs-comment">/* 在列级定义主码 */</span><br> Sname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br> Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br> Sage <span class="hljs-type">SMALLINT</span>,<br> Sdept <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>)<br>);<br></code></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student<br>(Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>),<br> Sname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br> Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),<br> Sage <span class="hljs-type">SMALLINT</span>,<br> Sdept <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>),<br> <span class="hljs-keyword">PRIMARY</span> KEY(Sno)   <span class="hljs-comment">/* 在表级定义主码 */</span><br>);<br></code></pre></td></tr></table></figure>
+<h3 id="实体完整性检查和违约处理">5.1.2 实体完整性检查和违约处理</h3>
+<p>用 PRIMARY KEY
+短语定义了关系的主码后，每当用户程序对基本表插入一条记录或对主码列进行更新操作时，关系数据库管理系统按照实体完整性规则自动进行检查。包括：</p>
+<p>（1）检查<strong>主码值是否唯一</strong>，如果不唯一则拒绝插入或修改。</p>
+<p>（2）检查<strong>主码的各个属性是否为空</strong>，只要有一个为空就拒绝插入或修改。</p>
+<p>检查记录中主码值是否唯一的一种方法是进行<strong>全表扫描</strong>，依次判断表中每一条记录的主码值与将插入记录的主码值
+（或者修改的新主码值）是否相同。</p>
+<p>表扫描的缺点：十分耗时。</p>
+<p>为避免对基本表进行全表扫描，RDBMS一般都在<strong>主码</strong>上自动建立一个<strong>索引</strong>。</p>
+<h2 id="参照完整性-1">5.2 参照完整性</h2>
+<h3 id="定义参照完整性">5.2.1 定义参照完整性</h3>
+<p>关系模型的参照完整性定义</p>
+<ul>
+<li>在 CREATE TABLE 中用 <code>FOREIGN KEY</code>
+短语定义哪些列为外码</li>
+<li>用 <code>REFERENCES</code> 短语指明这些外码参照哪些表的主码</li>
+</ul>
+<p>例如，关系 SC
+中一个元组表示一个学生选修的某门课程的成绩，（Sno，Cno）是主码，Sno、Cno
+分别参照 Student 表的主码和 Course 表的主码。</p>
+<p>【例 5.3】定义 SC 中的参照完整性。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC <br>    (Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Grade <span class="hljs-type">SMALLINT</span>,<br>     <span class="hljs-keyword">PRIMARY</span> KEY (Sno, Cno),    <span class="hljs-comment">/*在表级定义实体完整性*/</span><br>     <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno), <span class="hljs-comment">/*在表级定义参照完整性*/</span><br>     <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)   <span class="hljs-comment">/*在表级定义参照完整性*/</span> <br>    );<br></code></pre></td></tr></table></figure>
+<h3 id="参照完整性检查和违约处理">5.2.2 参照完整性检查和违约处理</h3>
+<p>参照完整性将两个表中的相应元组联系起来。</p>
+<p>对被参照表和参照表进行增、删、改操作时有可能破坏参照完整性，必须进行检查以保证两个表的相容性。</p>
+<p>例如，对表 SC 和 Student 有 4 种可能破坏参照完整性的情况：</p>
+<ol type="1">
+<li>SC 表中增加一个元组，该元组的 Sno 属性值在表 Student
+中找不到一个元组，其 Sno 属性值与之相等。</li>
+<li>修改 SC 表中的一个元组，修改后该元组的 Sno 属性值在表 Student
+中找不到一个元组，其 Sno 属性值与之相等。</li>
+<li>从 Student 表中删除一个元组，造成 SC 表中某些元组的 Sno 属性值在表
+Student 中找不到一个元组，其 Sno 属性值与之相等。</li>
+<li>修改 Student 表中一个元组的 Sno 属性，造成 SC 表中某些元组的 Sno
+属性值在表 Student 中找不到一个元组，其 Sno 属性值与之相等。</li>
+</ol>
+<p>当上述的不一致发生时，系统可以采用以下策略加以处理：</p>
+<ol type="1">
+<li>拒绝（NO
+ACTION）执行：不允许该操作执行。该策略一般设置为<strong>默认策略</strong>。</li>
+<li>级联（CASCADE）操作：当删除或修改被参照表（Student）的一个元组导致与参照表（SC）的不一致时，删除或修改参照表中的所有导致不一致的元组。</li>
+<li>设置为空值：当删除或修改被参照表的一个元组时造成了不一致，则将参照表中的所有造成不一致的元组的对应属性设置为空值。</li>
+</ol>
+<p>对于参照完整性，除了应该定义外码，<strong>还应定义外码列是否允许空值</strong>。</p>
+<p>【例 5.4】显式说明参照完整性的违约处理示例。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>    (Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Grade <span class="hljs-type">SMALLINT</span>,<br>     <span class="hljs-keyword">PRIMARY</span> KEY(Sno,Cno),  <span class="hljs-comment">/*在表级定义实体完整性，Sno,Cno 都不能取空值*/</span> <br>     <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno)      <span class="hljs-comment">/*在表级定义参照完整性*/</span> <br>     <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> CASCADE      <span class="hljs-comment">/*级联删除SC表中相应的元组*/</span> <br>     <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> CASCADE,     <span class="hljs-comment">/*级联更新SC表中相应的元组*/</span>  <br>     <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)       <span class="hljs-comment">/*在表级定义参照完整性*/</span> <br>     <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">NO</span> ACTION    <span class="hljs-comment">/*当删除course 表中的元组造成与SC表不一致时拒绝删除*/</span> <br>     <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> CASCADE      <span class="hljs-comment">/*当更新course表中的cno时，级联更新SC表中相应的元组*/</span> <br>    );<br></code></pre></td></tr></table></figure>
+<h2 id="用户定义的完整性-1">5.3 用户定义的完整性</h2>
+<p>用户定义的完整性是：针对<strong>某一具体应用</strong>的数据必须满足的语义要求。</p>
+<p>关系数据库管理系统提供了定义和检验用户定义完整性的机制，不必由应用程序承担。</p>
+<h3 id="属性上的约束条件">5.3.1 属性上的约束条件</h3>
+<p><strong>1. 属性上约束条件的定义</strong></p>
+<p>在 CREATE TABLE
+中定义属性的同时，可根据应用要求定义属性上的约束条件，即属性值限制。包括：</p>
+<ul>
+<li>列值非空（NOT NULL）</li>
+<li>列值唯一（UNIQUE）</li>
+<li>检查列值是否满足一个条件表达式（CHECK 短语）</li>
+</ul>
+<p>【例 5.8】要求 SC 表的 Grade 的值应该在 0 和 100 之间：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>    (Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>),<br>     Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>), <br>     Grade <span class="hljs-type">SMALLINT</span> <span class="hljs-keyword">CHECK</span> (Grade<span class="hljs-operator">&gt;=</span><span class="hljs-number">0</span> <span class="hljs-keyword">AND</span> Grade<span class="hljs-operator">&lt;=</span><span class="hljs-number">100</span>), <span class="hljs-comment">/*Grade取值范围是0到100*/</span> <br>     <span class="hljs-keyword">PRIMARY</span> KEY (Sno,Cno), <br>     <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno),  <br>     <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<br>    );<br></code></pre></td></tr></table></figure>
+<p><strong>2. 属性上约束条件的检查和违约处理</strong></p>
+<p>当往表中插入元组或修改属性的值时，关系数据库管理系统将检查属性上的约束条件是否被满足，如果不满足则操作被拒绝执行。</p>
+<h3 id="元组上的约束条件">5.3.2 元组上的约束条件</h3>
+<p><strong>1. 元组上约束条件的定义</strong></p>
+<p>在 CREATE TABLE 语句中可以用 <code>CHECK</code>
+短语定义元组上的约束条件，即<strong>元组级的限制</strong>。</p>
+<p>同属性值限制相比，元组级的限制可以设置不同属性之间的取值的相互约束条件。</p>
+<p>【例 5.9】当学生的性别是男时，其名字不能以 Ms. 打头。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student<br>    (Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>), <br>     Sname <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>, <br>     Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>),  <br>     Sage <span class="hljs-type">SMALLINT</span>, <br>     Sdept <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>),  <br>     <span class="hljs-keyword">PRIMARY</span> KEY (Sno), <br>     <span class="hljs-keyword">CHECK</span> (Ssex<span class="hljs-operator">=</span><span class="hljs-string">'女'</span> <span class="hljs-keyword">OR</span> Sname <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'Ms.%'</span>)<br>    );      <span class="hljs-comment">/*定义了元组中Sname和Ssex两个属性值之间的约束条件*/</span><br></code></pre></td></tr></table></figure>
+<p><strong>2. 元组上约束条件的检查和违约处理</strong></p>
+<p>当往表中插入元组或修改属性的值时，关系数据库管理系统将检查元组上的约束条件是否被满足，如果不满足则操作被拒绝执行。</p>
+<h2 id="完整性约束命名子句">5.4 完整性约束命名子句</h2>
+<p><strong>1. 完整性约束命名子句</strong></p>
+<p>完整性约束命名子句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CONSTRAINT</span> <span class="hljs-operator">&lt;</span>完整性约束条件名<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>完整性约束条件<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+<p><code>&lt;完整性约束条件&gt;</code> 包括 NOT NULL、UNIQUE、PRIMARY
+KEY、FOREIGN KEY、CHECK 短语等。</p>
+<p>【例 5.10】建立学生登记表 Student，要求学号在 90000~99999
+之间，姓名不能取空值，年龄小于 30，性别只能是“男”或“女” 。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student<br>    (Sno <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">6</span>) <br>     <span class="hljs-keyword">CONSTRAINT</span> C1 <span class="hljs-keyword">CHECK</span> (Sno <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">90000</span> <span class="hljs-keyword">AND</span> <span class="hljs-number">99999</span>),<br>     Sname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>)<br>     <span class="hljs-keyword">CONSTRAINT</span> C2 <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Sage <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">3</span>)<br>     <span class="hljs-keyword">CONSTRAINT</span> C3 <span class="hljs-keyword">CHECK</span> (Sage<span class="hljs-operator">&lt;</span><span class="hljs-number">30</span>),<br>     Ssex <span class="hljs-type">CHAR</span>(<span class="hljs-number">2</span>)<br>     <span class="hljs-keyword">CONSTRAINT</span> C4 <span class="hljs-keyword">CHECK</span> (Ssex <span class="hljs-keyword">IN</span> (<span class="hljs-string">'男'</span>,<span class="hljs-string">'女'</span>)),<br>     <span class="hljs-keyword">CONSTRAINT</span> StudentKey <span class="hljs-keyword">PRIMARY</span> KEY(Sno) <br>    );<br></code></pre></td></tr></table></figure>
+<p>【例 5.11】建立教师表 TEACHER，要求每个教师的应发工资不低于 3000
+元。应发工资是工资列 Sal 与扣除项 Deduct 之和。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> TEACHER<br>    (Eno <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">PRIMARY</span> KEY     <span class="hljs-comment">/*在列级定义主码*/</span><br>     Ename <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>),<br>     Job <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>),<br>     Sal <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">7</span>,<span class="hljs-number">2</span>),<br>     Deduct <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">7</span>,<span class="hljs-number">2</span>), <br>     Deptno <span class="hljs-type">NUMERIC</span>(<span class="hljs-number">2</span>),<br>     <span class="hljs-keyword">CONSTRAINT</span> TEACHERFKey <span class="hljs-keyword">FOREIGN</span> KEY(Deptno)<br>     <span class="hljs-keyword">REFERENCES</span> DEPT(Deptno),<br>     <span class="hljs-keyword">CONSTRAINT</span> C1 <span class="hljs-keyword">CHECK</span> (Sal <span class="hljs-operator">+</span> Deduct <span class="hljs-operator">&gt;=</span> <span class="hljs-number">3000</span>)<br>    );<br></code></pre></td></tr></table></figure>
+<p><strong>2. 修改表中的完整性限制</strong></p>
+<p>使用 ALTER TABLE 语句修改表中的完整性限制。</p>
+<p>【例 5.12】去掉例 5.10 Student 表中对性别的限制。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">CONSTRAINT</span> C4;<br></code></pre></td></tr></table></figure>
+<p>【例 5.13】修改表 Student 中的约束条件，要求学号改为在 900000~999999
+之间，年龄由小于 30 改为小于 40。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* 可以先删除原来的约束条件，再增加新的约束条件。 */</span><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student<br>    <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">CONSTRAINT</span> C1;<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student <br>    <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> C1 <span class="hljs-keyword">CHECK</span> (Sno <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">900000</span> <span class="hljs-keyword">AND</span> <span class="hljs-number">999999</span>);<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student<br>    <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">CONSTRAINT</span> C3;<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student<br>    <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> C3 <span class="hljs-keyword">CHECK</span>(Sage <span class="hljs-operator">&lt;</span> <span class="hljs-number">40</span>);<br></code></pre></td></tr></table></figure>
+<h2 id="域中的完整性限制">*5.5 域中的完整性限制</h2>
+<h2 id="断言">5.6 断言</h2>
+<p>SQL中，可以使用 ASSERTION
+语句，通过声明性断言来指定更具一般性的约束。</p>
+<p>可以定义涉及多个表的或聚集操作的比较复杂的完整性约束。</p>
+<p>断言创建以后，<strong>任何对断言所涉及的关系的操作都会触发关系数据库管理系统对断言的检查</strong>，任何使断言<strong>不为真值</strong>的操作都会被<strong>拒绝执行</strong>。</p>
+<p><strong>1. 创建断言的语句格式</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ASSERTION <span class="hljs-operator">&lt;</span>断言名<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+<p>每个断言都被赋予一个名字，中的约束条件与 WHERE
+子句的条件表达式类似。</p>
+<p>【例 5.18】限制数据库课程最多 60 名学生选修。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ASSERTIONASSE_SC_DB_NUM <br>    <span class="hljs-keyword">CHECK</span> (<span class="hljs-number">60</span><span class="hljs-operator">&gt;=</span>(<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-comment">/*此断言的谓词涉及聚集操作 count 的 SQL 语句*/</span> <br>                <span class="hljs-keyword">FROM</span> Course,SC <br>                <span class="hljs-keyword">WHERE</span> SC.Cno<span class="hljs-operator">=</span>Course.Cno <span class="hljs-keyword">AND</span> Course.Cname<span class="hljs-operator">=</span><span class="hljs-string">'数据库'</span>)<br>          );<br></code></pre></td></tr></table></figure>
+<p>【例 5.19】限制每一门课程最多 60 名学生选修。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ASSERTION ASSE_SC_CNUM1 <br>    <span class="hljs-keyword">CHECK</span>(<span class="hljs-number">60</span><span class="hljs-operator">&gt;=</span><span class="hljs-keyword">ALL</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-comment">/* 此断言的谓词，涉及聚集操作 count */</span><br>                   <span class="hljs-keyword">FROM</span> SC         <span class="hljs-comment">/* 和分组函数 group by 的SQL语句 */</span><br>                   <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> CNO) <br>         );<br></code></pre></td></tr></table></figure>
+<p>【例 5.20】限制每个学期每一门课程最多 60 名学生选修。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* 首先修改 SC 表的模式，增加一个“学期（TERM）”的属性。 */</span><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> SC <span class="hljs-keyword">ADD</span> TERM <span class="hljs-type">DATE</span>;<br><span class="hljs-comment">/* 然后定义断言 */</span><br><span class="hljs-keyword">CREATE</span> ASSERTION ASSE_SC_CNUM2<br>    <span class="hljs-keyword">CHECK</span> (<span class="hljs-number">60</span> <span class="hljs-operator">&gt;=</span> <span class="hljs-keyword">ALL</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> SC <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> CNO,TERM) );<br></code></pre></td></tr></table></figure>
+<p><strong>2. 删除断言的语句格式</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> ASSERTION <span class="hljs-operator">&lt;</span>断言名<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
+<p>如果断言很复杂，则系统在检测和维护断言上的<strong>开销较高</strong>，
+这是在使用断言时应该注意的。</p>
+<h2 id="触发器">5.7 触发器</h2>
+<p>触发器（trigger）是用户定义在关系表上的一类由<strong>事件驱动</strong>的特殊过程。</p>
+<ul>
+<li>触发器保存在数据库服务器中</li>
+<li>任何用户对表的增、删、改操作均由服务器自动激活相应的触发器，在关系数据库管理系统核心层进行集中的完整性控制</li>
+<li>触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</li>
+</ul>
+<p>不同的关系数据库管理系统实现触发器的语法各不相同、互不兼容。</p>
+<h3 id="定义触发器">5.7.1 定义触发器</h3>
+<p>触发器又叫做事件-条件-动作（event-condition-action）规则。</p>
+<p>当特定的系统事件（如对一个表的增、删、改操作，事务的结束等）发生时，对规则的条件进行检查，如果条件成立则执行规则中的动作，否则不执行该动作。</p>
+<p>规则中的动作体可以很复杂，可以涉及其他表和其他数据库对象， 通常是一段
+SQL 存储过程。</p>
+<p>建立触发器的一般格式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> <span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span>             <span class="hljs-comment">/*每当触发事件发生时，该触发器被激活*/</span><br>{BEFORE<span class="hljs-operator">|</span>AFTER} <span class="hljs-operator">&lt;</span>触发事件<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span>    <span class="hljs-comment">/*指明触发器激活的时间是在执行触发事件前或后*/</span><br><span class="hljs-keyword">REFERENCING</span> <span class="hljs-keyword">NEW</span><span class="hljs-operator">|</span><span class="hljs-keyword">OLD</span> ROWAS<span class="hljs-operator">&lt;</span>变量<span class="hljs-operator">&gt;</span>       <span class="hljs-comment">/* REFERENCING 指出引用的变量*/</span> <br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> {<span class="hljs-type">ROW</span><span class="hljs-operator">|</span>STATEMENT}             <span class="hljs-comment">/* 定义触发器的类型，指明动作体执行的频率*/</span> <br>[<span class="hljs-keyword">WHEN</span> <span class="hljs-operator">&lt;</span>触发条件<span class="hljs-operator">&gt;</span>] <span class="hljs-operator">&lt;</span>触发动作体<span class="hljs-operator">&gt;</span>           <span class="hljs-comment">/* 仅当触发条件为真时才执行触发动作体*/</span><br></code></pre></td></tr></table></figure>
+<p>定义触发器的语法说明</p>
+<ol type="1">
+<li><p>只有表的<strong>拥有者</strong>，即创建表的用户才可以在表上创建触发器。</p></li>
+<li><p>触发器名</p>
+<ul>
+<li><p>触发器名可以包含模式名，也可以不包含模式名。</p></li>
+<li><p>同一模式下，触发器名必须是唯一的，且<strong>触发器名和表名必须在同一模式下</strong>。</p></li>
+</ul></li>
+<li><p>表名</p>
+<ul>
+<li><p>触发器<strong>只能定义在基本表</strong>上，不能定义在视图上。</p></li>
+<li><p>当基本表的数据发生变化时，将激活定义在该表上相应触发事件的触发器。</p></li>
+</ul></li>
+<li><p>触发事件</p>
+<ul>
+<li><p><strong>触发事件可以是 INSERT、DELETE 或
+UPDATE</strong>，也可以是这几个事件的组合</p></li>
+<li><p><strong>还可以是 UPDATE OF
+&lt;触发列，...&gt;</strong>，即进一步指明修改哪些列时激活触发器。</p></li>
+<li><p>AFTER/BEFORE 是触发的时机，AFTER
+表示在触发事件的操作执行之后激活触发器，BEFORE
+表示在触发事件的操作执行之前激活触发器。</p></li>
+</ul></li>
+<li><p>触发器类型：行级触发器（FOR EACH ROW）和语句级触发器（FOR EACH
+STATEMENT）</p>
+<p>例如，在例 5.11 的 TEACHER 表上创建一个 AFTER UPDATE
+触发器，触发事件是 UPDATE 语句：</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> TEACHER <span class="hljs-keyword">SET</span> Deptno<span class="hljs-operator">=</span><span class="hljs-number">5</span>;<br></code></pre></td></tr></table></figure></p>
+<p>假设表 TEACHER 有 1000
+行，如果定义的触发器为语句级触发器，那么执行完该语句后触发动作只发生一次；如果是行级触发器，触发动作将执行
+1000 次。</p></li>
+<li><p>触发条件</p>
+<ul>
+<li>触发器被激活时，只有当<strong>触发条件为真</strong>时触发动作体才执行，否则触发动作体不执行。</li>
+<li>如果省略 WHEN 触发条件，则触发动作体在触发器激活后立即执行。</li>
+</ul></li>
+<li><p>触发动作体</p>
+<ul>
+<li>触发动作体可以是一个匿名 PL/SQL
+过程块，也可以是对已创建存储过程的调用。</li>
+<li>如果是<strong>行级触发器</strong>，用户可以在过程体中使用
+<strong>NEW 和 OLD</strong> 引用 UPDATE/INSERT
+事件之后的<strong>新值</strong>和UPDATE/DELETE事件之前的<strong>旧值</strong>；如果是语句级触发器，则不能在触发动作体中使用
+NEW 或 OLD 进行引用。</li>
+<li>如果触发动作体执行失败，激活触发器的事件就会终止执行，触发器的目标表或触发器可能影响的其他对象不发生任何变化。</li>
+</ul></li>
+</ol>
+<p>【例 5.21】当对表 SC 的 Grade
+属性进行修改时，若分数增加了10%，则将此次操作记录到另一个表中
+SC_U（Sno,Cno,Oldgrade,Newgrade）中，其中 Oldgrade
+是修改前的分数，Newgrade 是修改后的分数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> SC_T 								<span class="hljs-comment">/* SC_T是触发器的名字*/</span> <br>AFTER <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">OF</span> Grade <span class="hljs-keyword">ON</span> SC 						<span class="hljs-comment">/* UPDATE OF Grade ON SC是触发事件 */</span><br><span class="hljs-comment">/* AFTER是触发的时机，表示当对 SC 的 Grade 属性修改完后再触发下面的规则 */</span>  <br><span class="hljs-keyword">REFERENCING</span> <br>    OLDROW <span class="hljs-keyword">AS</span> OldTuple,<br>    NEWROW <span class="hljs-keyword">AS</span> NewTuple<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span> 		<span class="hljs-comment">/* 行级触发器，即每次执行一次 Grade 的更新，下面的规则就执行一次 */</span> <br><span class="hljs-keyword">WHEN</span> (NewTuple.Grade <span class="hljs-operator">&gt;=</span> <span class="hljs-number">1.1</span><span class="hljs-operator">*</span>OldTuple.Grade) 		<span class="hljs-comment">/* 触发条件，只有该条件为真时才执行 */</span>  <br>    <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> SC_U(Sno,Cno,OldGrade,NewGrade) 	<span class="hljs-comment">/* 下面的 INSERT 语句 */</span>   <br>    <span class="hljs-keyword">VALUES</span>(OldTuple.Sno,OldTuple.Cno,OldTuple.Grade,NewTuple.Grade)<br></code></pre></td></tr></table></figure>
+<p>【例 5.22】将每次对表 Student 的插入操作所增加的学生个数记录到表
+StudentInsertLog 中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> Student_Count<br>AFTER <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> Student <span class="hljs-comment">/* 指明触发器激活的时间是在执行 INSERT 后 */</span> <br><span class="hljs-keyword">REFERENCING</span> <br>    <span class="hljs-keyword">NEW</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">AS</span> DELTA  <br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> STATEMENT      <span class="hljs-comment">/* 语句级触发器，即执行完 INSERT 语句后下面的触发动作体才执行一次 */</span> <br>    <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> StudentInsertLog (Numbers)  <br>    <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> DELTA<br></code></pre></td></tr></table></figure>
+<p>【例 5.23】定义一个 BEFORE 行级触发器，为教师表 Teacher
+定义完整性规则 “教授的工资不得低于 4000 元，如果低于 4000 元，自动改为
+4000 元”。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> Insert_Or_Update_Sal <span class="hljs-comment">/*对教师表插入或更新时激活触发器*/</span><br>BEFORE <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">OR</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">ON</span> Teacher  <span class="hljs-comment">/* BEFORE触发事件*/</span><br><span class="hljs-keyword">REFERENCING</span> NEWrow <span class="hljs-keyword">AS</span> NewTuple <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span> <span class="hljs-comment">/*行级触发器*/</span> <br><span class="hljs-keyword">BEGIN</span>                   			<span class="hljs-comment">/*定义触发动作体，这是一个PL/SQL过程块*/</span> <br>    IF (newtuple.Job<span class="hljs-operator">=</span><span class="hljs-string">'教授'</span>) <span class="hljs-keyword">AND</span> (newtuple.Sal <span class="hljs-operator">&lt;</span> <span class="hljs-number">4000</span>)  <br>        <span class="hljs-keyword">THEN</span> newtuple.Sal<span class="hljs-operator">=</span><span class="hljs-number">4000</span>; <br>    <span class="hljs-keyword">END</span> IF;<br><span class="hljs-keyword">END</span>;                                <span class="hljs-comment">/*触发动作体结束*/</span><br></code></pre></td></tr></table></figure>
+<h3 id="激活触发器">5.6.2 激活触发器</h3>
+<p>触发器的执行是由<strong>触发事件激活</strong>，并由数据库服务器自动执行的。</p>
+<p>一个数据表上可能定义了多个触发器，同一个表上的多个触发器激活时遵循如下的执行顺序：</p>
+<ol type="1">
+<li>执行该表上的 BEFORE 触发器</li>
+<li>激活触发器的 SQL 语句</li>
+<li>执行该表上的 AFTER 触发器</li>
+</ol>
+<p>对于同一个表上的多个
+BEFORE（AFTER）触发器，遵循“谁先创建谁先执行”的原则，即按照触发器创建的时间先后顺序执行。有些关系数据库管理系统是按照触发器名称的字母排序顺序执行触发器。</p>
+<h3 id="删除触发器">5.6.3 删除触发器</h3>
+<p>删除触发器的 SQL 语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TRIGGER</span> <span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
+<p>触发器必须是一个已经创建的触发器，并且只能由具有相应权限的用户删除。</p>
 
                 
               </div>
@@ -1774,7 +2618,7 @@ WITH CHECK OPTION 子句。</li>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月22日</div>
+          <div>2023年12月23日</div>
         </div>
       
       
