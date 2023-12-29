@@ -50,8 +50,15 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/25/20231225-140852.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/25/20231225-140922.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/25/20231225-141144.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-135430.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-164655.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-164717.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-164740.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-165004.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-165037.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-165055.png">
 <meta property="article:published_time" content="2023-12-19T08:54:00.000Z">
-<meta property="article:modified_time" content="2023-12-25T06:50:53.733Z">
+<meta property="article:modified_time" content="2023-12-29T09:03:58.897Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三上">
@@ -350,7 +357,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.4k 字
+          14k 字
         
       </span>
     
@@ -361,7 +368,7 @@ mjx-container[display="true"] + br {
         
         
         
-          118 分钟
+          181 分钟
         
       </span>
     
@@ -1096,6 +1103,438 @@ m:n。</li>
 <h3 id="确定数据库的存储结构">7.5.3 确定数据库的存储结构</h3>
 <h3 id="评价物理结构">7.5.4 评价物理结构</h3>
 <h2 id="数据库的实施和维护">7.6 数据库的实施和维护</h2>
+<h1 id="第八章-数据库编程">第八章 数据库编程</h1>
+<h2 id="过程化sql">8.2 过程化SQL</h2>
+<h3 id="过程化sql的块结构">8.2.1 过程化SQL的块结构</h3>
+<p>过程化SQL在数据库服务器上执行，效率高（预编译）</p>
+<p>可以扩展标准SQL的功能</p>
+<p><strong>业务逻辑在数据库上实现</strong>，便于根据需求修改，<strong>无需改动应用程序</strong></p>
+<p>基本结构是块：块之间可以互相嵌套，每个块完成一个逻辑操作</p>
+<ol type="1">
+<li><p>定义：DECLARE 变量、常量、游标、异常等</p>
+<p>定义的变量、常量等只能在该基本块中使用。当基本块执行结束时，定义就不再存在。</p>
+<p>SQL Functions定义与调用：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 定义：<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> dept_count (dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>))<br>    			<span class="hljs-keyword">returns</span> <span class="hljs-type">integer</span><br>    <span class="hljs-keyword">begin</span><br>        <span class="hljs-keyword">declare</span> d_count <span class="hljs-type">integer</span>;<br>        <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span> (<span class="hljs-operator">*</span> ) <span class="hljs-keyword">into</span> d_count<br>        <span class="hljs-keyword">from</span> instructor<br>        <span class="hljs-keyword">where</span> instructor.dept_name <span class="hljs-operator">=</span> dept_name<br>    <span class="hljs-keyword">return</span> d_count;<br><span class="hljs-keyword">end</span><br># 调用：<br><span class="hljs-keyword">select</span> dept_name, budget<br>    <span class="hljs-keyword">from</span> department<br>    <span class="hljs-keyword">where</span> dept_count (dept_name ) <span class="hljs-operator">&gt;</span> <span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
+<p>SQL Procedures 定义与调用：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 定义：<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">procedure</span> dept_count_proc (<span class="hljs-keyword">in</span> dept_name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>), <span class="hljs-keyword">out</span> d_count <span class="hljs-type">integer</span>)<br>    <span class="hljs-keyword">begin</span><br>        <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">into</span> d_count<br>        <span class="hljs-keyword">from</span> instructor<br>        <span class="hljs-keyword">where</span> instructor.dept_name <span class="hljs-operator">=</span> dept_count_proc.dept_name<br>    <span class="hljs-keyword">end</span><br># 调用：<br><span class="hljs-keyword">declare</span> d_count <span class="hljs-type">integer</span>;<br><span class="hljs-keyword">call</span> dept_count_proc( ‘Physics’, d_count);<br></code></pre></td></tr></table></figure></li>
+<li><p>执行部分：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">BEGIN</span><br>	# <span class="hljs-keyword">SQL</span>语句、过程化<span class="hljs-keyword">SQL</span>的流程控制语句<br>EXCEPTION<br>	# 异常处理部分<br><span class="hljs-keyword">END</span>；<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="变量和常量的定义">8.2.2 变量和常量的定义</h3>
+<ol type="1">
+<li>变量定义
+<ul>
+<li>变量名 数据类型 [[NOT NULL] :=初值表达式]</li>
+<li>变量名 数据类型 [[NOT NULL] 初值表达式]</li>
+</ul></li>
+<li>常量定义
+<ul>
+<li>常量名 数据类型 CONSTANT:=常量表达式</li>
+<li>常量必须要给一个值，并且该值在存在期间或常量的作用域内不能改变。如果试图修改它，过程化SQL将返回一个异常。</li>
+</ul></li>
+<li>赋值语句
+<ul>
+<li>变量名 :=表达式</li>
+</ul></li>
+</ol>
+<h3 id="流程控制">8.2.3 流程控制</h3>
+<p>过程化SQL功能：</p>
+<ol type="1">
+<li><p>条件控制语句</p>
+<p>IF-THEN，IF-THEN-ELSE和嵌套的IF语句</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">IF  <span class="hljs-keyword">condition</span>  <span class="hljs-keyword">THEN</span><br>    Sequence_of_statements1;     <span class="hljs-comment">/*条件为真时语句序列才被执行*/</span><br><span class="hljs-keyword">ELSE</span><br>    Sequence_of_statements2;     <span class="hljs-comment">/*条件为假或NULL时才被执行*/</span>  <br><span class="hljs-keyword">END</span> IF<br></code></pre></td></tr></table></figure></p></li>
+<li><p>循环控制语句</p>
+<p>LOOP，WHILE-LOOP和FOR-LOOP</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql">LOOP<br>    Sequence_of_statements；    <span class="hljs-comment">/*使用EXIT、BREAK或LEAVE等循环结束语句结束*/</span><br><span class="hljs-keyword">END</span> LOOP;<br><br><span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">condition</span> LOOP<br>    Sequence_of_statements；    <span class="hljs-comment">/*条件为真时执行循环体内的语句序列*/</span><br><span class="hljs-keyword">END</span> LOOP;<br><br><span class="hljs-keyword">FOR</span> count <span class="hljs-keyword">IN</span> [REVERSE] bound1...bound2  LOOP<br>     Sequence_of_statements；<br><span class="hljs-keyword">END</span> LOOP;<br></code></pre></td></tr></table></figure></p></li>
+<li><p>错误处理</p>
+<p>如果过程化SQL在执行时出现异常，则应该让程序在产生异常的语句处停下来，根据异常的类型去执行异常处理语句。
+SQL标准对数据库服务器提供什么样的异常处理做出了建议，要求过程化SQL管理器提供完善的异常处理机制。</p></li>
+</ol>
+<h2 id="存储过程和函数">8.3 存储过程和函数</h2>
+<h3 id="存储过程">8.3.1 存储过程</h3>
+<p>过程化 SQL 块类型</p>
+<ul>
+<li>命名块：编译后保存在数据库中，可以被反复调用，运行速度较快，过程和函数是命名块</li>
+<li>匿名块：每次执行都要编译，不能在其他过程化 SQL 块中调用</li>
+</ul>
+<p>存储过程：由过程化 SQL
+语句书写的过程，经编译和优化后存储在数据库服务器中，使用时只需调用</p>
+<p>优点：</p>
+<ol type="1">
+<li>运行效率高</li>
+<li>降低客户机和服务器之间的通信量</li>
+<li>方便实施企业规则</li>
+</ol>
+<p>存储过程的用户接口</p>
+<ol type="1">
+<li><p>创建存储过程</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE <span class="hljs-keyword">PROCEDURE</span> 过程名<span class="hljs-params">([参数1,参数2,...])</span> <span class="hljs-title function_">AS</span>&lt;过程 <span class="hljs-title function_">SQL</span> 块&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>执行存储过程</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi">CALL/PERFORM <span class="hljs-function"><span class="hljs-keyword">PROCEDURE</span>  过程名<span class="hljs-params">([参数1,参数2,...])</span></span><br></code></pre></td></tr></table></figure></li>
+<li><p>修改存储过程</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi">ALTER <span class="hljs-function"><span class="hljs-keyword">PROCEDURE</span> 过程1 <span class="hljs-title">RENAME</span> <span class="hljs-title">TO</span> 过程2</span><br></code></pre></td></tr></table></figure></li>
+<li><p>删除存储过程</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi">DROP <span class="hljs-function"><span class="hljs-keyword">PROCEDURE</span> 过程名</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="函数">8.3.2 函数</h3>
+<p>函数：和存储过程一样，都是<strong>持久性存储模块</strong>，但是函数<strong>必须指定返回的类型</strong></p>
+<ol type="1">
+<li><p>创建函数</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> <span class="hljs-built_in">REPLACE</span> <span class="hljs-keyword">FUNCTION</span> 函数名([参数<span class="hljs-number">1</span>,参数<span class="hljs-number">2</span>,...]) RETURNS &lt;类型&gt; <span class="hljs-keyword">AS</span>&lt;过程 SQL 块&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>执行存储过程</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">CALL/PERFORM <span class="hljs-keyword">FUNCTION</span>  <span class="hljs-title">函数名</span>([参数1,参数2,...])<br></code></pre></td></tr></table></figure></li>
+<li><p>修改函数名</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">FUNCTION</span> 函数名<span class="hljs-number">1</span> <span class="hljs-keyword">RENAME</span> <span class="hljs-keyword">TO</span> 函数名<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure></li>
+<li><p>重新编译</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">ALTER <span class="hljs-keyword">FUNCTION</span> <span class="hljs-title">函数名</span> COMLIPE<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="jdbc编程">8.6 JDBC编程</h2>
+<p>JDBC(Java Database Connectivity) API
+提供了一套访问任何RDBMS的标准接口。包含组件：</p>
+<ul>
+<li>JDBC Driver：驱动程序</li>
+<li>Connection：数据库连接</li>
+<li>Statement：增删改查SQL语句</li>
+<li>ResultSet：执行查询返回的结果集</li>
+</ul>
+<h3 id="jdbc编程的基本步骤">8.6.1 JDBC编程的基本步骤</h3>
+<ol type="1">
+<li>加载目标数据库的驱动程序（jar包）</li>
+<li>打开一个数据库连接Connection</li>
+<li>创建一个“Statement”对象</li>
+<li>构造SQL数据操作（DML）语句</li>
+<li>使用 Statement 对象发送构造的SQL语句</li>
+<li>DB
+Server执行SQL语句，返回ResultSet结果集，Client执行后续的应用逻辑</li>
+<li>执行相关的异常处理</li>
+<li><strong>关闭Statement, Connection等对象释放资源</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">JDBCexample</span><span class="hljs-params">(String dbid, String userid, String passwd)</span><br>{<br>    <span class="hljs-keyword">try</span> ( <span class="hljs-type">Connection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> DriverManager.getConnection(<br>        <span class="hljs-string">"jdbc:oracle:thin:@db.test.com:2000:testdb"</span>, userid, passwd);<br>        <span class="hljs-type">Statement</span> <span class="hljs-variable">stmt</span> <span class="hljs-operator">=</span> conn.createStatement();<br>    	)<br>    {<br>        … Do Actual Work ….<br>    }<br>    <span class="hljs-keyword">catch</span> (SQLException sqle) {<br>        System.out.println(<span class="hljs-string">"SQLException : "</span> + sqle);<br>    }<br>}<br></code></pre></td></tr></table></figure>
+<p>Oracle JDBC驱动连接方式:</p>
+<p>Connecting to Oracle service name (建议使用)：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml">jdbc:oracle:thin:[<span class="hljs-tag">&lt;<span class="hljs-name">user</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>]@//<span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>[:<span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>]/<span class="hljs-tag">&lt;<span class="hljs-name">service</span>&gt;</span><br>Ex：jdbc:oracle:thin:@//myoracle.db.server:1521/orclpdb<br></code></pre></td></tr></table></figure>
+<h3 id="jdbc-sql-执行调用方式">8.6.2 JDBC SQL 执行调用方式</h3>
+<ol type="1">
+<li>execute()
+<ul>
+<li>返回true或者false：如果第一个结果是一个ResultSet对象，则返回true；如果是一个更新计数或者没有结果，则返回false。</li>
+<li>通过反复调用Statement.getResultSet来检索查询返回的ResultSet对象。</li>
+<li>通用于执行所有的DML（数据操作语言）和DDL（数据定义语言）语句。</li>
+</ul></li>
+<li>executeQuery()
+<ul>
+<li>返回一个ResultSet对象。</li>
+<li>用于执行SELECT查询语句。</li>
+</ul></li>
+<li>executeUpdate()
+<ul>
+<li>返回一个表示受SQL语句影响的行数的整数。</li>
+<li>用于执行INSERT（插入）、DELETE（删除）或UPDATE（更新）语句。</li>
+</ul></li>
+</ol>
+<h3 id="sql注入">8.6.3 SQL注入</h3>
+<h4 id="预编译语句">1. 预编译语句</h4>
+<p>Prepared
+Statement（预编译语句）是一种用于执行SQL查询和更新操作的安全编程技术。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">pStmt</span> <span class="hljs-operator">=</span> conn.prepareStatement(<br>    <span class="hljs-string">"insert into instructor values(?,?,?,?)"</span>);<br>pStmt.setString(<span class="hljs-number">1</span>, <span class="hljs-string">"88877"</span>);<br>pStmt.setString(<span class="hljs-number">2</span>, <span class="hljs-string">"Perry"</span>);<br>pStmt.setString(<span class="hljs-number">3</span>, <span class="hljs-string">"Finance"</span>);<br>pStmt.setInt(<span class="hljs-number">4</span>, <span class="hljs-number">125000</span>);<br>pStmt.executeUpdate();<br>pStmt.setString(<span class="hljs-number">1</span>, <span class="hljs-string">"88878"</span>);<br>pStmt.executeUpdate();<br></code></pre></td></tr></table></figure>
+<p>当从用户获取输入并将其添加到查询中时，始终使用预编译语句。绝不要通过<strong>字符串拼接</strong>来创建查询，因为这会增加SQL注入的风险。</p>
+<h4 id="sql注入-1">2. SQL注入</h4>
+<p>SQL注入是一种高级的<strong>代码注入技术</strong>，发生<strong>在应用程序与数据库交互层的安全漏洞</strong>。</p>
+<p>如果在<strong>输入的查询字符串之中注入了特别的SQL指令</strong>，当设计不良的程序忽略了特殊字符或
+者某些逻辑检查，那么这些注入进去的恶意SQL指令就会被数据库服务器执行，因此遭到破
+坏或是入侵。</p>
+<p>攻击者通过专门构造传递给数据库的SQL字符串来修改SQL自身的语法和功能，从而实现恶意查询或者数据破坏的意图。</p>
+<p>SQL注入产生的技术根源：典型的B/S应用程序三层架构</p>
+<ul>
+<li>前台的查询条件传递给中间的WEB服务器</li>
+<li>WEB服务器通过构建合适的SQL语句发送给后台的DB服务器执行</li>
+<li>如果应用程序对前台的<strong>查询字符串</strong>不做<strong>特殊字符串或者关键字的检查和过滤</strong>，可能就会导致SQL注入</li>
+</ul>
+<p>漏洞产生原因：<strong>开发人员</strong>应用SQL
+API实现数据操作逻辑，通常只关心业务逻辑，<strong>缺乏安全编程概念与意识</strong></p>
+<ul>
+<li><strong>动态构造SQL字符串（拼接）</strong>，未做特殊字符串安全过滤</li>
+<li>不安全的数据库配置与权限设置：
+<ul>
+<li>默认数据库系统账号/密码</li>
+<li>权限过大，非“最小权限”原则，没有根据实际需求设置权限</li>
+<li>程序中使用DBA角色等</li>
+</ul></li>
+</ul>
+<h4 id="sql注入测试">3. SQL注入测试</h4>
+<p>识别SQL注入：推理测试</p>
+<p>WEB 应用：HTTP get/post 请求</p>
+<p>经典的<strong>单引号判断法</strong>
+<code>http://xxx/abc.php?id=1’</code></p>
+<p>如果页面返回错误，则存在 Sql
+注入。原因是无论字符型还是整型都会因为单引号个
+数不匹配而报错。如果未报错，不代表不存在 SQL 注入。</p>
+<h4 id="sql注入类型">4. SQL注入类型</h4>
+<ol type="1">
+<li><p>整数注入：</p>
+<p>含有漏洞的代码为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">sql = <span class="hljs-string">"SELECT * FROM clients WHERE "</span> .<br><span class="hljs-string">"account = <span class="hljs-subst">$formacct</span> AND "</span> .<br><span class="hljs-string">"pin = <span class="hljs-subst">$formpin</span>"</span>;<br></code></pre></td></tr></table></figure>
+<p>如果输入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$formacct</span> = <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span> <span class="hljs-comment">#</span><br><span class="hljs-variable">$formpin</span> = <span class="hljs-number">1111</span><br></code></pre></td></tr></table></figure>
+<p>最后的sql结果为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> clients<br><span class="hljs-keyword">WHERE</span> account <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-number">1</span><br># <span class="hljs-keyword">AND</span> pin <span class="hljs-operator">=</span> <span class="hljs-number">1111</span><br></code></pre></td></tr></table></figure></li>
+<li><p>字符串注入：</p>
+<p>含有漏洞的代码为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">sql = <span class="hljs-string">"SELECT * FROM users WHERE username = ' "</span> + user + <span class="hljs-string">" ' AND password = ' "</span> + pwd + <span class="hljs-string">" ' "</span>;<br></code></pre></td></tr></table></figure>
+<p>对username进行注入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">user = <span class="hljs-string">" admin' OR '1'='1 "</span><br></code></pre></td></tr></table></figure>
+<p>对password进行注入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">pwd = <span class="hljs-string">" ' OR '1'='1 "</span><br></code></pre></td></tr></table></figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-135430.png" srcset="/img/loading.gif" lazyload alt="字符串注入的方式">
+<figcaption aria-hidden="true">字符串注入的方式</figcaption>
+</figure></li>
+<li><p>SQL注释：</p>
+<ul>
+<li>单行注释：<code>--</code> ，MySQL：<code>#</code></li>
+<li>多行注释：<code>/* */</code></li>
+</ul></li>
+<li><p>执行多条SQL语句：</p>
+<p>username的输入为：<code>Admin’ or 1=1;INSERT INTO Users VALUES (‘root’, ‘123456’); --</code>，由于分号，SQL语句变成两句。</p></li>
+<li><p>Union注入：查询额外的信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Select</span> <span class="hljs-operator">*</span> form users <span class="hljs-keyword">where</span> username<span class="hljs-operator">=</span>‘admin’ <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> users;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="预防sql注入">5. 预防SQL注入</h4>
+<ul>
+<li>预编译语句</li>
+<li>根本的解决方案：<strong>检查用户输入，转义特殊字符</strong></li>
+</ul>
+<h1 id="第九章-关系查询处理和查询优化">第九章
+关系查询处理和查询优化</h1>
+<p>查询优化分类 ：</p>
+<ul>
+<li>代数优化：指关系代数表达式的优化</li>
+<li>物理优化：指存取路径和底层操作算法的选择</li>
+</ul>
+<h2 id="关系数据库系统的查询处理">9.1 关系数据库系统的查询处理</h2>
+<h3 id="查询处理步骤">9.1.1 查询处理步骤</h3>
+<p>查询处理步骤</p>
+<ol type="1">
+<li><strong>查询分析</strong>：对查询语句进行扫描、词法分析和语法分析
+<ul>
+<li>词法分析：从查询语句中识别出正确的语言符号</li>
+<li>语法分析：进行语法检查</li>
+</ul></li>
+<li><strong>查询检查</strong>：检查查询的合法性，例如数据模型完整性检查、安全性检查（DAC/MAC定义的权限）等。
+<ul>
+<li>检查语句中的数据库对象，如关系名、属性名是否存在和有效</li>
+<li>用视图消解方法把对视图的操作转换成对基本表的操作</li>
+<li>用<strong>用户权限和完整性约束定义</strong>对用户的存取权限进行检查</li>
+<li>检查通过后把SQL查询语句转换成内部表示，即等价的<strong>关系代数表达式</strong></li>
+<li>关系数据库管理系统一般都用<strong>查询树</strong>，也称为<strong>语法分析树</strong>来表示扩展的关系代数表达式。</li>
+</ul></li>
+<li><strong>查询优化</strong>：选择高效的查询执行策略。
+<ul>
+<li>分类：代数优化/逻辑优化、物理优化</li>
+<li>查询优化的依据：基于规则、基于代价、基于语义</li>
+</ul></li>
+<li><strong>查询执行</strong>：按优化器的执行策略运行查询。</li>
+</ol>
+<h3 id="实现查询操作的算法示例">9.1.2 实现查询操作的算法示例</h3>
+<h4 id="选择操作的实现">1. 选择操作的实现</h4>
+<p>实现方法：</p>
+<ol type="1">
+<li>全表扫描方法</li>
+<li>索引扫描方法：通过索引先找到满足条件的元组主码或元组指针，再通过元组指针直接在查询的基本表中找到元组</li>
+</ol>
+<p>Index的一般结构：B+树</p>
+<ul>
+<li>多路搜索平衡树，高度一般3~4层，搜索性能稳定</li>
+<li>非叶子节点仅用作索引，数据全部在叶子节点</li>
+<li>叶子节点左小右大排序，用指针连在一起</li>
+</ul>
+<p>若选择时有多个条件，可有两种解决算法：<code>Sdept＝‘CS’ AND Sage&gt;20</code>，如果Sdept和Sage上都有索引：</p>
+<ol type="1">
+<li>分别用上面两种方法分别找到<code>Sdept＝‘CS’</code>的一组元组指针和<code>Sage&gt;20</code>的另一组元组指针（使用B+树索引找到<code>Sage=20</code>的索引项，以此为入口点在B+树的顺序集上得到<code>Sage&gt;20</code>的所有元组指针），然后求这两组指针的交集</li>
+<li>找到<code>Sdept＝‘CS’</code>的一组元组指针，通过这些元组指针到student表中检索，对得到的元组检查另一些选择条件(如<code>Sage&gt;20</code>)是否满足</li>
+</ol>
+<h4 id="连接操作的实现">2. 连接操作的实现</h4>
+<p>连接操作是查询处理中最耗时的操作之一</p>
+<p>例：<code>SELECT * FROM Student, SC WHERE Student.Sno = SC.Sno;</code></p>
+<p>实现方法：</p>
+<ol type="1">
+<li>嵌套循环算法(nested loop join)
+<ul>
+<li>对外层循环(Student表)的每一个元组(s)，检索内层循环(SC表)中的每一个元组(sc)</li>
+<li>直到外层循环表中的元组处理完为止。</li>
+<li>理想的情况是：外表较小，内表的连接字段有唯一索引，或者非唯一索引的区分度较高。通常可以快速返回前面的几条查询记录。</li>
+</ul></li>
+<li>排序-合并算法(sort-merge join 或merge join)
+<ul>
+<li>先对Student表和SC表按连接属性Sno排序。
+取Student表中第一个Sno，依次扫描SC表中具有相同Sno的元组。
+当扫描到Sno不相同的第一个SC元组时，返回Student表扫描它的下一个元组，再扫描SC表中具有相同Sno的元组，把它们连接起来。
+重复上述步骤直到Student 表扫描完。</li>
+<li>Student表和SC表都只要<strong>扫描一遍</strong>。</li>
+<li>如果两个表原来没有排序，执行时间要加上对两个表的<strong>排序时间</strong>。</li>
+<li>可适用于等值、非等值，但是不能用于<code>!=</code>运算</li>
+</ul></li>
+<li>索引连接(index join)
+<ul>
+<li>在SC表上已经建立属性Sno的索引。
+对Student中每一个元组，由Sno值通过SC的索引查找相应的SC元组。
+循环执行，直到Student表中的元组处理完为止。</li>
+</ul></li>
+<li>Hash Join算法
+<ul>
+<li>把连接属性作为hash码，用同一个hash函数把Student表和SC表中的元组散列到hash表中。</li>
+<li>划分阶段：对包含较少元组的表(如Student表)进行一遍处理，把它的元组按hash函数分散到hash表的桶(bucket)中。</li>
+<li>试探阶段：对另一个表(SC表)进行一遍处理，利用相同的hash函数将相匹配的元组连接起来。</li>
+<li>Hash Join是做大数据集连接时的常用方式。</li>
+<li>算法前提：<strong>适用于较小的表完全可以放于内存中的情况</strong>。</li>
+<li>Hash Join只能应用于<strong>等值连接</strong>。</li>
+</ul></li>
+</ol>
+<h2 id="关系数据库系统的查询优化">9.2 关系数据库系统的查询优化</h2>
+<h3 id="查询优化概述">9.2.1查询优化概述</h3>
+<p>查询优化的优点：</p>
+<ul>
+<li>用户不必考虑如何最好地表达查询以获得较好的效率</li>
+<li>系统可以比用户程序的“优化”做得更好</li>
+</ul>
+<p>关系数据库管理系统通过某种<strong>代价模型计算</strong>出各种<strong>查询执行策略</strong>的执行代价，然后选取<strong>代价最小</strong>的执行方案。</p>
+<p>执行代价：</p>
+<ul>
+<li>集中式数据库
+<strong>磁盘存取块数(I/O代价)</strong>（主要）、处理机时间(CPU代价)、查询的内存开销</li>
+<li>分布式数据库 总代价 = I/O 代价 + CPU 代价 + 内存代价 + 通信代价</li>
+</ul>
+<h3 id="一个实例">9.2.2一个实例</h3>
+<h2 id="代数优化">9.3 代数优化</h2>
+<h3 id="关系代数表达式等价变换规则">9.3.1
+关系代数表达式等价变换规则</h3>
+<p>代数优化策略：通过对关系代数表达式的等价变换来提高查询效率</p>
+<p><strong>关系代数表达式等价</strong>：指用相同的关系代替两个表达式中相应的关系所得到的结果是相同的</p>
+<p>常用的等价变换规则：</p>
+<ol type="1">
+<li>连接、笛卡尔积交换律</li>
+<li>连接、笛卡尔积的结合律</li>
+<li>投影的串接定律</li>
+<li>选择的串接定律：选择条件可以合并，一次就可检查全部条件</li>
+<li>选择与投影操作的交换律</li>
+<li>选择与笛卡尔积的交换律：使部分选择在笛卡尔积前先做</li>
+<li>选择与并、差、自然连接的分配律</li>
+<li>投影与并、笛卡尔积的分配律（投影与差没有分配律）</li>
+</ol>
+<h3 id="查询树的启发式优化">9.3.2 查询树的启发式优化</h3>
+<p>典型的启发式规则有：</p>
+<p>（1）<strong>选择运算应尽可能先做</strong>：在优化策略中这是最重要、最基本的一条。</p>
+<p>（2）<strong>把投影运算和选择运算同时进行</strong></p>
+<p>（3）<strong>把投影同其前或后的双目运算结合起来</strong></p>
+<p>（4）<strong>把某些选择同在它前面要执行的笛卡尔积结合起来成为一个连接运算</strong></p>
+<p>（5）<strong>找出公共表达式</strong></p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-164655.png" srcset="/img/loading.gif" lazyload alt="算法1">
+<figcaption aria-hidden="true">算法1</figcaption>
+</figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-164717.png" srcset="/img/loading.gif" lazyload alt="算法2">
+<figcaption aria-hidden="true">算法2</figcaption>
+</figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-164740.png" srcset="/img/loading.gif" lazyload alt="算法3">
+<figcaption aria-hidden="true">算法3</figcaption>
+</figure>
+<p>下面给出[例9.3]中 SQL语句的代数优化示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Student.Sname<br><span class="hljs-keyword">FROM</span> Student, SC<br><span class="hljs-keyword">WHERE</span> Student.Sno<span class="hljs-operator">=</span>SC.Sno<br>	<span class="hljs-keyword">AND</span> SC.Cno<span class="hljs-operator">=</span>’<span class="hljs-number">2</span>’<br></code></pre></td></tr></table></figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-165004.png" srcset="/img/loading.gif" lazyload alt="查询树图">
+<figcaption aria-hidden="true">查询树图</figcaption>
+</figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-165037.png" srcset="/img/loading.gif" lazyload alt="关系代数语法树图">
+<figcaption aria-hidden="true">关系代数语法树图</figcaption>
+</figure>
+<p>利用规则4、6把选择σSC.Cno=‘2’移到叶端，查询树便转换成下图优化的查询树。这就是9.2.2节中Q3的查询树表示。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/29/20231229-165055.png" srcset="/img/loading.gif" lazyload alt="优化后">
+<figcaption aria-hidden="true">优化后</figcaption>
+</figure>
+<h2 id="物理优化">9.4 物理优化</h2>
+<p><strong>代数优化</strong>改变查询语句<strong>操作的次序和组合</strong>，不涉及底层的存取路径</p>
+<p>物理优化就是要选择<strong>高效合理的操作算法</strong>或<strong>存取路径</strong>，求得优化的查询计划</p>
+<h3 id="基于启发式规则的存取路径选择优化">9.4.1
+基于启发式规则的存取路径选择优化</h3>
+<h4 id="选择操作的启发式规则">1. 选择操作的启发式规则</h4>
+<p>对于<strong>小关系，使用全表顺序扫描</strong>，即使选择列上有索引</p>
+<p>对于大关系，启发式规则有：</p>
+<ol type="1">
+<li>对于选择条件是“<strong>主码＝值</strong>”的查询
+查询结果最多是一个元组，可以选择<strong>主码索引</strong></li>
+<li>对于选择条件是“<strong>非主属性＝值</strong>”的查询，并且选择列上有索引
+要估算查询结果的元组数目
+如果比例较小(&lt;10%)可以使用索引扫描方法，否则还是使用全表顺序扫描</li>
+<li>对于选择条件是<strong>属性上的非等值查询或者范围查询</strong>，并且<strong>选择列上有索引</strong>
+同2方法</li>
+<li>对于<strong>用AND连接的合取选择</strong>条件</li>
+</ol>
+<ul>
+<li>如果有涉及这些属性的组合索引 优先采用组合索引扫描方法</li>
+<li>如果某些属性上有一般的索引，可以用索引扫描方法
+通过分别查找满足每个条件的指针，求指针的交集
+通过索引查找满足部分条件的元组，然后在扫描这些元组时判断是否满足剩余条件</li>
+<li>其他情况：使用全表顺序扫描</li>
+</ul>
+<ol start="5" type="1">
+<li>对于用OR连接的析取选择条件，一般使用全表顺序扫描</li>
+</ol>
+<h4 id="连接操作的启发式规则">2. 连接操作的启发式规则</h4>
+<ol type="1">
+<li>如果2个表都已经按照连接属性排序：选用排序-合并算法</li>
+<li>如果一个表在连接属性上有索引：选用索引连接算法</li>
+<li>如果上面2个规则都不适用，其中一个表较小：选用Hash join算法</li>
+<li>可以选用<strong>嵌套循环方法，并选择其中较小的表，</strong>确切地讲是占用的块数(b)较少的表，作为<strong>外表</strong>(外循环的表)</li>
+</ol>
+<h3 id="基于代价的优化">9.4.2 基于代价的优化</h3>
+<h4 id="统计信息">1. 统计信息</h4>
+<p>基于代价的优化方法要计算查询的各种不同执行方案的执行代价，它与数据库的状态密切相关</p>
+<p>优化器需要的统计信息：</p>
+<ol type="1">
+<li>对每个基本表 该表的元组总数(N) 元组长度(l) 占用的块数(B)
+占用的溢出块数(BO)</li>
+<li>对基表的每个列 该列不同值的个数(m) 列最大值 最小值
+列上是否已经建立了索引 哪种索引(B+树索引、Hash索引、聚集索引)
+可以计算选择率(f) 如果不同值的分布是均匀的，f＝1/m
+如果不同值的分布不均匀，则要计算每个值的选择率，f＝具有该值的元组数/N</li>
+<li>对索引 索引的层数(L) 不同索引值的个数
+索引的选择基数S(有S个元组具有某个索引值) 索引的叶结点数(Y)</li>
+</ol>
+<h4 id="代价估算示例">2. 代价估算示例</h4>
+<ol type="1">
+<li>全表扫描算法的代价估算公式
+<ul>
+<li>如果基本表大小为B块，全表扫描算法的代价 cost＝B</li>
+<li>如果选择条件是“码＝值”，那么平均搜索代价 cost＝B/2</li>
+</ul></li>
+<li>索引扫描算法的代价估算公式
+<ul>
+<li>如果选择条件是“码＝值” 则采用该表的主索引
+若为B+树，层数为L，需要存取B+树中从根结点到叶结点L块，再加上基本表中该元组所在的那一块，所以cost=L+1</li>
+<li>如果选择条件涉及非码属性
+若为B+树索引，选择条件是相等比较，S是索引的选择基数(有S个元组满足条件)
+满足条件的元组可能会保存在不同的块上，所以(最坏的情况)cost=L+S</li>
+<li>如果比较条件是＞，＞＝，＜，＜＝操作 假设有一半的元组满足条件
+就要存取一半的叶结点 通过索引访问一半的表存储块 cost=L+Y/2+B/2
+如果可以获得更准确的选择基数，可以进一步修正Y/2与B/2</li>
+</ul></li>
+<li>嵌套循环连接算法的代价估算公式
+<ul>
+<li>嵌套循环连接算法的代价 cost＝Br+BrBs/(K-1)</li>
+<li>如果需要把连接结果写回磁盘 cost＝Br+Br Bs/(K-1)+(FrsNrNs)/Mrs
+其中Frs为连接选择性(join selectivity)，表示连接结果元组数的比例
+Mrs是存放连接结果的块因子，表示每块中可以存放的结果元组数目</li>
+</ul></li>
+<li>排序-合并连接算法的代价估算公式
+<ul>
+<li>如果连接表已经按照连接属性排好序，则 cost＝Br+Bs+(FrsNrNs)/Mrs</li>
+<li>如果必须对文件排序 还需要在代价函数中加上排序的代价</li>
+</ul></li>
+</ol>
 
                 
               </div>
@@ -1143,7 +1582,7 @@ m:n。</li>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月25日</div>
+          <div>2023年12月29日</div>
         </div>
       
       
