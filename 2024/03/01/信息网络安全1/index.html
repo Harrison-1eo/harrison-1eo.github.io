@@ -23,14 +23,20 @@
 <meta property="og:site_name" content="Harrison&#39;s Blog">
 <meta property="og:description" content="信息网路安全笔记一">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/03/20240303-215132.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/03/20240303-215145.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/04/20240304-181623.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/04/20240304-182121.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/05/20240305-132836.png">
 <meta property="article:published_time" content="2024-03-01T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-03T13:50:06.311Z">
+<meta property="article:modified_time" content="2024-03-05T15:06:12.322Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三下">
 <meta property="article:tag" content="考研">
 <meta property="article:tag" content="信息网络安全">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/03/20240303-215132.png">
   
   
   
@@ -323,7 +329,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          7.1k 字
         
       </span>
     
@@ -334,7 +340,7 @@ mjx-container[display="true"] + br {
         
         
         
-          21 分钟
+          89 分钟
         
       </span>
     
@@ -567,6 +573,376 @@ Contol）：指用户有权对自身所创建的访问对象（文件、数据�
 </ul></li>
 </ol></li>
 </ol>
+<h2 id="网络安全模型">1.7 网络安全模型</h2>
+<p>网络安全模型：保密通信模型</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/03/20240303-215132.png" srcset="/img/loading.gif" lazyload alt="保密通信模型">
+<figcaption aria-hidden="true">保密通信模型</figcaption>
+</figure>
+<p>网络安全模型——访问控制模型</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/03/20240303-215145.png" srcset="/img/loading.gif" lazyload alt="访问控制模型">
+<figcaption aria-hidden="true">访问控制模型</figcaption>
+</figure>
+<h1 id="第2章-计算机网络基础">第2章 计算机网络基础</h1>
+<h2 id="计算机网络的定义">2.1 计算机网络的定义</h2>
+<h2 id="计算机网络体系结构">2.2 计算机网络体系结构</h2>
+<h2 id="分组交换技术">2.3 分组交换技术</h2>
+<h2 id="internet的基本知识">2.4 Internet的基本知识</h2>
+<h1 id="第3章-internet协议的安全性">第3章 Internet协议的安全性</h1>
+<h2 id="internet协议概述">3.1 Internet协议概述</h2>
+<p>在TCP/IP参考模型中：</p>
+<ul>
+<li>应用层：HTTP、SMTP、FTP</li>
+<li>传输层：TCP、UDP</li>
+<li>网际层：IP、ARP</li>
+<li>网络接口层</li>
+</ul>
+<h2 id="网际层协议">3.2 网际层协议</h2>
+<h3 id="ip协议">3.2.1 IP协议</h3>
+<p>IP（Internet
+Protocol，IP）协议：网际互连协议，它主要负责实现数据包的传输和路由的选择。</p>
+<p>IP地址：32位</p>
+<p>IPv4协议：数据报由首部和数据净荷两部分组成，首部固定分为20字节的固定部分和可选字段。</p>
+<p>数据报的前四位为版本号，IPv4表示为4（0b0100），IPv6示为6（0b0110）</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/04/20240304-181623.png" srcset="/img/loading.gif" lazyload alt="IPv4数据报格式">
+<figcaption aria-hidden="true">IPv4数据报格式</figcaption>
+</figure>
+<p>关于IPv6：</p>
+<ol type="1">
+<li>IPv6与IPv4一样，它通过IPSec协议来保证IP层的安全。IPSec是IPv6的一个组成部分，而对IPv4来说是可选的。但是本质上，IPv6并不能比IPv4更安全。（IPsec是为IP网络提供安全性的协议和服务的集合，它是VPN中常用的一种技术。
+由于IP报文本身没有集成任何安全特性，IP数据包在公用网络如Internet中传输可能会面临被伪造、窃取或篡改的风险。通信双方通过IPsec建立一条IPsec隧道，IP数据包通过IPsec隧道进行加密传输，有效保证了数据在不安全的网络环境如Internet中传输的安全性。）</li>
+<li>IPv6尚未得到全球广泛应用，人们开发了许多协议以实现从IPv4到IPv6的过渡。</li>
+<li>若让IPv6数据通过防火墙，防火墙就必须支持IPv6。若防火墙不支持IPv6，就要开通IPv6隧道。</li>
+</ol>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/04/20240304-182121.png" srcset="/img/loading.gif" lazyload alt="IPv6数据报格式">
+<figcaption aria-hidden="true">IPv6数据报格式</figcaption>
+</figure>
+<p>IP协议的特点：</p>
+<ol type="1">
+<li>无连接：IP协议为无连接的数据报服务，各数据报独立传输，传输路劲和到达顺序均不同</li>
+<li>不可靠：不含有错误检测，或错误恢复的编码。如果需要可靠性保证，需要在上层使用TCP协议</li>
+<li>点对点：是点对点协议，虽然IP数据报携带源IP和目的IP地址，但进行数据传输时的对等实体一定<u>相邻设备（同一网络中）</u>的对等实体</li>
+<li>采用尽力传输的思想，效率高，实现简单</li>
+<li>无状态：不同步传输数据的状态信息，无法处理乱序和重复的IP数据包；IP协议提供标识字段唯一标识IP数据包，以处理IP分片和重组，<u>不指示接收顺序</u></li>
+</ol>
+<p>IP协议的主要功能：</p>
+<ol type="1">
+<li>分配IP地址：为每个连接到互联网上的设备分配<u>唯一</u>的IP地址</li>
+<li>路由选择：IP协议根据路由表选择最佳的路径将数据包传输到目的地</li>
+<li>分组传输：数据被分成若干个数据包进行传输，每个数据包都有自己的目的地址和源地址</li>
+<li>分片和重组：IP协议可以将大的数据包进行分片，传输到接收方后再进行重组</li>
+</ol>
+<p>IP协议的安全问题及防护措施：</p>
+<ol type="1">
+<li><p>受被动攻击，容易被监听、窃取</p>
+<p>防护：加密</p></li>
+<li><p>没有错误检测，不能保证数据部分的正确性</p>
+<p>防护：对数据进行完整性检测</p></li>
+<li><p>攻击者可以伪造源地址，即IP欺骗攻击</p>
+<p>防护：添加源地址鉴别机制</p></li>
+<li><p>IP数据报在传输过程中要经历被分段和重组的过程，攻击者可以在包过滤器中注入大量病态的小数据报，来破坏包过滤器的正常工作。</p>
+<p>防护：许多防火墙能够重组分段的IP数据报，以检查其内容</p></li>
+<li><p>特殊的目的地址，如定向广播地址等</p>
+<p>防护：配置路由器禁止发送广播数据报</p></li>
+</ol>
+<h3 id="arp协议">3.2.2 ARP协议</h3>
+<p>地址解析协议（Address Resolution
+Protocol，ARP）是根据IP地址获取物理地址的一个协议。</p>
+<p>MAC地址：48位</p>
+<p>ICMP协议的安全问题及防护措施：</p>
+<ol type="1">
+<li><p>ARP欺骗攻击：</p>
+<p>C主机向A主机欺骗自身为B，向B主机欺骗自身为A，则AB之间的通信将会全部会转发给C，可以完全控制AB之间的流量，发动被动攻击（流量监测、获取涉密信息）或主动攻击（伪造数据）。</p>
+<p>防护措施：在交换机上配置IEEE
+802.1x协议，攻击者连接交换机时需进行身份认证；建立静态ARP表。</p></li>
+</ol>
+<h3 id="icmp协议">3.2.3 ICMP协议</h3>
+<p>控制报文协议（Internet Control Message
+Protocol，ICMP）是一个重要的<u>错误处理和信息处理</u>协议，不仅用于传输<u>差错报文</u>，还传输<u>控制报文</u>，用于通知主机到达目的地的最佳路由，报告路由故障。</p>
+<p>是Ping和Tracert的重要组成部分。</p>
+<p>ICMP协议的安全问题及防护措施：</p>
+<ol type="1">
+<li>ICMP重定向攻击：攻击者对ICMP报文进行重定向，使得目标机器遭受劫持和拒绝服务等攻击。</li>
+<li>ICMP路由器发现攻击：在进行路由发现时，ICMP并不对应答方进行认证，使得它可能遭受严
+重的中间人攻击。攻击者假冒正常的路由器，使用伪造信息应答ICMP询问，接收方无法知道响应是伪造的。</li>
+<li>防火墙穿透攻击：通过防火墙穿越攻击技术（Firewalking），攻击者能够穿越某个防火墙的访问控制列表和规则集，进而确定该防火墙过滤的内容和具体的过滤方式。</li>
+</ol>
+<h3 id="igmp协议">3.2.4 IGMP协议</h3>
+<p>组管理协议（Internet Group Management Protocol，IGMP）是TCP/IP
+协议族中负责IP 组播成员管理的协议。</p>
+<p>功能：</p>
+<ul>
+<li><p>主机通过IGMP通知路由器希望接收或离开某个特定组播组的信息。</p></li>
+<li><p>路由器通过IGMP周期性地查询局域网内的组播组成员是否处于活动状态，实现所连网段组成员关系的收集与维护。</p></li>
+</ul>
+<p>举例：</p>
+<ul>
+<li>IGMP查询周期为60s，使用D类地址</li>
+<li>地址范围：224.0.0.0-239.255.255.255</li>
+<li>群组主机地址：224.0.0.1（代表子网上的所有计算机）</li>
+<li>群组路由器地址：224.0.0.2（代表子网上所有路由器）</li>
+</ul>
+<p>IGMP协议的安全问题及防护措施：</p>
+<ol type="1">
+<li>利用查询报文：较低IP的路由器发送伪造的查询报文，合法的查询方则不会再查询，会转变为相应查询请求。</li>
+<li>利用离开报文进行DoS攻击：攻击者伪装某合法用户发送伪造的IGMP离开报文，组播路由器会认为该用户已经离开则不再向他发送询问请求，导致拒绝服务攻击。</li>
+<li>利用报告报文</li>
+<li>防护措施：采用公钥密码技术实现组播组成员的身份认证</li>
+</ol>
+<h3 id="ospf协议">3.2.5 OSPF协议</h3>
+<p>开放最短路径优先协议（Open Shortest Path
+First，OSPF）是一个内部网关协议，用于在单一自治系统内实施路由决策</p>
+<p>是分布式的链路状态路由协议，每个路由器保存全网链路信息，并计算出OSPF路由表</p>
+<p>OSPF协议中规定了认证域，但是作用有限：</p>
+<ol type="1">
+<li>节点仍使用简单口令</li>
+<li>某个合法用户遭破坏后他的消息不再可信</li>
+<li>攻击者重复旧的会话内容</li>
+</ol>
+<h3 id="bgp协议">3.2.6 BGP协议</h3>
+<p>边界网关协议（Border Gateway
+Protocol，BGP）将单一管理的网络转化为由多个自治系统分散互连的网络</p>
+<p>安全问题：</p>
+<p>BGP缺乏一个安全可信的路由认证机制，无法对所传播的路由信息的安全性进行验证。</p>
+<h2 id="传输层协议">3.3 传输层协议</h2>
+<h3 id="tcp协议">3.3.1 TCP协议</h3>
+<p>传输控制协议（Transmission Control
+Protocol，TCP）是一种<u>面向连接的、可靠的</u>传输层通信协议。</p>
+<p>三次握手过程：</p>
+<ol type="1">
+<li>客户端 --&gt; 服务器：SYN=1，序列号=X</li>
+<li>客户端 &lt;-- 服务器：SYN=1，ACK=1，序列号=Y，确认号=X+1</li>
+<li>客户端 --&gt; 服务器：ACK=1，序列号=X+1，确认号=Y+1</li>
+</ol>
+<p>TCP协议的安全问题及防护措施：</p>
+<ol type="1">
+<li><p>SYN FLOOD攻击：针对TCP连接建立阶段的三次握手过程</p>
+<p>攻击者不断发送简历TCP连接请求的SYN数据报，使得服务器忙碌，无法接受正常请求，是拒绝服务攻击。</p>
+<p>防护措施：在服务器前端部署网络安全设备（防火墙）进行数据包过滤</p></li>
+<li><p>TCP会话劫持攻击：TCP协议不对数据包加密和认证</p>
+<p>TCP协议确认数据包的真实性主要依据是判断数据包中独有的32位序列号是否正确。如果攻击者能够预测目标主机的起始序号，就可以欺骗该目标主机。</p>
+<p>防护措施：在TCP连接建立时采用一个随机数作为初始序列号。</p></li>
+<li><p>针对TCP的拥塞控制机制的特性，在TCP连接建立后的数据阶段攻击</p>
+<p>攻击者可以利用拥塞机制，周期性地制造网络关键节点的拥塞，最终达到降低正常传输能力目的。</p>
+<p>防护措施：实时监测网络异常流量</p></li>
+</ol>
+<h3 id="udp协议">3.3.2 UDP协议</h3>
+<p>用户数据报协议(User Datagram Protocol,
+UDP)是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务</p>
+<p>安全问题：最常见的UDP攻击为DoS攻击，而UDP
+Flood攻击又是DoS攻击中最普遍的流量型攻击。攻击源发送大量的UDP小包到攻击目标，使得目的主机忙碌。</p>
+<p>防护措施：</p>
+<ul>
+<li>若攻击包是大包，则根据攻击包大小设定包碎片重组大小。在极端情况下，可考虑丢弃所有UDP碎片。</li>
+<li>若攻击端口为业务端口，根据该业务UDP最大包长度，设置UDP的最大包长度，可以过滤异常流量。</li>
+<li>若攻击端口为非业务端口，通常通过设置UDP连接规则，要求其首先建立TCP连接，然后再进行下面的业务，以阻止非法连接。</li>
+</ul>
+<h2 id="应用层协议">3.4 应用层协议</h2>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/05/20240305-132836.png" srcset="/img/loading.gif" lazyload alt="应用层协议的分类">
+<figcaption aria-hidden="true">应用层协议的分类</figcaption>
+</figure>
+<h3 id="rip协议端口udp-520">3.4.1 RIP协议（端口：UDP 520）</h3>
+<p>动态路由选择协议(Routing Information Protocol,
+RIP)是一种动态内部路由/网关协议，用于自治系统内的路由信息的传递。</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>攻击者伪造RIP路由信息，并向邻居路由发送，若干轮更新后网络可能会瘫痪</li>
+<li>利用网络嗅探工具获得远程网络的RIP路由表，通过欺骗工具伪造RIP报文，再利用重定向工具截取、修改和重写向外发送的报文，控制网络的报文信息。</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>将路由器的某些接口配置为被动接口，停止广播路由更新报文，但是可以接受收到的更新报文。</li>
+<li>配置路由器的访问控制列表，只允许某些IP地址的路由更新进入列表。</li>
+</ol>
+<h3 id="http协议端口tcp-80">3.4.2 HTTP协议（端口：TCP 80）</h3>
+<p>超文本传输协议(Hyper Text Transfer Protocol,
+HTTP)是一个客户端和服务器端请求和应答的标准，是互联网上应用最广泛的一种网络协议。</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>HTTP协议采用明文传输，不进行数据加密。使用网络嗅探工具可以容易的获得明文数据</li>
+<li>HTTP为无状态连接，只对报文头部的数据长度进行校验。消息容易被篡改，易受中间人攻击。</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>在HTTP和TCP之间添加<u>安全套接层</u>，主要为SSL（443端口）及TLS实现。</li>
+<li>HTTPS添加安全套接层，实现了双向身份认证、加密、防止重放等安全功能。</li>
+</ol>
+<h3 id="telnet协议端口tcp-23">3.4.3 TELNET协议（端口：TCP 23）</h3>
+<p>远程登录协议（Teletype Network，TELNET）</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>使用简单的账户名称和口令登录，容易被记录和泄露。</li>
+<li>受到主动攻击，如劫持Telnet会话并在认证后插入额外指令。</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>对Telnet会话进行加密。目前出现了几种Telnet的加密解决方案，它们分别为SSH、Stel、SSLtelnet等协议。其中，SSH已经成为远程登录的标准协议。</li>
+</ol>
+<h3 id="ssh协议端口tcp-22">3.4.4 SSH协议（端口：TCP 22）</h3>
+<p>安全壳协议（Secure
+Shell，SSH）是一种在不安全的网络上建立安全的远程登录或其他安全网络服务的协议</p>
+<p>特点：</p>
+<ol type="1">
+<li>支持身份认证和数据加密，并采用“挑战/相应”机制代替名称和口令认证</li>
+<li>可以代替Telnet作为安全的远程登陆方式</li>
+</ol>
+<p>安全问题：</p>
+<ol type="1">
+<li><p>无服务器认证：在不安全网络环境中没有可信机制对服务器的真实性进行认证。</p>
+<p>防护措施：检验主机密钥来认证服务器的正确性</p></li>
+<li><p>不检测协议版本：版本协商时如果采用了有安全漏洞的版本，则可能会被攻击。</p>
+<p>防护措施：对采用有安全问题软件的通信方，服务器可以中断TCP连接</p></li>
+<li><p>主机密钥存储不安全：SSH协议服务器的主机密钥存储在一个主机密钥文件中，若该文件被窃取或篡改，则会对协议的认证机制造成严重威胁</p>
+<p>防护措施：增强主机密钥文件的管理</p></li>
+</ol>
+<h3 id="dns协议端口udp-53">3.4.5 DNS协议（端口：UDP 53）</h3>
+<p>域名系统(Domain Name
+System)是一个分布式数据库系统，实现域名与IP地址之间的映射。1个为主根服务器，在美国，12个为辅根服务器，其中，9个放置在美国，欧洲2个，位于英国和瑞典，亚洲1个，位于日本.</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>DNS欺骗攻击： 攻击者假冒域名服务器</li>
+<li>DNS缓存中毒攻击：攻击者给DNS服务器注入非法网络域名地址</li>
+<li>DNS重定向攻击：攻击者将DNS名称查询重定向到恶意DNS服务器上</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>不要采用基于名称的认证</li>
+<li>不要把秘密的信息放在主机名中</li>
+<li>采用DNSsec新标准</li>
+</ol>
+<h3 id="smtp协议端口tcp-25">3.4.6 SMTP协议（端口：TCP 25）</h3>
+<p>简单邮件传输协议(Simple Mail Transfer Protocol,
+SMTP）是用于<u>发送</u>邮件的协议</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>可成为拒绝服务攻击(DoS)的发源地，导致邮件服务器无法使用</li>
+<li>邮件名为黑客提供一些有用信息</li>
+<li>“开放中继”允许任何人之间的邮件传递</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>使用SMTP认证，并与加密SMTP会话结合使用，从而避免“开放中继“。</li>
+<li>用IMAP4协议取代。</li>
+</ol>
+<h3 id="mime协议">3.4.7 MIME协议</h3>
+<p>多用途网间邮件扩充协议（Multipurpose Internet E mail
+Extention，MIME）是广泛应用的一种电子邮件技术规范。</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>当MIME应用于电子邮件系统时，自动运行MIME编码消息隐藏着巨大的风险，这些消息中被编码的结构信息能够指示客户端软件要采取何种行动；</li>
+<li>对MIME存在一种分段攻击；</li>
+<li>MIME的其它安全风险:邮递可执行程序或邮件含有危险的PostScript文件，是传播蠕虫和病毒的主要途径。</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>禁用MIME客户端的自动运行功能</li>
+<li>拒收不完整邮件</li>
+<li>禁止下载带有可执行程序的MIME消息</li>
+</ol>
+<h3 id="pop3协议端口tcp-110">3.4.8 POP3协议（端口：TCP 110）</h3>
+<p>邮局协议（Post Office
+Protocol，POP）是一个邮件<u>接收</u>协议，它的第3个版本称为POP3。</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>POP3协议非常简单，甚至可采用PerI脚本程序非常容易地实现，所以非常不安全。</li>
+<li>POP3口令以明文传输，使用sniffer等网络监听软件很容易捕获用户口令。</li>
+<li>采用APOP对用户名和口令进行"挑战/响应”机制进行身份认证，但对邮件内容没有加密保护。</li>
+<li>口令以明文形式存储在服务器上，一旦服务器受到攻击，口令也被黑客窃取。</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>在防火墙上对邮件服务器的访问进行限制。</li>
+<li>对POP3服务器的用户数据库进行安全加固。</li>
+<li>采用IMAP4协议替代POP3协议，SSL/TLS对传输的数据进行加密。</li>
+</ol>
+<h3 id="imap4协议端口tcp-143-993">3.4.9 IMAP4协议（端口：TCP 143,
+993）</h3>
+<p>消息访问协议（Internet Message Access
+Protocol，IMAP）是一个邮件<u>获取</u>协议，第4个版本是IMAP4。</p>
+<p>IMAP4与POP3一样，是收邮件协议。</p>
+<p>安全问题：</p>
+<ol type="1">
+<li>IMAP4采用"挑战/响应"机制实现用户认证，但这一机制用到保存在服务器端的共享秘密信息，一旦服务器被攻破，用户的秘密信息被黑客窃取。</li>
+</ol>
+<p>防护措施：</p>
+<ol type="1">
+<li>使用杂凑函数将共享秘密进行杂凑运算，消除共享秘密的等值性。</li>
+</ol>
+<h3 id="pgp协议">3.4.10 PGP协议</h3>
+<p>PGP（Pretty Good
+Privacy）协议是常用的安全电子邮件标准。PGP包括5种服务：认证、保密、压缩、邮件兼容和分段。</p>
+<p>安全问题：</p>
+<ol type="1">
+<li><p>公钥篡改</p>
+<p>多用户系统上的PGP，使得暴露密钥和口令的可能性增大，篡改公钥将导致合法通信者无法解密文件，或导致攻击者可以伪造签名。</p>
+<p>防护措施：采用数字证书技术确保公钥的可信性。</p></li>
+<li><p>时戳不可信</p>
+<p>问题描述：攻击者可以通过修改系统时间，对时间戳进行伪造，从而攻击者可实施重放攻击。</p>
+<p>防护措施：建立第三方时间公证体系，由公证方在邮件上签上标准时间。采用国际标准时戳协议RFC3161。</p></li>
+<li><p>信任模型缺陷</p>
+<p>问题描述：为得到未核实身份的通信对方的有效公钥，PGP中引入了第三方，这带来了对第三方的信任问题。此外，PGP没有采用有效的PKI证书管理体系。</p>
+<p>防护措施：对用户的信任度进行规范设置；建立有效的PGP证书管理体系。</p></li>
+</ol>
+<h3 id="ftp协议端口tcp-2021">3.4.11 FTP协议（端口：TCP 20/21）</h3>
+<p>文件传输协议（File Transfer
+Protocol，FTP）是Internet文件传送的基础，是TCP/IP协议族的重要协议之一。</p>
+<p>FTP功能：</p>
+<ul>
+<li>控制连接（21端口）：在整个会话期间一直保持打开，客户发送的传送请求通过控制连接发送给服务器端的控制进程。</li>
+<li>数据连接（20端口）：用于传输文件。</li>
+</ul>
+<p>安全问题：</p>
+<ul>
+<li>FTP反弹攻击：就是攻击者利用FTP协议的<u>PORT命令</u>，将数据发送到第三方，攻击者可利用FTP服务器对其他机器进行端口扫描和发送数据。</li>
+<li>伪装攻击：攻击者可以将Java程序伪装成FTP客户机发动攻击。</li>
+<li>口令探测：客户机与服务器之间的消息是以明文的形式传输的，运行FTP协议时，访问FTP服务器的口令很容易被探测或猜测到。</li>
+<li>获取ROOT权限：ftpd后台守护程序开始时以root用户权限运行，若攻击者取得了root权限，就可以为所欲为。</li>
+</ul>
+<p>防护措施：</p>
+<ul>
+<li>主动模式下，FTP服务器限制PORT命令的IP地址为客户端IP且端口大于1024。</li>
+<li>在被动模式下，可使用PASV命令。</li>
+<li>禁止运行含有Java的脚本程序。</li>
+<li>使用SFTP协议对用户名和口令进行加密传输。</li>
+</ul>
+<h3 id="tftp协议端口udp-69">3.4.12 TFTP协议（端口：UDP 69）</h3>
+<p>简单文件传输协议（Trivial File Transfer
+Protocol，TFTP）是用来在客户机与服务器之间进行简单文件传输的协议。</p>
+<p>安全问题：</p>
+<p>TFTP用于提供<u>简单、开销较小</u>的文件传输服务，采用UDP协议，提供不可靠的数据流传输服务，不提供授权与认证机制，使用超时重传方式来保证数据的到达。只提供文件传输而不验证文件是否成功传送，<u>在可靠性与安全性上没有保证</u>。</p>
+<p>防护措施：</p>
+<p>除非真的需要此协议，否则不应该在任何及其上运行该协议；若要使用应确保对其正确配置，严禁上传配置文件。</p>
+<h3 id="nfs协议端口udp-2049">3.4.13 NFS协议（端口：UDP 2049）</h3>
+<p>网络文件系统（Network File
+System，NFS）是一个基于TCP/IP网络的文件共享协议。</p>
+<p>功能：</p>
+<ul>
+<li>NFS允许一个系统在网络上与他人共享目录和文件。</li>
+<li>通过NFS协议，用户可以像访问本地文件一样访问远端系统
+上的文件，在远端系统的共享文件进行创建、修改和删除操作。</li>
+<li>NFS协议采用基于远程过程调用的分布式文件系统结构。</li>
+</ul>
+<p>安全问题：</p>
+<ol type="1">
+<li>NFS协议缺乏用户验证机制，需加强客户端访问控制。</li>
+<li>2049号端口处于无特权范围，使防火墙禁止其它进程访问2049。</li>
+<li>客户机可对服务器实施DoS攻击（客户机可伪造返回数据包，创建setuid程序来发动DoS攻击），应设置禁止加载不可信资源选项。</li>
+<li>服务器可对客户机植入恶意程序，对外来文件进行病毒木马查杀。</li>
+</ol>
+<h3 id="snmp协议端口udp-161162">3.4.14 SNMP协议（端口：UDP
+161/162）</h3>
+<h3 id="dhcp协议端口udp-6768">3.4.15 DHCP协议（端口：UDP 67/68）</h3>
+<h3 id="h.323协议">3.4.16 H.323协议</h3>
+<h3 id="sip协议">3.4.17 SIP协议</h3>
+<h3 id="ntp协议端口udp-123">3.4.18 NTP协议（端口：UDP 123）</h3>
+<h3 id="finger协议端口udp-79">3.4.19 FINGER协议（端口：UDP 79）</h3>
+<h3 id="whois协议端口tcp-43">3.4.20 Whois协议（端口：TCP 43）</h3>
+<h3 id="ldap协议端口tcp-389">3.4.21 LDAP协议（端口：TCP 389）</h3>
+<h3 id="nntp协议端口tcp-119">3.4.22 NNTP协议（端口：TCP 119）</h3>
 
                 
               </div>
@@ -616,7 +992,7 @@ Contol）：指用户有权对自身所创建的访问对象（文件、数据�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月3日</div>
+          <div>2024年3月5日</div>
         </div>
       
       
