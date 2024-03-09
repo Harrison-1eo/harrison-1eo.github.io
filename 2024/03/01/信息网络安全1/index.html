@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/04/20240304-182121.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/05/20240305-132836.png">
 <meta property="article:published_time" content="2024-03-01T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-05T15:06:12.322Z">
+<meta property="article:modified_time" content="2024-03-09T13:28:18.747Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三下">
@@ -329,7 +329,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.1k 字
+          8.7k 字
         
       </span>
     
@@ -340,7 +340,7 @@ mjx-container[display="true"] + br {
         
         
         
-          89 分钟
+          109 分钟
         
       </span>
     
@@ -586,9 +586,133 @@ Contol）：指用户有权对自身所创建的访问对象（文件、数据�
 </figure>
 <h1 id="第2章-计算机网络基础">第2章 计算机网络基础</h1>
 <h2 id="计算机网络的定义">2.1 计算机网络的定义</h2>
+<ol type="1">
+<li><p>简单定义：</p>
+<p>计算机网络是一些相互连接的、自治的计算机系统的集合。</p></li>
+<li><p>通用定义：</p>
+<p>将处于不同位置并具有独立功能的多个计算机系统通过<u>通信线路和网络设备</u>连接起来，以实现网络<u>资源共享</u>，此系统称为计算机网络。</p></li>
+</ol>
 <h2 id="计算机网络体系结构">2.2 计算机网络体系结构</h2>
+<ol type="1">
+<li><p>协议：</p>
+<p>这些为进行网络中的数据交换而建立的规则、标准或约定就是网络协议。</p>
+<p>这些规则明确规定了所交换的数据的格式以及有关的同步（含有时序）。</p></li>
+<li><p>一个协议定义了在<u>两个（含）以上的通信实体之间</u>交换的报文格式和次序，以及在报文传输和（或）接收时所采取的动作。</p></li>
+<li><p>网络通信是指在网络中的<u>不同实体之间</u>进行的通信。</p></li>
+<li><p>网络分层的必要性：</p>
+<p>网络实体之间的通信十分复杂，通过“分层”
+，可以将庞大、复杂的问题转换为若干较小、简单和单一的</p>
+<p>局部问题</p>
+<p>ARPAnet最早提出分层思想。</p></li>
+<li><p>网络协议的组成：</p>
+<ol type="1">
+<li>语法：数据与协议控制信息</li>
+<li>语义：要进行的操作，如完成何种动作做出何种应答等</li>
+<li>同步</li>
+</ol></li>
+<li><p>网络协议的特点：</p>
+<ol type="1">
+<li>参与方必须大于等于二</li>
+<li>依次执行</li>
+<li>要具体完成一项任务</li>
+</ol></li>
+<li><p>网络体系结构：</p>
+<p>计算机网络的各层定义及其协议集合，称为网络体系结构，是对网络实体所应完成功能的精确定义。</p>
+<p>实现方式不属于网络体系结构。</p></li>
+<li><p><strong>OSI参考模型/五层参考模型/TCP/IP参考模型</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">  应用层      ｜             |    </span><br><span class="hljs-code">  表示层      ｜    应用层    |    应用层</span><br><span class="hljs-section">  会话层      ｜             |    </span><br><span class="hljs-section">----------------------------------------</span><br><span class="hljs-code">  传输层      ｜    传输层    |    传输层</span><br><span class="hljs-code">  网络层      ｜    网络层    |    网际层</span><br><span class="hljs-code">  数据链路层   ｜  数据链路层  |</span><br><span class="hljs-code">  物理层      ｜    物理层    |  网络接口层</span><br><br><span class="hljs-code">  OSI七层模型  |   五层模型  ｜  TCP/IP四层模型</span><br></code></pre></td></tr></table></figure></li>
+<li><p>OSI参考模型中共分为7层</p>
+<p>低三层面向通信，可用软硬件实现</p>
+<p>高三层面向信息处理，由软件实现</p>
+<p>传输层联系上下层</p></li>
+<li><p>TCP/IP体系的网络接口层可以包括多种通信网</p>
+<p>IP协议支持多种网络技术互联以形成一个逻辑网络，提供了主机到主机的通道。</p>
+<p>TCP和UDP提供了应用到应用到传输通道。</p></li>
+<li><p>数据单位：</p>
+<ol type="1">
+<li>应用层：用户数据、用户消息</li>
+<li>传输层：数据段、报文</li>
+<li>网络层：分组、包</li>
+<li>链路层：帧</li>
+<li>物理层：位</li>
+</ol></li>
+</ol>
 <h2 id="分组交换技术">2.3 分组交换技术</h2>
+<p>分组交换技术(Packet switching
+technology)也称包交换技术，是将用户传送的较长的数据划分成较短的一定长度的分组，通过传输分组的方式传输信息的一种技术。</p>
+<p>每个分组的前面有一个分组头，用以指明该分组发往何地址，然后由交换机根据每个分组的地址标志，将它们转发至目的地，这一过程称为分组交换。</p>
 <h2 id="internet的基本知识">2.4 Internet的基本知识</h2>
+<ol type="1">
+<li>Internet的构成：
+<ul>
+<li>边缘部分：由连接在Internet上的主机（用户终端、服务器）构成，用户直接使用边缘部分进行通信和资源共享。</li>
+<li>核心部分：由大量的网络和连接这些网络的路由器组成。</li>
+</ul></li>
+<li>服务类别：
+<ul>
+<li>面向连接的服务：通信双方在传输数据之间先建立连接。如TCP协议</li>
+<li>无连接的服务：不需要先建立连接，是“尽力传递”的服务。如UDP协议、IP协议</li>
+</ul></li>
+<li>Internet上的主机至少拥有一个IP地址，任何两台主机的IP地址不能相同。</li>
+<li>IP地址的划分经历了三个阶段：分类的IP地址、子网的划分、无分类编址</li>
+</ol>
+<h4 id="一分类的ip地址">（一）分类的IP地址</h4>
+<ol type="1">
+<li>IP地址：32位，4字节，由网络标识和主机标识两部分组成</li>
+<li>IP地址分5类：
+<ol type="1">
+<li>A类：0开头，网络标识占8位</li>
+<li>B类：10开头，网络标识占16位</li>
+<li>C类：110开头，网络标识占24位</li>
+<li>D类：1110开头，为组播地址</li>
+<li>E类：11110开头，保留以后使用</li>
+</ol></li>
+<li>特殊地址/保留地址：
+<ol type="1">
+<li>网络地址：主机号全为0，用于表示指向某个网络的地址</li>
+<li>直接广播地址：主机好全为1，网络号不为0时，表示一个物理网络上的所有主机，只能作为目的地址使用，所发送的数据包将到达一个特定网络上的所有计算机</li>
+<li>有限广播地址：32位全为1时，表示在该主机所在的物理网络的一次广播</li>
+<li>本地地址：32位全为0</li>
+</ol></li>
+<li>所以计算某网络可用的最大主机数时需要减2（全0和全1）</li>
+</ol>
+<h4 id="二子网的划分">（二）子网的划分</h4>
+<ol type="1">
+<li>子网掩码（SUBNET
+MASKS）的作用是用来区分网络上的主机是否在同一网络取段内</li>
+<li>从主机号中借用一部分，两级的IP地址转变为三级的IP地址结构</li>
+<li>将子网掩码和IP地址进行逐位相“与”，所得的结果就是网络地址</li>
+</ol>
+<h4 id="三无分类编址cidr">（三）无分类编址（CIDR）</h4>
+<ol type="1">
+<li>CIDR表示方法：IP地址/net-id的位数</li>
+</ol>
+<p>IP地址和MAC地址：</p>
+<ol type="1">
+<li>一个路由器至少有两个IP地址和两个MAC地址，但是路由器的IP地址不会出现在IP数据报中。</li>
+<li>在网络交换机上建立MAC地址和IP地址映射表，由ARP协议实现48b的MAC地址与32b
+IPv4地址之间的自动转换。</li>
+<li>链路层看到的只是MAC帧，IP数据报被封装在MAC帧中，在不同的网络上传输时，MAC帧的首部会发生变换。</li>
+</ol>
+<p>IPv6：</p>
+<ol type="1">
+<li>IPv6：128位，分为8组，每组4个十六进制表示</li>
+<li>将多个具有0值的连续片段替换成双冒号，但是双冒号在IPv6中只能出现一次，如：<code>FA06::1/64</code></li>
+<li>优点：
+<ol type="1">
+<li>地址空间大</li>
+<li>支持IPsec协议，更安全</li>
+<li>优化了网络性能，在寻址和路由上更快，提高了传输效率</li>
+<li>自动配置机制，可以自动获取IPv6地址</li>
+</ol></li>
+</ol>
+<p>端口：</p>
+<ol type="1">
+<li>端口是传输层的概念</li>
+<li>端口 是用来<strong>标志进程</strong>的“端口”，就是协议端口号。</li>
+<li>端口号的主要作用是表示一台计算机中的<strong>特定进程所提供的服务</strong>。</li>
+<li>小于1024的端口为特权端口/熟知端口。</li>
+</ol>
 <h1 id="第3章-internet协议的安全性">第3章 Internet协议的安全性</h1>
 <h2 id="internet协议概述">3.1 Internet协议概述</h2>
 <p>在TCP/IP参考模型中：</p>
@@ -992,7 +1116,7 @@ System，NFS）是一个基于TCP/IP网络的文件共享协议。</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月5日</div>
+          <div>2024年3月9日</div>
         </div>
       
       
