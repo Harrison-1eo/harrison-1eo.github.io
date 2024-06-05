@@ -16,12 +16,12 @@
   <meta name="author" content="Harrison">
   <meta name="keywords" content="Harrison, Blog, 博客, Hexo">
   
-    <meta name="description" content="信息网路安全笔记二">
+    <meta name="description" content="信息网路安全笔记二：密码学相关部分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息网络安全 | 笔记二">
-<meta property="og:url" content="https://harrison-1eo.github.io/2024/03/12/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A82/index.html">
+<meta property="og:url" content="https://harrison-1eo.github.io/2024/04/01/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A82/index.html">
 <meta property="og:site_name" content="Harrison&#39;s Blog">
-<meta property="og:description" content="信息网路安全笔记二">
+<meta property="og:description" content="信息网路安全笔记二：密码学相关部分">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F03%2F09%2F20240309-211032.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/03/19/20240319-140404.png">
@@ -33,8 +33,8 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F03%2F23%2F20240323-212503.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F03%2F23%2F20240323-212540.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F03%2F23%2F20240323-212645.png">
-<meta property="article:published_time" content="2024-03-12T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-28T08:14:06.460Z">
+<meta property="article:published_time" content="2024-04-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-05T09:06:38.153Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三下">
@@ -322,8 +322,8 @@ mjx-container[display="true"] + br {
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-12 12:00" pubdate>
-          2024年3月12日 中午
+        <time datetime="2024-04-01 12:00" pubdate>
+          2024年4月1日 中午
         </time>
       </span>
     
@@ -334,7 +334,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.9k 字
+          4.5k 字
         
       </span>
     
@@ -345,7 +345,7 @@ mjx-container[display="true"] + br {
         
         
         
-          62 分钟
+          57 分钟
         
       </span>
     
@@ -389,6 +389,7 @@ mjx-container[display="true"] + br {
                 
                 <h1 id="第4章-单私钥密码体制">第4章 单（私）钥密码体制</h1>
 <h2 id="密码体制的定义">4.1 密码体制的定义</h2>
+<p>密码体制的语法定义：</p>
 <ul>
 <li>明文消息<strong>空间</strong>：<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.378ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 1051 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g></g></g></svg></mjx-container></span></li>
 <li>密文消息<strong>空间</strong>：<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="1.719ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 760 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g></g></g></svg></mjx-container></span></li>
@@ -436,27 +437,9 @@ mjx-container[display="true"] + br {
 <img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F03%2F09%2F20240309-211032.png" srcset="/img/loading.gif" lazyload alt="流密码原理框图">
 <figcaption aria-hidden="true">流密码原理框图</figcaption>
 </figure>
-<p>若密钥流是一个完全随机的非周期序列，则为一次一密体制。但是实际使用的流密码大多采用有限存储单元和确定性算法，可用有限状态自动机
-(Finite State Automation) 来描述，产生的序列是伪随机序列。</p>
-<p>流密码分类：</p>
-<ul>
-<li><p>同步流密码：密钥流与明文消息无关</p>
-<p>没有差错传播，但是对失步敏感</p></li>
-<li><p>自同步流密码：密钥流与明文有关</p>
-<p>传输过程中一位出错，影响后n 位密钥的正确性</p></li>
-</ul>
-<p>密钥流生成器结构：分为驱动部分和组合部分</p>
+<h2 id="section"></h2>
 <h2 id="快速软硬件实现的流密码算法">4.4
 快速软、硬件实现的流密码算法</h2>
-<p><strong>A5加密算法：</strong></p>
-<p>执行效率高，可通过已知统计检测标准，其唯一缺点是移存器级数短，可以用穷尽搜索法破译。</p>
-<p>是GSM中采用的加密算法，用于手机到基站无线链路的加密。</p>
-<p><strong>RC4算法：</strong></p>
-<p>工作于输出反馈模式，密钥流与明文独立，40b密钥的RC4产品已经允许出口。</p>
-<p><strong>祖冲之密码：</strong></p>
-<p>用于新一代宽带无线移动通信系统 (LTE) 国际标准，即 4G 的国际标准。</p>
-<p>祖冲之密码——128-EEA3主要用于4G移动通信中移动用户设备和核心网之间无线链路上数据的加解密。</p>
-<p>祖冲之密码——128-EIA3主要用于4G移动通信中通信信令和数据的完整性认证，并对信令源进行认证。</p>
 <h1 id="第5章-双公钥密码体制">第5章 双（公）钥密码体制</h1>
 <h2 id="双钥密码体制的基本概念">5.1 双钥密码体制的基本概念</h2>
 <p><strong>单向函数：</strong></p>
@@ -913,7 +896,7 @@ protocol)：在另一实体的身份已被证实的基础之上两个通信实�
   <div class="license-box my-3">
     <div class="license-title">
       <div>信息网络安全 | 笔记二</div>
-      <div>https://harrison-1eo.github.io/2024/03/12/信息网络安全2/</div>
+      <div>https://harrison-1eo.github.io/2024/04/01/信息网络安全2/</div>
     </div>
     <div class="license-meta">
       
@@ -925,13 +908,13 @@ protocol)：在另一实体的身份已被证实的基础之上两个通信实�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月12日</div>
+          <div>2024年4月1日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月28日</div>
+          <div>2024年6月5日</div>
         </div>
       
       
@@ -961,6 +944,12 @@ protocol)：在另一实体的身份已被证实的基础之上两个通信实�
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/05/01/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A83/" title="信息网络安全 | 笔记三">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">信息网络安全 | 笔记三</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

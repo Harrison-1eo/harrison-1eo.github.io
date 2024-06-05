@@ -1,0 +1,1629 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lighthouse_ico1.png">
+  <link rel="icon" href="/img/lighthouse_ico1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#25354e">
+  <meta name="author" content="Harrison">
+  <meta name="keywords" content="Harrison, Blog, 博客, Hexo">
+  
+    <meta name="description" content="信息网路安全笔记三：网络安全技术部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息网络安全 | 笔记三">
+<meta property="og:url" content="https://harrison-1eo.github.io/2024/05/01/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A83/index.html">
+<meta property="og:site_name" content="Harrison&#39;s Blog">
+<meta property="og:description" content="信息网路安全笔记三：网络安全技术部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-154446.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-155142.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-155211.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-161703.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-162759.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-162814.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-163617.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-163637.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-164011.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-102808.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-102850.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-103119.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-103555.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-105314.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-105420.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-105448.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-162735.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-163544.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-163708.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-165658.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170237.jpg">
+<meta property="article:published_time" content="2024-05-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-05T09:09:20.440Z">
+<meta property="article:author" content="Harrison">
+<meta property="article:tag" content="期末复习">
+<meta property="article:tag" content="大三下">
+<meta property="article:tag" content="考研">
+<meta property="article:tag" content="信息网络安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png">
+  
+  
+  
+  <title>信息网络安全 | 笔记三 - Harrison&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"harrison-1eo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Harrison&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2023/12/21/20231221-141601.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信息网络安全 | 笔记三"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-01 12:00" pubdate>
+          2024年5月1日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          95 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">信息网络安全 | 笔记三</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第9章-数字证书与公钥基础设施">第9章 数字证书与公钥基础设施</h1>
+<p>考研要求：</p>
+<ol type="1">
+<li>PKI的定义、组成及应用</li>
+<li>数字证书的概念、结构、生成、签名及验证</li>
+<li>交叉证书</li>
+<li>X.509证书</li>
+</ol>
+<h2 id="pki的基本概念">9.1 PKI的基本概念</h2>
+<h3 id="pki的定义">9.1.1 PKI的定义</h3>
+<p>PKI的定义：PKI（Public Key
+Infrastructure）公钥基础设施，它基于公钥密码理论，可为信息系统提供安全服务，是一种普适性的安全基础设施。</p>
+<p>PKI的目的：解决网上身份认证、电子信息的完整性和不可抵赖性等安全问题，为网络应用提供可靠安全服务。</p>
+<p>PKI的任务：确立可信的数字身份，这些身份可以用于提供认证、授权或数字签名验证等服务</p>
+<h3 id="pki的组成">9.1.2 PKI的组成</h3>
+<ol type="1">
+<li><p>证书机构CA（Certificate Authority）</p>
+<ul>
+<li>CA负责发放和管理数字证书</li>
+<li>提供网络身份认证服务、证书签发以及签发后的证书生命周期的所有方面的管理。包括：
+<ul>
+<li>跟踪证书状态</li>
+<li>在证书需要撤销时发布证书撤销通知</li>
+</ul></li>
+<li>维护证书档案和证书相关的审计。</li>
+</ul></li>
+<li><p>注册机构RA（Registration Authority）</p>
+<p>是数字证书注册审批机构，是认证中心的延伸。</p>
+<p>RA按照政策与管理规范对用户的资格<strong>进行审查</strong>，并执行“<strong>是否同意</strong>给该申请者发放证书、撤销证书”等操作。</p></li>
+<li><p>证书发布库</p>
+<ul>
+<li>集中存放CA颁发的证书和证书撤销列表。</li>
+<li>支持分布式存放，以提高查询效率。</li>
+<li>LDAP协议（轻量级目录访问协议）是创建高效大规模PKI认证的关键技术。</li>
+</ul></li>
+<li><p>密钥备份和恢复</p>
+<ul>
+<li><p>PKI提供密钥备份和恢复机制：PKI仅备份和恢复用户的加密/解密密钥，而<strong>不备份和恢复用户的签名密钥</strong>（支持不可否认服务）。</p></li>
+<li><p>密钥备份在用户注册阶段进行；</p>
+<p>若用户声明公钥/私钥对是用于<strong>数据加密</strong>的，则CA即可对该用户的<strong>私钥</strong>进行备份；</p>
+<p>当用户丢失密钥后，可通过可信任的密钥恢复中心或者CA完成密钥恢复。</p></li>
+</ul></li>
+<li><p>证书撤销</p>
+<p>证书撤销的两种实现方法：</p>
+<ul>
+<li>周期性发布机制：证书撤销列表CRL</li>
+<li>在线证书查询机制：在线证书状态协议OCSP</li>
+</ul></li>
+<li><p>PKI应用接口</p></li>
+</ol>
+<h3 id="pki的应用">9.1.3 PKI的应用</h3>
+<ol type="1">
+<li>认证服务</li>
+<li>数据完整性服务</li>
+<li>数据保密性服务</li>
+<li>不可否认服务</li>
+<li>公证服务</li>
+</ol>
+<h2 id="数字证书">9.2 数字证书</h2>
+<h3 id="数字证书的概念">9.2.1 数字证书的概念</h3>
+<p>数字证书的概念：将用户身份ID与其所持有的公钥PK绑定，再由CA对该用户身份及对应公钥的组合<code>{ID||PK}</code>进行数字签名得到S，然后将<code>{签名S||身份ID||公钥PK}</code>加以存储，即数字证书。</p>
+<p>数字证书的组成：</p>
+<ul>
+<li>主体名</li>
+<li>序号</li>
+<li>有效期</li>
+<li>签发者名</li>
+<li>公钥</li>
+</ul>
+<h3 id="数字证书的结构">9.2.2 数字证书的结构</h3>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png" srcset="/img/loading.gif" lazyload alt="数字证书的组成">
+<figcaption aria-hidden="true">数字证书的组成</figcaption>
+</figure>
+<h3 id="数字证书的生成">9.2.3 数字证书的生成</h3>
+<p>用户和RA、CA的关系：<code>用户 &lt;==&gt; RA &lt;==&gt; CA</code>，即注册机构RA主要帮助证书机构CA与最终用户交互，注册机构RA不能签发证书，证书只能由证书机构CA签发。</p>
+<p>数字证书的生成步骤：</p>
+<ol type="1">
+<li>密钥生成
+<ul>
+<li>用户可以采用自己生成的公钥私钥对</li>
+<li>RA为用户生成公钥私钥对</li>
+</ul></li>
+<li>用户注册
+<ul>
+<li>PKCS#10 的证书申请结构包括：证书版本、主体名、公钥信息、属性</li>
+<li>用户将公钥和证明材料发送给注册机构</li>
+</ul></li>
+<li>验证信息
+<ul>
+<li>RA验证用户材料，明确是否接受用户注册</li>
+<li>检验用户私钥的拥有证明POP（Proof Of
+Possession），即检查用户拥有与发向RA的公钥相对应的私钥信息
+<ul>
+<li>方法一：RA要求用户采用私钥对证书签名请求进行数字签名。</li>
+<li>方法二：RA生成随机数挑战信息，用该用户公钥加密，并将加密后的挑战值发送给用户。若用户能用其私钥解密，则验证通过。</li>
+<li>方法三：将CA生成的数字证书使用用户公钥加密，用户需要使用对应的私钥解密证书。</li>
+</ul></li>
+</ul></li>
+<li>证书生成
+<ul>
+<li>RA将申请信息发送给CA，CA生成证书后发回给RA</li>
+<li>RA将证书发回给用户，并在CA维护的证书目录中保留一份证书记录。
+<ul>
+<li>发回证书的方法一：RA将数字证书采用用户公钥加密后，发给用户；用户用与公钥匹配的私钥解密方可取得明文证书。</li>
+<li>方法二：RA也可以向用户发送一封电子邮件，通知其从CA网站下载用户的数字证书。</li>
+</ul></li>
+</ul></li>
+</ol>
+<h3 id="数字证书的签名与验证">9.2.4 数字证书的签名与验证</h3>
+<p>CA签发证书过程：</p>
+<p>将证书中除去CA签名的其他部分做哈希运算获得MDC值，使用CA的私钥对MDC进行签名，得到CA的签名，放入证书中。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png" srcset="/img/loading.gif" lazyload alt="CA签发证书过程">
+<figcaption aria-hidden="true">CA签发证书过程</figcaption>
+</figure>
+<p>数字证书验证过程：</p>
+<p>将证书中除去CA签名的其他部分做哈希运算获得MD1值，取出CA签名部分使用签名验证算法获得MD2值，比较MD1值和MD2值是否相同。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170805.png" srcset="/img/loading.gif" lazyload alt="数字证书验证过程">
+<figcaption aria-hidden="true">数字证书验证过程</figcaption>
+</figure>
+<h1 id="第10章-网络加密与密钥管理">第10章 网络加密与密钥管理</h1>
+<p>考研要求：</p>
+<ol type="1">
+<li>四种网络加密模式的原理、特点</li>
+<li>密钥管理的基本概念</li>
+<li>层次化密钥管理方法</li>
+<li>密钥分发协议</li>
+</ol>
+<h2 id="网络加密的几种方式及实现">10.1 网络加密的几种方式及实现</h2>
+<h3 id="链路加密">10.1.1 链路加密</h3>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-154446.png" srcset="/img/loading.gif" lazyload alt="链路加密">
+<figcaption aria-hidden="true">链路加密</figcaption>
+</figure>
+<p>对网络中<strong>两个相邻节点之间</strong>传输的数据进行加密保护。</p>
+<p>特点：</p>
+<ol type="1">
+<li>不同节点对之间的密码机和密钥不一定相同</li>
+<li>在每个中间节点上，消息先解密，后加密</li>
+<li>报文和报头可同时进行加密</li>
+<li>在节点内部，消息以明文的方式存在</li>
+<li>在链路加密中，密钥分配存在困难</li>
+<li>随着节点增多，密码机的需求数量很大</li>
+</ol>
+<h3 id="节点加密">10.1.2 节点加密</h3>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-155142.png" srcset="/img/loading.gif" lazyload alt="节点加密">
+<figcaption aria-hidden="true">节点加密</figcaption>
+</figure>
+<p>与链路加密类似：</p>
+<ul>
+<li>在通信链路上为用户提供安全性，在通信链路上所传输的消息为密文</li>
+<li>在中间节点先对消息进行解密，然后进行加密</li>
+<li>加密过程对用户是透明</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>节点加密不允许消息在网络节点中与明文形式存在。它先把收到的消息及进行解密，然后再安全模块中用另一个不同的密钥讲数据字段进行加密，但是包头和路由信息是明文形式，以便中间节点能处理信息。</li>
+<li>链路加密再节点内部，消息是完全不加密的。</li>
+</ul>
+<h3 id="端到端加密">10.1.3 端到端加密</h3>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-155211.png" srcset="/img/loading.gif" lazyload alt="端到端加密">
+<figcaption aria-hidden="true">端到端加密</figcaption>
+</figure>
+<p>特点：</p>
+<ul>
+<li>对两个终端之间的整个通信线路进行加密</li>
+<li>只需要2台密码机，1台在发端，1台在收端</li>
+<li>从发端到收端的传输过程中，报文始终以密文存在</li>
+<li>消息报头（源/目的地址）不能加密，以明文传送</li>
+<li>比链路和节点加密更安全可靠，更容易设计和维护</li>
+</ul>
+<p>缺点：不能防止业务流分析攻击。</p>
+<h3 id="混合加密">10.1.4 混合加密</h3>
+<p>链路加密+端到端加密</p>
+<h2 id="硬件软件加密及有关问题">10.2 硬件、软件加密及有关问题</h2>
+<h3 id="硬件加密">10.2.1 硬件加密</h3>
+<p>优点：</p>
+<ul>
+<li>加密速度快</li>
+<li>硬件安全性好</li>
+<li>硬件易于安装</li>
+</ul>
+<p>硬件种类：</p>
+<ul>
+<li>自配套加密模块</li>
+<li>通信用加密盒</li>
+<li>PC插线板</li>
+<li>加密TF卡</li>
+</ul>
+<h3 id="软件加密">10.2.2 软件加密</h3>
+<p>优点：</p>
+<ul>
+<li>灵活轻便</li>
+<li>节约成本</li>
+<li>可以利用现有加密模块</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>速度慢</li>
+<li>密钥管理困难，并且明文和密钥文件容易泄露</li>
+<li>容易遭受暴力破解攻击</li>
+<li>加密过程中数据易被窃取</li>
+</ul>
+<h2 id="密钥管理基本概念">10.3 密钥管理基本概念</h2>
+<h3 id="密钥管理">10.3.1 密钥管理</h3>
+<p>密钥管理是处理密钥从产生到最终销毁的整个过程中的有关问题，包括系统的初始化及密钥的产生、存储、备份/恢复、装入、分配、保护、更新、控制、丢失、撤销和销毁等内容。</p>
+<h3 id="密钥的种类">10.3.2 密钥的种类</h3>
+<ol type="1">
+<li><p>基本密钥(Base Key) / 初始密钥(Primary Key) / 用户密钥(User Key)
+<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.65ex;" xmlns="http://www.w3.org/2000/svg" width="2.171ex" height="2.22ex" role="img" focusable="false" viewBox="0 -694 959.7 981.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(554,-150) scale(0.707)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g></g></g></g></svg></mjx-container></span>​</p>
+<p>是由用户选定或由系统分配给他的、可在较长时间内由一对用户所专用的密钥。</p></li>
+<li><p>主机主密钥(Host Master Key) <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex;" xmlns="http://www.w3.org/2000/svg" width="2.771ex" height="1.927ex" role="img" focusable="false" viewBox="0 -694 1224.8 851.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(554,-150) scale(0.707)"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></p></li>
+<li><p>密钥加密密钥(Key Encrypting Key) <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex;" xmlns="http://www.w3.org/2000/svg" width="2.112ex" height="1.927ex" role="img" focusable="false" viewBox="0 -694 933.5 851.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(554,-150) scale(0.707)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></g></svg></mjx-container></span></p></li>
+<li><p>会话密钥 (Session Key) <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.355ex;" xmlns="http://www.w3.org/2000/svg" width="2.117ex" height="1.926ex" role="img" focusable="false" viewBox="0 -694 935.6 851.1"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(554,-150) scale(0.707)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></g></svg></mjx-container></span></p></li>
+<li><p>数据加密密钥(Data Encrypting Key) <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex;" xmlns="http://www.w3.org/2000/svg" width="2.512ex" height="1.927ex" role="img" focusable="false" viewBox="0 -694 1110.3 851.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(554,-150) scale(0.707)"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g></g></g></g></svg></mjx-container></span></p></li>
+</ol>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-161703.png" srcset="/img/loading.gif" lazyload alt="密钥之间的关系">
+<figcaption aria-hidden="true">密钥之间的关系</figcaption>
+</figure>
+<h2 id="密钥生成">10.4 密钥生成</h2>
+<p>差的密钥选择易受字典攻击。</p>
+<p>好的密钥的生成：</p>
+<ol type="1">
+<li>真随机</li>
+<li>应尽量避免使用特定算法的弱密钥。</li>
+<li>双钥系统的密钥必须满足一定的数学关系。</li>
+<li>密钥一般会选伪随机数，循环周期应尽可能大。</li>
+<li>采用密钥揉搓或杂凑技术，变换成伪随机串存放。</li>
+</ol>
+<p>不同等级的密钥产生的方式不同：</p>
+<ol type="1">
+<li>主机主密钥：长期使用，数量小，使用投硬币、掷骰子、噪声产生器</li>
+<li>密钥加密密钥：安全算法、二极管噪声产生器、伪随机数发生器</li>
+<li>会话密钥、工作密钥：安全算法</li>
+</ol>
+<h2 id="密钥分配">10.5 密钥分配</h2>
+<h3 id="密钥分配的基本方法">10.5.1 密钥分配的基本方法</h3>
+<ul>
+<li>利用安全信道实现密钥传递</li>
+<li>利用双钥体制建立安全信道</li>
+<li>利用量子技术实现密钥传递</li>
+</ul>
+<h4 id="利用安全信道传递">1. 利用安全信道传递</h4>
+<p>可以将密钥分拆成几部分分别递送：只适用于传递少量密钥。</p>
+<h4 id="利用双钥体制建立安全信道传递">2.
+利用双钥体制建立安全信道传递</h4>
+<p>双钥密码体制运算量大，不适合对实时数据进行加解密，适合用来进行密钥的分配。</p>
+<p>借助可信密钥管理中心（KDC）进行密钥分配。</p>
+<h4 id="利用量子技术实现密钥传递">3. 利用量子技术实现密钥传递</h4>
+<p>量子比特与经典比特的区别：测不准原理。可提供不可窃听、不可破译的安全保密通信。</p>
+<h3 id="密钥分配的基本模式">10.5.2 密钥分配的基本模式</h3>
+<h4 id="点对点密钥分配">1. 点对点密钥分配</h4>
+<p>Alice和Bob共享基本密钥kp，使用单钥加密传输。</p>
+<h4 id="密钥分配中心kdc">2. 密钥分配中心KDC</h4>
+<p>会话密钥 k 由KDC产生</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-162759.png" srcset="/img/loading.gif" lazyload alt="KDC">
+<figcaption aria-hidden="true">KDC</figcaption>
+</figure>
+<h4 id="密钥传递中心">3. 密钥传递中心</h4>
+<p>会话密钥 k 由用于产生</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-162814.png" srcset="/img/loading.gif" lazyload alt="KTC">
+<figcaption aria-hidden="true">KTC</figcaption>
+</figure>
+<h2 id="密钥的保护存储与备份">10.6 密钥的保护、存储与备份</h2>
+<h3 id="密钥的分级保护结构">10.6.1 密钥的分级保护结构</h3>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-163617.png" srcset="/img/loading.gif" lazyload alt="密钥的分级保护结构">
+<figcaption aria-hidden="true">密钥的分级保护结构</figcaption>
+</figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-163637.png" srcset="/img/loading.gif" lazyload alt="密钥分级结构">
+<figcaption aria-hidden="true">密钥分级结构</figcaption>
+</figure>
+<h3 id="密钥的存储与备份">10.6.2 密钥的存储与备份</h3>
+<p>几种存储方法：</p>
+<ul>
+<li>每个用户都有一个用户加密文件备用。</li>
+<li>密钥的一半存入ROM钥卡或者IC智能卡中，另一半存入终端。</li>
+<li>难记的密钥可以密文形式存储，用密钥加密密钥对其加密。</li>
+<li>采用易记的口令启动密钥产生器，再用确定性算法生成密钥。</li>
+</ul>
+<h2 id="密钥的撤销过期与销毁">10.7 密钥的撤销、过期与销毁</h2>
+<p>密钥安全是密码协议、算法和密码设备安全的基本条件.。</p>
+<p>密钥注销与销毁：对于不再需要的密钥或已被注销（从所有记录中除名）的用户密钥，要将其<strong>所有副本</strong>销毁。</p>
+<p>密钥恢复：若密钥丧失但未被泄露（如设备故障），就可以用安全方式<strong>从密钥备份中恢复</strong>。</p>
+<p>密钥吊销如密钥丢失，或因其它原因在密钥未过期之前，需将其从<strong>正常使用的集合</strong>中删除，即密钥吊销。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/03/20240603-164011.png" srcset="/img/loading.gif" lazyload alt="密钥管理系统">
+<figcaption aria-hidden="true">密钥管理系统</figcaption>
+</figure>
+<h1 id="第11章-无线网络安全">第11章 无线网络安全</h1>
+<p>考研要求：</p>
+<ol type="1">
+<li>无线网络面临哪些安全威胁</li>
+<li>GSM/CDMA/3G 系统的认证过程中及主要安全缺陷。</li>
+<li>WCDMA 蜂窝系统的认证过程及安全性改进。</li>
+</ol>
+<h2 id="引言">11.1 引言</h2>
+<ul>
+<li>1G蜂窝通信系统——模拟通信系统（AMPS）</li>
+<li>2G蜂窝通信系统——数字通信系统（GSM/CDMA）</li>
+<li>3G蜂窝通信系统——IMT-2000（<strong>TD-SCDMA</strong>/WCDMA/CDMA2000）</li>
+<li>4G蜂窝通信系统——LTE-Advanced系统（<strong>TD-LTE</strong>/FDD-LTE）</li>
+<li>5G蜂窝移动通信——5G系统均采用TDD技术，华为5G全球领先</li>
+</ul>
+<p>无线网络面临的安全威胁：</p>
+<ul>
+<li>被动攻击
+<ol type="1">
+<li>通话窃听</li>
+<li>服务区标志符泄露</li>
+</ol></li>
+<li>主动攻击
+<ol type="1">
+<li>通信阻断</li>
+<li>数据注入与篡改</li>
+<li>中间人攻击</li>
+<li>客户端假冒</li>
+<li>接入点伪装</li>
+<li>匿名攻击</li>
+<li>端对端攻击</li>
+<li>隐匿无线信道</li>
+<li>重放攻击</li>
+</ol></li>
+</ul>
+<h2 id="g移动网络的安全性">11.2 2G移动网络的安全性</h2>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-102808.png" srcset="/img/loading.gif" lazyload alt="GMS的网络结构">
+<figcaption aria-hidden="true">GMS的网络结构</figcaption>
+</figure>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-102850.png" srcset="/img/loading.gif" lazyload alt="GSM的认证与密钥协商（AKA）协议">
+<figcaption aria-hidden="true">GSM的认证与密钥协商（AKA）协议</figcaption>
+</figure>
+<p>安全缺陷：</p>
+<ul>
+<li>首次开机时泄漏IMSI信息</li>
+<li>基站对用户实施单向认证</li>
+<li>骨干网数据传输无加密</li>
+<li>无数据完整性验证机制</li>
+<li>主密钥K直接参与认证与加密</li>
+<li>主密钥K存在SIM卡中，有复制SIM卡的风险</li>
+</ul>
+<h2 id="g移动网络的安全性-1">11.3 3G移动网络的安全性</h2>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-103119.png" srcset="/img/loading.gif" lazyload alt="3G网络的AKA协议">
+<figcaption aria-hidden="true">3G网络的AKA协议</figcaption>
+</figure>
+<p>安全性提升：</p>
+<ul>
+<li>用户和网络双向认证</li>
+<li>建立了用户和网络之间的会话密钥</li>
+<li>保持了会话密钥的新鲜性</li>
+<li>增加了数据完整性验证功能</li>
+</ul>
+<p>安全缺陷：</p>
+<ul>
+<li>首次开机时泄漏IMSI信息</li>
+<li>骨干网上传输无加密</li>
+<li>主密钥K直接参与认证与加密</li>
+<li>CK和IK直接传输，存在被窃听的风险</li>
+<li>主密钥K存在SIM卡中，有复制SIM卡的风险</li>
+<li>采用十种安全算法f1-f10，算法过多存在被攻破的风险</li>
+</ul>
+<h2 id="g移动网络的安全性-2">11.4 4G移动网络的安全性</h2>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-103555.png" srcset="/img/loading.gif" lazyload alt="4G网络的EPS- AKA协议">
+<figcaption aria-hidden="true">4G网络的EPS- AKA协议</figcaption>
+</figure>
+<p>安全性提升：</p>
+<ul>
+<li>用户和网络双向认证</li>
+<li>建立了用户和网络之间的会话密钥</li>
+<li>增加了数据完整性验证功能</li>
+<li>实现了层次化的密钥管理</li>
+<li>隐藏了CK和IK</li>
+</ul>
+<p>安全缺陷：</p>
+<ul>
+<li>首次开机泄漏IMSI</li>
+<li>骨干网无加密</li>
+</ul>
+<h2 id="g移动网络的安全性-3">11.5 5G移动网络的安全性</h2>
+<p>5G的应用场景：</p>
+<ul>
+<li>高宽带 (eMBB, enhanced Mobilo Broad Band)</li>
+<li>低时延 (uRLLC, ultra-Reliable and Low Latency Communication)</li>
+<li>广连接 (mMTC, massive Machine Traffic Connection)</li>
+</ul>
+<h3 id="g网络安全发展现状">11.5.1
+<strong>5G</strong>网络安全发展现状</h3>
+<h4 id="五大安全挑战">1. 五大安全挑战</h4>
+<h4 id="安全能力要求">2. 安全能力要求</h4>
+<h4 id="网络接入认证">3. 网络接入认证</h4>
+<h4 id="sdn安全威胁">4. SDN安全威胁</h4>
+<p>软件定义网络（Software Defined Networking, SDN）</p>
+<h4 id="nfv安全威胁">5. <strong>NFV</strong>安全威胁</h4>
+<p>网络功能虚拟化（Network Functions Virtualization, NFV）</p>
+<h4 id="边缘计算切片">6. 边缘计算/切片</h4>
+<h3 id="g网络安全关键技术">11.<strong>5.2</strong>
+5G网络安全关键技术</h3>
+<h4 id="安全域划分">1. 安全域划分</h4>
+<h4 id="安全防护框架">2. 安全防护框架</h4>
+<h4 id="层次化密钥生成">3. 层次化密钥生成</h4>
+<ul>
+<li>种子密钥是最高的，用于生成子层密钥Kausf</li>
+<li>种子密钥不能用于直接计算KgNB，无法跨网络层次生成密钥</li>
+<li>种子密钥存储于UICC（设备端的SIM卡）和网络端的HSS /
+UDM，可以安全地保护其免受任何其他实体（包括网络供应商在内）未经授权访问。</li>
+<li>接入网络仅从核心网络获取临时密钥，而不能用于派生种子密钥</li>
+</ul>
+<h4 id="身份隐私保护">4. 身份隐私保护</h4>
+<ul>
+<li>用UICC中存储的公钥对用户永久标识SUPI进行加密，获得用户隐藏标识SUCI</li>
+<li>因此，攻击者从5G无线接入网中无法获得用户设备的永久标识SUPI。</li>
+</ul>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-105314.png" srcset="/img/loading.gif" lazyload alt="5G隐私保护">
+<figcaption aria-hidden="true">5G隐私保护</figcaption>
+</figure>
+<h4 id="aka协议">4. AKA协议</h4>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-105420.png" srcset="/img/loading.gif" lazyload alt="5G AKA协议">
+<figcaption aria-hidden="true">5G AKA协议</figcaption>
+</figure>
+<p>小结：</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F04%2F20240604-105448.png" srcset="/img/loading.gif" lazyload alt="image-20240604105448233">
+<figcaption aria-hidden="true">image-20240604105448233</figcaption>
+</figure>
+<h1 id="第12章-防火墙原理与设计">第12章 防火墙原理与设计</h1>
+<p>考研要求：</p>
+<ol type="1">
+<li>防火墙的类型和结构</li>
+<li>静态包过滤器</li>
+<li>动态包过滤器</li>
+<li>电路级网关</li>
+<li>应用级网关</li>
+</ol>
+<h2 id="防火墙概述">12.1 防火墙概述</h2>
+<p>防火墙是由软件和硬件组成的系统，它处于安全的网络和不安全的网络之间，属于<strong>网络边界防护设备</strong>，由系统管理员设置访问控制规则，对进出网络边界的数据流进行过滤。</p>
+<p>防火墙无法防御的部分：</p>
+<ul>
+<li>来自内部的攻击</li>
+<li>绕过防火墙的连接</li>
+</ul>
+<p>防火墙设计的基本目标/须满足的要求：</p>
+<ul>
+<li>所有进出网络数据流都必须经过防火墙。</li>
+<li>只允许经授权的数据流通过防火墙。</li>
+<li>防火墙自身对入侵免疫，即确保自身安全。</li>
+</ul>
+<p>防火墙默认规则：<strong>凡是没有明确允许的</strong>，一律都是禁止的。</p>
+<p>防火墙对数据流的处理方式：</p>
+<ul>
+<li>允许</li>
+<li>拒绝：回复拒绝消息</li>
+<li>丢弃：直接丢弃，不发送任何提示信息</li>
+</ul>
+<h2 id="防火墙的类型和结构">12.2 防火墙的类型和结构</h2>
+<h3 id="防火墙的分类">12.2.1 防火墙的分类</h3>
+<p>按防火墙技术分类：</p>
+<ul>
+<li>应用级网关防火墙（工作在OSI七层模型的应用层）</li>
+<li>电路级网关防火墙（会话层）</li>
+<li>包过滤防火墙（网络层）</li>
+</ul>
+<p>按防火墙结构分类：</p>
+<ul>
+<li><p>静态包过滤</p></li>
+<li><p>动态包过滤</p></li>
+<li><p>电路级网关</p></li>
+<li><p>应用层网关</p></li>
+<li><p>状态检查包过滤</p></li>
+<li><p>切换代理</p></li>
+<li><p>空气隙（物理隔离）</p></li>
+</ul>
+<p><strong>防火墙工作原理</strong>：不同类型的防火墙，将分别对IP头、TCP头、应用级头、数据/净荷等部分数据进行过滤。</p>
+<h3 id="网络地址转换nat">12.2.2 网络地址转换NAT</h3>
+<p>为什么要做NAT：IP地址资源相对匮乏，NAT可解决地址紧缺的问题。</p>
+<p>NAT有什么好处：隐藏内部网络的拓扑结构，提升网络安全性。</p>
+<ul>
+<li>静态NAT 内部（私有）IP地址与外部Internet IP（公网）地址是一
+一对应的。</li>
+<li>动态NAT
+外部地址限定在一个范围内，内部网络的地址范围大于外部地址，当发生地址转换时所有私有IP地址可随机转换为任何指定的Internet
+IP地址。若内网私有IP地址数超出了可用的公网
+IP地址范围，此时必须采用动态的PAT技术。</li>
+<li>端口地址转换PAT
+在进行网络地址转换时，不仅网络地址发生改变，而且协议端口也会发生改变。NAT优先，公网地址不够时再使用PAT。当公网地址不够分配时，新来的连接请求会重复使用前面已分配
+的公网IP，两次NAT的数据包通过端口号（源端口号或目的端口号）加以区分。</li>
+<li>源网络地址转换SNAT
+当内部用户使用内部地址访问Internet时，必须将IP头部中的数据源地址转换成合法Internet地址。</li>
+<li>目的网络地址转换DNAT
+当数据包进入内网时，必须将数据包中的目的地址转换成内网中服务器的专用地址，使公网IP地址与内网专用地址相对应。</li>
+</ul>
+<p>NAT路由器的工作过程：</p>
+<ul>
+<li>对于所有输出的数据包，NAT路由器用其外部地址替换数据包的源地址。</li>
+<li>对于所有输入数据包，
+NAT路由器必须采用最终目标主机的IP地址替换数据包的目的地址。</li>
+</ul>
+<h2 id="静态包过滤防火墙">12.3 静态包过滤防火墙</h2>
+<p>静态数据包过滤发生在<strong>网络层</strong>上，是最原始的防火墙。</p>
+<p>主要功能：</p>
+<ol type="1">
+<li>接收每个数据包。</li>
+<li>对数据包采用过滤规则。如果数据包的头信息与一组规则匹配，则根据该规则确定是转发还是丢弃。</li>
+<li>如果没有规则与数据包头信息匹配，则对数据包施加默认规则。
+<ul>
+<li>”容易使用“：默认允许</li>
+<li>”安全第一“：默认丢弃</li>
+</ul></li>
+</ol>
+<p>对于静态包过滤防火墙来说，决定接收还是拒绝一个数据包，取决于对数据包中IP头和协议头等<strong>特定域</strong>的检查和判定。</p>
+<p>检查内容/特定域包括：</p>
+<ul>
+<li>数据源地址</li>
+<li>目的地址</li>
+<li>应用或协议</li>
+<li>源端口号</li>
+<li>目的端口号</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>对网络性能影响较小</li>
+<li>成本较低</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>安全性较低（仅工作与网络层）</li>
+<li>缺少状态感知能力（一些需要动态分配端口的服务器需要动态地打开许多端口，因此只能将默认规则设为默认允许）</li>
+<li>容易遭受IP欺骗攻击（静态包过滤防火墙不能区分真实IP和伪造的IP地址）</li>
+<li>创建访问控制规则比较困难（逐条设定规则，规则的优先级顺序）</li>
+</ul>
+<h2 id="其他类型防火墙简介">12.4 其他类型防火墙简介</h2>
+<h3 id="动态包过滤防火墙">12.4.1 动态包过滤防火墙</h3>
+<p>工作于<strong>传输层</strong></p>
+<p>检查的数据包头信息：</p>
+<ul>
+<li>源地址</li>
+<li>目的地址</li>
+<li>应用或协议</li>
+<li>源端口号</li>
+<li>目的端口号</li>
+</ul>
+<p>工作原理：</p>
+<ul>
+<li>典型的动态包过滤防火墙与普通包过滤防火墙相似，大部分工作于<strong>网络层</strong>。有些安全
+性高的动态包过滤防火墙，则工作于<strong>传输层</strong>。</li>
+<li>动态包过滤防火墙的<strong>不同点</strong>：对外出数据包进行身份记录，便于下次让具有相同连接的数据包通过。</li>
+<li>动态包过滤防火墙是直接对”连接“进行处理，而不是进包头信息进行检查。</li>
+<li>动态包过滤防火墙需要对已建连接和规则表进行动态维护，因此是动态的和有状态的。</li>
+<li>典型的动态包过滤防火墙能够感知新建连接与已建连接之间的差别，所以说它<strong>具有动态状态感知功能</strong>。</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>采用对称多处理SMP技术时，对网络性能的影响非常小。</li>
+<li>动态包过滤防火墙的安全性优于静态包过滤防火墙。</li>
+<li>“状态感知”能力使其性能得到了显著提高。</li>
+<li>成本低。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>仅工作于网络层，仅检查IP头和TCP头。</li>
+<li>没过滤数据包的净荷部分，仍具有较低的安全性。</li>
+<li>容易遭受IP欺骗攻击。</li>
+<li>难于创建规则，管理员创建时必须要考虑规则的先后次序。</li>
+<li>如果在建立连接时没有遵循三步握手协议，会引入风险。</li>
+</ul>
+<h3 id="电路级网关">12.4.2 电路级网关</h3>
+<p>工作于<strong>会话层</strong></p>
+<p>在电路级网关中，网关充当了服务器的角色。当内网主机想要连接到某个外部服务器时，首先要连接到中继主机（网关）上，然后中继主机再连接到服务器上。对于服务器来说，该客户机的名称和IP是不可见的。</p>
+<p>检查内容：</p>
+<ul>
+<li>源地址</li>
+<li>目的地址</li>
+<li>应用或协议</li>
+<li>源端口号</li>
+<li>目的端口号</li>
+<li>握手信息及序列号</li>
+</ul>
+<p>工作原理：</p>
+<ol type="1">
+<li>在转发该数据包前，首先将数据包的IP头和TCP头与规则表相比较，以决定将数据包丢弃，还是通过。</li>
+<li>在进行TCP握手通信时，仅当SYN标志、ACK标志及序列号符合逻辑时，电路级网关才判定该会话是合法的。</li>
+<li>若会话合法，包过滤器将逐条扫描规则，直到发现一条规则与数据包中的有关信息一致。否则施加默认规则。</li>
+<li>电路级网关与远程主机之间建立一个新连接，这一切对内网中用户都是完全透明。</li>
+<li>在有效会话建立后，电路级网关仅复制、传递数据，而不进行过滤。</li>
+<li>在整个过程中IP数据包不会实现端到端的流动，因为中继主机工作在网络层以上，所有在IP层上的攻击、探测问题都会在中继主机上终止。</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>性能比包过滤防火墙稍差，但是比应用代理防火墙好。</li>
+<li>切断了外部网络到防火墙后的服务器直接连接。</li>
+<li>比静态或动态包过滤防火墙具有更高的安全性。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>具有一些固有缺陷。例如，电路级网关不能对数据净荷进行检测，无法抵御应用层攻击等。</li>
+<li>仅提供一定程度的安全性。</li>
+<li>当增加新的内部程序或资源时，往往需要修改电路级 网关的代码。</li>
+</ul>
+<h3 id="应用级网关">12.4.3 应用级网关</h3>
+<p>工作于<strong>应用层</strong></p>
+<p>工作特点：</p>
+<ul>
+<li><p>必针对<strong>每个服务运行一个代理</strong>。</p>
+<p>应用代理与电路级网关的区别：</p>
+<ul>
+<li>代理是针对应用的。</li>
+<li>代理对整个数据包进行检查，因此能在OSI模型的应用层上对数据包进行过滤。</li>
+</ul></li>
+<li><p>对数据包进行逐个检查和过滤。</p></li>
+<li><p>采用“强应用代理”</p></li>
+<li><p>在更高层上过滤信息自动创建必要的包过滤规则。</p></li>
+<li><p>当前最安全的防火墙结构之一。</p></li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>安全性最高</li>
+<li>强大的认证的功能</li>
+<li>强大的日志功能</li>
+<li>规则配置简单</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>灵活性差，对每一种应用都需要设置一个代理</li>
+<li>配置烦琐，增加了管理员的工作量</li>
+<li>流量吞吐性能不高，有可能成为网络的瓶颈</li>
+</ul>
+<h3 id="状态检测防火墙">12.4.4 状态检测防火墙</h3>
+<p>工作于所有7层</p>
+<p>工作原理：</p>
+<ul>
+<li>通信信息</li>
+<li>通信状态</li>
+<li>应用状态</li>
+<li>操作信息</li>
+</ul>
+<h3 id="切换代理">12.4.5 切换代理</h3>
+<p>先在会话层，后在网络层</p>
+<p>工作原理：</p>
+<ul>
+<li>切换代理首先起电路级代理的作用，以验证RFC建议的三步握手。</li>
+<li>再切换到动态包过滤的工作模式下。</li>
+</ul>
+<h3 id="空气隙防火墙">12.4.6 空气隙防火墙</h3>
+<p>工作于物理层</p>
+<p>工作原理：</p>
+<ul>
+<li>外部客户机与防火墙之间的连接数据被写入一个具有SCSI接口的高速硬盘。</li>
+<li>内部的连接再从该SCSI硬盘中读取数据。</li>
+<li>防火墙切断了客户机到服务器的直接连接，并且对硬盘数据的读/写操作都是独立进行的。</li>
+</ul>
+<h1 id="第13章-入侵检测技术">第13章 入侵检测技术</h1>
+<p>考研要求：</p>
+<ol type="1">
+<li>入侵检测概述；</li>
+<li>入侵检测原理及主要方法；</li>
+<li>IDS 的结构与分类；</li>
+<li>NIDS/HIDS/DIDS 原理及部署。</li>
+</ol>
+<h2 id="入侵检测概述">13.1 入侵检测概述</h2>
+<p>入侵（Instrusion）</p>
+<ul>
+<li>非法取得系统控制权</li>
+<li>利用系统漏洞收集信息</li>
+<li>破坏信息系统</li>
+</ul>
+<p>入侵检测（Instrusion Detection）</p>
+<ul>
+<li>检测对系统的非授权访问</li>
+<li>监控系统运行状态，保证系统资源的保密性、完整性、可用性</li>
+<li>识别针对计算机系统网络系统或广义信息系统的非法攻击</li>
+</ul>
+<p>入侵检测系统的组成：</p>
+<ul>
+<li>数据收集器/探测器</li>
+<li>检测器/分析器/检测引擎</li>
+<li>知识库</li>
+<li>控制器</li>
+</ul>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-162735.png" srcset="/img/loading.gif" lazyload alt="IDS模型">
+<figcaption aria-hidden="true">IDS模型</figcaption>
+</figure>
+<p>IDS的任务：</p>
+<ul>
+<li><p>信息收集</p>
+<p>所收集的信息内容：用户（合法用户和非法用户）在网络、系统、数据库及应用系统中活动的状态和行为</p>
+<ul>
+<li>系统和网络的日志文件</li>
+<li>目录和文件中的异常改变</li>
+<li>程序执行中的异常行为</li>
+<li>物理形式的入侵信息</li>
+</ul></li>
+<li><p>信息分析</p>
+<ul>
+<li>模式匹配</li>
+<li>统计分析</li>
+<li>完整性分析</li>
+</ul></li>
+<li><p>安全响应</p>
+<ul>
+<li>主动响应：由用户驱动或者系统本身执行，对入侵行为终止连接、修正环境等</li>
+<li>被动响应：发出告警信息和通知</li>
+</ul></li>
+</ul>
+<p>IDS的评价标准：</p>
+<ul>
+<li>性能测试</li>
+<li>功能测试</li>
+<li>可用性测试</li>
+</ul>
+<h2 id="入侵检测原理及主要方法">13.2 入侵检测原理及主要方法</h2>
+<h3 id="异常检测基本原理">13.2.1 异常检测基本原理</h3>
+<p>异常检测技术又称为基于行为的入侵检测技术，用来识别主机和网络中的异常行为。该技术假设攻击行为与正常行为有明显的差异。</p>
+<p>异常检测中首先收集一段正常的历史活动数据，再建立代表主机、用户或者网络连接的正常行为描述，然后收集事件数据并使用一些方法决定所检测到的实践活动是否偏离了正常行为模式。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-163544.png" srcset="/img/loading.gif" lazyload alt="异常检测模型">
+<figcaption aria-hidden="true">异常检测模型</figcaption>
+</figure>
+<h3 id="误用检测基本原理">13.2.2 误用检测基本原理</h3>
+<p>误用检测技术又称为基于知识的入侵检测技术。该技术假设所有入侵行为和手段（及其变形）都能表达为一种模式或特征。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-163708.png" srcset="/img/loading.gif" lazyload alt="误用检测模型">
+<figcaption aria-hidden="true">误用检测模型</figcaption>
+</figure>
+<h2 id="ids的结构与分类">13.3 IDS的结构与分类</h2>
+<p>IDS的结构：</p>
+<ol type="1">
+<li>事件提取（信息收集）</li>
+<li>入侵分析</li>
+<li>入侵响应</li>
+<li>远程管理</li>
+</ol>
+<p>IDS的分类：</p>
+<ol type="1">
+<li>按照数据来源分类
+<ul>
+<li>NIDS（基于网络的入侵检测系统）：截获数据包，提取特征并与知识库中已知的攻击签名相比较。</li>
+<li>HIDS（基于主机的入侵检测系统）：通过对系统日志和审计记录的监控分析来发现攻击后的误操作。</li>
+<li>DIDS（分布式入侵检测系统）：同时分析来自主机系统审计日志和网络数据流，一般为分布式结构，由多个组件构成。</li>
+</ul></li>
+<li>按照检测技术分类
+<ul>
+<li>误用检测（滥用检测）：将收集的信息与数据库作比较</li>
+<li>异常检测：测量属性的平均值，并用来与系统行为较</li>
+<li>完整性检测：关注数据内容是否被更改</li>
+</ul></li>
+</ol>
+<h2 id="nids">13.4 NIDS</h2>
+<p>根据网络流量、网络数据包和协议来分析入侵检测</p>
+<p>利用网络适配器监视并分析通过网络的所有通信业务</p>
+<p>常用技术：</p>
+<ul>
+<li>攻击模式、表达式或字节匹配</li>
+<li>频率或穿越阈值</li>
+<li>低级事件的相关性</li>
+<li>统计学意义上的非常规现象检测</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>成本低</li>
+<li>攻击者转移证据困难</li>
+<li>可做到实时检测和响应</li>
+<li>能够检测未成功的攻击企图</li>
+<li>独立于主机所使用的操作系统</li>
+</ul>
+<h2 id="hids">13.5 HIDS</h2>
+<p>根据主机系统的系统日志和审计记录进行入侵检测</p>
+<p>检测针对主机的攻击，通常被部署在关键服务器上，被认为是保护关键服务器的最后一道防线</p>
+<p>常用技术：</p>
+<ul>
+<li>文件和注册表保护技术</li>
+<li>网路安全防护技术</li>
+<li>IIS（Internet 信息服务器）保护技术</li>
+<li>文件完整性分析技术</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>捕获应用层入侵</li>
+<li>监视特定的系统活动</li>
+<li>非常适应与加密和交换环境</li>
+<li>近实时的检测和应答</li>
+<li>不需要额外的硬件</li>
+</ul>
+<h2 id="dids">13.6 DIDS</h2>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-165658.png" srcset="/img/loading.gif" lazyload alt="DIDS结构">
+<figcaption aria-hidden="true">DIDS结构</figcaption>
+</figure>
+<h2 id="ids设计上的考虑">13.7 IDS设计上的考虑</h2>
+<p>控制台设计：</p>
+<ul>
+<li>日志检索</li>
+<li>探测器管理</li>
+<li>规则管理</li>
+<li>日志报表</li>
+<li>用户管理</li>
+</ul>
+<p>自身安全设计：</p>
+<ul>
+<li>系统安全</li>
+<li>认证和审计</li>
+<li>通信安全</li>
+</ul>
+<p>IDS的测评指标：</p>
+<ul>
+<li>检测入侵能力</li>
+<li>抗欺骗能力</li>
+<li>远程管理能力</li>
+<li>自身安全性</li>
+</ul>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170237.jpg" srcset="/img/loading.gif" lazyload alt="典型的IDS部署图">
+<figcaption aria-hidden="true">典型的IDS部署图</figcaption>
+</figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="print-no-link">#期末复习</a>
+      
+        <a href="/tags/%E5%A4%A7%E4%B8%89%E4%B8%8B/" class="print-no-link">#大三下</a>
+      
+        <a href="/tags/%E8%80%83%E7%A0%94/" class="print-no-link">#考研</a>
+      
+        <a href="/tags/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="print-no-link">#信息网络安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信息网络安全 | 笔记三</div>
+      <div>https://harrison-1eo.github.io/2024/05/01/信息网络安全3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Harrison</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月1日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月5日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/01/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A82/" title="信息网络安全 | 笔记二">
+                        <span class="hidden-mobile">信息网络安全 | 笔记二</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      全站 CC BY 4.0 DEED Harrison<br> Powered by Hexo & Fluid
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    // document.addEventListener('scroll', function() {
+    //   var activeItem = document.querySelector('.tocbot-active-link');
+    //   if (activeItem) {
+    //     var tocBody = document.getElementById('toc-body');
+    //     var itemRect = activeItem.getBoundingClientRect();
+    //     var tocRect = tocBody.getBoundingClientRect();
+
+    //     if (itemRect.top < tocRect.top || itemRect.bottom > tocRect.bottom) {
+    //       tocBody.scrollTop = activeItem.offsetTop - tocBody.offsetTop - 20; // 20 是可调整的偏移量
+    //     }
+    //     // console.log(activeItem.textContent);
+    //   } else {
+    //     // 当没有活动链接时的逻辑，可能是保持当前滚动位置或其他操作
+    //     // tocBody.scrollTop = 保持当前位置;
+    //   }
+    // });
+
+
+    // document.addEventListener('scroll', function() {
+    //   var activeItem = document.querySelector('.tocbot-active-link');
+    //   if (activeItem) {
+    //     var tocBody = document.getElementById('toc-body');
+    //     var activeItemOffset = activeItem.offsetTop;
+    //     var tocBodyScrollTop = tocBody.scrollTop;
+    //     var fixedPosition = 0; // 您希望活动链接固定的位置，这里是顶部，可以调整
+
+    //     // 计算并更新滚动位置
+    //     var newScrollTop = activeItemOffset - fixedPosition;
+    //     if (tocBodyScrollTop !== newScrollTop) {
+    //       tocBody.scrollTop = newScrollTop;
+    //     }
+    //   }
+    // });
+
+
+
+
+    // Add scroll event listener
+    document.querySelector('#toc-body').addEventListener('scroll', function(e) {
+      var tocBody = e.target;
+      if (tocBody.scrollHeight - tocBody.scrollTop === tocBody.clientHeight) {
+        e.preventDefault();
+      }
+    });    
+  
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
