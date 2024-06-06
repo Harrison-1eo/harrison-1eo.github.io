@@ -47,8 +47,14 @@
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-163708.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-165658.png">
 <meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170237.jpg">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144102.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144515.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144808.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144913.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-150552.png">
+<meta property="og:image" content="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-225249.png">
 <meta property="article:published_time" content="2024-05-01T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-05T09:09:20.440Z">
+<meta property="article:modified_time" content="2024-06-06T16:07:36.260Z">
 <meta property="article:author" content="Harrison">
 <meta property="article:tag" content="期末复习">
 <meta property="article:tag" content="大三下">
@@ -348,7 +354,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.6k 字
+          9.6k 字
         
       </span>
     
@@ -359,7 +365,7 @@ mjx-container[display="true"] + br {
         
         
         
-          95 分钟
+          120 分钟
         
       </span>
     
@@ -1227,6 +1233,203 @@ NAT路由器必须采用最终目标主机的IP地址替换数据包的目的地
 <img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024/06/05/20240605-170237.jpg" srcset="/img/loading.gif" lazyload alt="典型的IDS部署图">
 <figcaption aria-hidden="true">典型的IDS部署图</figcaption>
 </figure>
+<h1 id="第14章-vpn技术">第14章 VPN技术</h1>
+<p>考研要求：</p>
+<ol type="1">
+<li>VPN的基本概念</li>
+<li>VPN的分类</li>
+<li>VPN的部署</li>
+</ol>
+<h2 id="vpn概述">14.1 VPN概述</h2>
+<p>虚拟专网 (VPN, Virtual Private Network)
+：将物理上分布在不同地点的网络，通过公用网络连接而构成逻辑上独立的虚拟子网。</p>
+<p>VPN的特点：</p>
+<ul>
+<li>费用低</li>
+<li>安全保障</li>
+<li>服务质量保证</li>
+<li>可扩充性和灵活性</li>
+<li>可管理性</li>
+</ul>
+<p>分类：</p>
+<ul>
+<li>按照应用分类
+<ul>
+<li>内联网VPN（一个公司内部的远程VPN网关之间）</li>
+<li>外联网VPN（跨公司的VPN网关之间）</li>
+<li>远程访问VPN（VPN客户端和服务端之间）</li>
+</ul></li>
+<li>按照隧道协议分类
+<ul>
+<li>IPSEC VPN</li>
+<li>SSL/TLS VPN</li>
+<li>MPLS VPN</li>
+<li>L2TP VPN</li>
+<li>PPTP VPN</li>
+</ul></li>
+</ul>
+<p>VPN的关键技术：</p>
+<ul>
+<li>隧道技术</li>
+<li>加解密技术</li>
+<li>身份认证技术</li>
+<li>密钥管理技术</li>
+<li>访问控制</li>
+</ul>
+<h2 id="隧道协议与vpn">14.2 隧道协议与VPN</h2>
+<p>封装：在原IP分组上添加新的报头，即IP封装化，这种在VPN设备之间建立的封装化数据的IP通信路径在逻辑上被称为隧道。收端VPN在接收到封装数据包后，将隧道标头删除，再发给目标主机。</p>
+<h3 id="第二层隧道协议">14.2.1 第二层隧道协议</h3>
+<p>对数据链路层的数据包进行封装</p>
+<h4 id="pptp-点对点隧道协议">1. PPTP 点对点隧道协议</h4>
+<p>基于PPP协议，将其封装在GRE头中。</p>
+<p>有两种不同的工作模式：被动模式和主动模式</p>
+<p>远程用户采用PPTP经由互联网访问企业的网络和应用，不需要直接拨号至企业网络。</p>
+<p>PPTP是为中小企业提供的VPN解决方案，但在具体实现上<strong>存在安全隐患</strong>。</p>
+<h4 id="l2f">2. L2F</h4>
+<p>它将链路层协议封装起来传输，因此网络的链路层协议完全独立于用户的链路层协议。L2F远程用户能够通过任何</p>
+<p>拨号方式接入公共IP网络。L2F盐城用户能够通过任何拨号方式接入公共IP网络。</p>
+<p>L2F隧道的建立和配置对用户是完全透明的。L2F协议本身并<strong>不提供加密能力</strong>。</p>
+<h4 id="l2tp">3. L2TP</h4>
+<p>L2TP结合了PPTP和L2F协议的优点，适合组建远程接入方式的VPN，已成为事实上的工业标准。</p>
+<p>总结：
+第二层隧道协议简单易行，但是拓展性都不好，并且没有提供内在的安全机制，不支持构建企业外局域网。</p>
+<h3 id="第三层隧道协议">14.2.2 第三层隧道协议</h3>
+<ol type="1">
+<li>IPSec</li>
+<li>GRE</li>
+<li>MPLS</li>
+</ol>
+<h2 id="ipsec">14.3 IPSec</h2>
+<h3 id="ipsec协议概述">14.3.1 IPSec协议概述</h3>
+<p>IPSec由AH协议和ESP协议组成，分别提供2种工作模式：传输模式、隧道模式</p>
+<h4 id="ah协议和esp协议">1. AH协议和ESP协议</h4>
+<p>这两个协议可以组合起来使用，也可以单独使用</p>
+<p><strong>ESP 提供加密，AH无加密</strong>；AH
+提供认证，ESP无认证（或者说对认证提供某种程度的支持）</p>
+<p>组合使用时，先ESP后AH，因此ESP头可被AH保护</p>
+<p>AH、ESP或AH+ESP既可以在隧道模式中使用，又可以在传输模式中使用。</p>
+<p><img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144102.png" srcset="/img/loading.gif" lazyload></p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144515.png" srcset="/img/loading.gif" lazyload alt="IPSec的功能和模式">
+<figcaption aria-hidden="true">IPSec的功能和模式</figcaption>
+</figure>
+<h4 id="两个模式">2. 两个模式</h4>
+<p>传输模式：在两个主机之间一端对端的方式提供安全通道，并在整个通信路径的建立和数据的传递过程中都采用了身份认证、数据保密性、数据完整性等安全保护措施。</p>
+<p>传输模式中AH和ESP协议对传输层（TCP、UDP）进行封装。</p>
+<p>隧道模式：在两个IP子网之间建立一个安全通道，允许每个子网中的所有主机用户可以访问对方子网中的所有服务和主机。</p>
+<p>隧道模式中的AH和ESP协议对网络层（IP包）进行封装。</p>
+<h3 id="工作原理">14.3.2 工作原理</h3>
+<p>IPSec网关通过查询安全策略数据库（SPD）决定对接收到的IP数据包进行转发、丢弃或<strong>IPSec处理</strong></p>
+<p>IPSec网关可仅对IP数据包进行加密或认证，亦可同时对数据包实施加密和认证</p>
+<p>采用<strong>传输模式</strong>时，IPSec只对IP数据包的<strong>净荷</strong>进行加密或认证；封装数据包继续使用原IP头部，只对部分域进行修改；IPSec协议头部插入到原IP头部和传送层头部之间。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144808.png" srcset="/img/loading.gif" lazyload alt="传输模式">
+<figcaption aria-hidden="true">传输模式</figcaption>
+</figure>
+<p>采用<strong>隧道模式</strong>时，IPSec对<strong>整个IP数据包</strong>进行加密或认证；产生一个新的IP头，原IP头被放在新IP头和原IP数据包之间。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-144913.png" srcset="/img/loading.gif" lazyload alt="隧道模式">
+<figcaption aria-hidden="true">隧道模式</figcaption>
+</figure>
+<h3 id="主要协议">14.3.3 主要协议</h3>
+<ol type="1">
+<li>认证头协议AH（Authentication Header）</li>
+<li>安全封装协议ESP（Encapsulating Security Payload）</li>
+<li>密钥交换协议IKE（Internet Key Exchange）</li>
+</ol>
+<h3 id="ipsec-vpn的构成">14.3.4 IPSec VPN的构成</h3>
+<ol type="1">
+<li>管理模块</li>
+<li>密钥分配和生成模块</li>
+<li>身份认证模块</li>
+<li>数据加解密模块</li>
+<li>数组分组封装/分解模块</li>
+<li>加密函数库</li>
+</ol>
+<h2 id="ssltls-vpn">14.4 SSL/TLS VPN</h2>
+<h3 id="概述">14.4.1 概述</h3>
+<p>TLS协议是主要用于HTTPS协议中构造VPN的技术。</p>
+<p>TLS VPN最大优点是用户不需要安装和配置客户端软件。</p>
+<p>TLS协议可使用数字签名和证书，能提供强大的认证功能。</p>
+<p>TLS协议的连接建立过程：</p>
+<ol type="1">
+<li>客户端向服务器发送“Client hello ”信息打开连接</li>
+<li>服务器用“Server hello”回答</li>
+<li>服务端发送自己的证书，并要求客户端发送自己的证书</li>
+<li>客户端发送自己的证书</li>
+<li>服务端完成对客户端证书的验证后执行密钥交换协议</li>
+<li>密钥交换协议只要任务是
+<ul>
+<li>产生一个主密钥</li>
+<li>主密钥产生两个会话密钥</li>
+<li>主密钥产生两个消息认证码密钥</li>
+</ul></li>
+<li>完成</li>
+</ol>
+<h3 id="tls-vpn的原理">14.4.2 TLS VPN的原理</h3>
+<p>TLS VPN需要在企业网络防火墙的后面放置一个TLS代理服务器</p>
+<p>用户与服务器之间的安全通信建立过程：</p>
+<ol type="1">
+<li>用户首先要在浏览器上输入一个URL；</li>
+<li>该连接请求将被TLS代理服务器取得；</li>
+<li>TLS服务器对用户进行身份验证；</li>
+<li>TLS代理服务器提供用户与各种不同应用服务器之间的连接。</li>
+</ol>
+<h3 id="优缺点">14.4.3 优缺点</h3>
+<p>优点：</p>
+<ul>
+<li>无须安装客户端软件</li>
+<li>适用于大多数设备</li>
+<li>适用于大多数操作系统</li>
+<li>支持网络驱动器访问</li>
+<li>不需要对网络做改变</li>
+<li>较强的资源控制能力</li>
+<li>费用低且有良好安全性</li>
+<li>绕过防火墙进行访问</li>
+<li>已内嵌在浏览器中</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>认证方式单一</li>
+<li>应用的局限性很大</li>
+<li>只对应用通道加密</li>
+<li>不能对应用层消息签名</li>
+<li>缺少LAN to LAN连接方案</li>
+<li>加密级别不如IPSec VPN高</li>
+<li>不能保护UDP通道安全</li>
+<li>是应用层加密，性能较差</li>
+<li>不能实施访问控制</li>
+<li>需CA支持，证书管理复杂</li>
+</ul>
+<h3 id="应用">14.4.4 应用</h3>
+<p>主要用于访问内部网络中一些基于Web的应用，例如电子邮件、内部网页浏览等。</p>
+<h3 id="tls-vpn-与-ipsec-vpn-比较">14.4.5 <strong>TLS VPN</strong> 与
+<strong>IPSec VPN</strong> 比较</h3>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-150552.png" srcset="/img/loading.gif" lazyload alt="比较">
+<figcaption aria-hidden="true">比较</figcaption>
+</figure>
+<p>TLS VPN有很多优点，但并不能取代 IPSec VPN。</p>
+<p>IPSec
+VPN主要提供LAN-to-LAN的隧道安全连接。在为企业高级用户提供远程访问及为企业提供LAN-to-LAN隧道连接方面，IPSec
+具有无可比拟的优势。</p>
+<p>IPSec VPN厂商开始研究让 IPSec VPN兼容TLS
+VPN，以增强可用性。届时，IPSec VPN的扩展性将大大加强。</p>
+<h2 id="mpls-vpn">14.5 MPLS VPN</h2>
+<p>MPLS VPN是一种基于多协议标记交换技术的IP VPN</p>
+<p>在网络路由和交换设备上应用MPLS技术可以简化核心路由器的路由选择方式</p>
+<p>MPLS利用传统路由中的标记交换技术来实现IP虚拟专网</p>
+<p>MPLS VPN可用来构造宽带的Internet 和Extranet</p>
+<p>MPLS是基于标记的IP路由选择方法。</p>
+<p>MPLS技术利用显式路由选择，可灵活选择优质路径来传输数据。</p>
+<p>MPLS协议实现了从第三层路由到第二层交换的转换。</p>
+<p>IP数据包进入网络时，边界路由器给它分配一个标记。</p>
+<p>对于到达同一目的地的IP数据包，可根据其TOS值的要求建立不同转发路径，以确保传输质量。</p>
+<p>安全性比较低。</p>
+<figure>
+<img src="http://typora-win11.oss-cn-beijing.aliyuncs.com/typora-img/2024%2F06%2F06%2F20240606-225249.png" srcset="/img/loading.gif" lazyload alt="网络结构">
+<figcaption aria-hidden="true">网络结构</figcaption>
+</figure>
 
                 
               </div>
@@ -1276,7 +1479,7 @@ NAT路由器必须采用最终目标主机的IP地址替换数据包的目的地
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年6月5日</div>
+          <div>2024年6月7日</div>
         </div>
       
       
@@ -1311,8 +1514,8 @@ NAT路由器必须采用最终目标主机的IP地址替换数据包的目的地
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/01/%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A82/" title="信息网络安全 | 笔记二">
-                        <span class="hidden-mobile">信息网络安全 | 笔记二</span>
+                      <a href="/2024/05/01/%E4%BF%A1%E6%81%AF%E7%BD%91%E8%B7%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%82%B9/" title="信息网络安全 | 考试要点">
+                        <span class="hidden-mobile">信息网络安全 | 考试要点</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
